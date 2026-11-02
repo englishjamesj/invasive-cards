@@ -49,7 +49,7 @@
     //  (empty list). Names are free text - whatever reads best to you.
     // -----------------------------------------------------------------
     nudgeSpecies: [
-      'Cheatgrass', 'Hydrilla', 'Black Carp', 'Blue Catfish', 'Southern House Mosquito'
+      'Cheatgrass', 'Hydrilla', 'Coconut Rhinoceros Beetle', 'Spotted Lanternfly', 'Feral Hog', 'Red Imported Fire Ant', 'Blue Catfish', 'Southern House Mosquito'
     ],
     // Optional: the lead-in wording before the list. Leave as-is or tweak.
     nudgeLead: 'We especially need expert eyes on these next'
