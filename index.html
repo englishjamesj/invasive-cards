@@ -53,6 +53,7 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.1;letter-spacing:.0
 .nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
 .nav a{font-family:var(--fd);text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;color:var(--ink-soft);text-decoration:none;padding:8px 12px;border-radius:8px}
 .nav a:hover{color:var(--usgs);background:var(--paper-2)}
+.nav a.on{color:var(--usgs);background:#fff;box-shadow:inset 0 0 0 1.5px var(--accent)}
 
 /* ---- hero ---- */
 .hero{position:relative;overflow:hidden;background:
@@ -130,11 +131,16 @@ section.alt{background:var(--paper-2)}
 .ex-pack.flag{border-color:var(--accent);box-shadow:0 16px 40px -24px rgba(198,160,74,.7)}
 .ex-pack.flag .ex-head{background:linear-gradient(135deg,#8a6d1f,#c6a04a)}
 .ex-pack ul{list-style:none;margin:0;padding:12px 16px;flex:1}
-.ex-pack li{font-weight:600;color:var(--ink);font-size:.95rem;padding:7px 0;border-bottom:1px solid var(--line);line-height:1.25}
+.ex-pack li{display:grid;grid-template-columns:34px 1fr;column-gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);line-height:1.2}
 .ex-pack li:last-child{border-bottom:0}
-.ex-pack li span{display:block;font-weight:400;font-size:.8rem;color:var(--ink-soft)}
-.ex-pack li.fill{color:var(--ink-soft)}
-.ex-pack li.horizon{color:#8a6d1f}
+.ex-pack li img{grid-row:1 / span 2;width:34px;aspect-ratio:1000/1400;object-fit:cover;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.ex-pack li .nm{font-weight:600;color:var(--ink);font-size:.92rem}
+.ex-pack li span{font-weight:400;font-size:.78rem;color:var(--ink-soft)}
+.ex-pack li .nm{grid-column:2}
+.ex-pack li span:not(.nm){grid-column:2}
+.ex-pack li.horizon{grid-template-columns:1fr}
+.ex-pack li.horizon .nm{grid-column:1;color:#8a6d1f}
+.ex-pack li.horizon span:not(.nm){grid-column:1}
 .ex-note{margin:0;padding:10px 16px 14px;font-size:.82rem;color:var(--ink-soft);font-style:italic}
 .region-note{margin:28px auto 0;max-width:80ch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:22px 24px}
 .region-note h4{font-family:var(--fd);color:var(--usgs);margin:0 0 8px;font-size:1.08rem}
@@ -143,6 +149,15 @@ section.alt{background:var(--paper-2)}
 .region-note li{margin-bottom:6px}
 .region-note li strong{color:var(--ink)}
 .region-fine{font-size:.85rem;font-style:italic;margin-bottom:0!important}
+
+/* ---- idea demo (one card front+back up top) ---- */
+.idea-demo{display:grid;grid-template-columns:1fr 1.05fr;gap:34px;align-items:center;margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 14px 40px -26px rgba(10,35,66,.6);padding:28px 30px}
+.idea-demo-copy h3{font-size:1.5rem;margin:0 0 .4em}
+.idea-demo-copy p{color:var(--ink-soft);margin:0 0 1.2em}
+.idea-demo-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.idea-demo-cards figure{margin:0;text-align:center}
+.idea-demo-cards img{width:100%;border-radius:10px;box-shadow:var(--shadow);border:2px solid rgba(255,255,255,.9)}
+.idea-demo-cards figcaption{font-family:var(--fd);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--ink-soft);margin-top:8px}
 
 /* ---- use-case chips ---- */
 .uses{display:flex;flex-wrap:wrap;gap:12px}
@@ -228,6 +243,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .hero .wrap{grid-template-columns:1fr;gap:10px}
   .hero-stage{height:320px;order:-1}
   .pitch-grid{grid-template-columns:1fr}
+  .idea-demo{grid-template-columns:1fr;gap:22px}
   .review{grid-template-columns:1fr}
   .tier-grid{grid-template-columns:1fr}
   .pack-grid{grid-template-columns:1fr}
@@ -290,6 +306,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       <div class="pc"><div class="ic">1</div><h3>Instantly understood</h3><p>No jargon, no briefing needed. The format does the explaining: threat vs. the team that beats it. It reads the same to a 9-year-old and a Deputy Director.</p></div>
       <div class="pc"><div class="ic">2</div><h3>Built to be wanted</h3><p>Trading cards work because people want the set. That &ldquo;gotta collect them all&rdquo; pull drives repeat engagement at events, in classrooms, and online &mdash; for free.</p></div>
       <div class="pc"><div class="ic">3</div><h3>It is us</h3><p>The scientists on these cards reflect the real USGS workforce &mdash; the women and men who do this work. The science is sourced from USGS and partner agencies, not invented.</p></div>
+    </div>
+
+    <div class="idea-demo">
+      <div class="idea-demo-copy">
+        <h3>One card. One glance. You get it.</h3>
+        <p>Front: the invader as the opposing player, with at-a-glance stats. Back: the real USGS science &mdash; where it came from, what it wrecks, and how we fight it. Here's the Sea Lamprey &mdash; a Great Lakes invader USGS has battled for decades.</p>
+        <a class="btn btn-gold" href="#gallery">See all 21 cards &rarr;</a>
+      </div>
+      <div class="idea-demo-cards">
+        <figure><img src="assets/cards/11_front.jpg" alt="Sea Lamprey card, front" loading="lazy"><figcaption>Front</figcaption></figure>
+        <figure><img src="assets/cards/11_back.jpg" alt="Sea Lamprey card, back &mdash; USGS science" loading="lazy"><figcaption>Back</figcaption></figure>
+      </div>
     </div>
   </div>
 </section>
@@ -385,7 +413,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
         <p>The best of the best, in a quietly premium <em>unmarked</em> wrapper &mdash; the cards speak for themselves, with no &ldquo;best of&rdquo; label. Kept at HQ for leadership and Capitol Hill outreach: the strongest cards plus a Horizon Scan card, to show what the program is in 30 seconds.</p>
       </div>
       <div class="pack">
-        <div class="pack-ic">&#128506;</div>
+        <div class="pack-ic">&#127482;&#127480;</div>
         <h3>Regional packs <span class="pack-spec">if Comms likes it</span></h3>
         <p>An option worth exploring: a regionally focused pack that speaks to a local audience &mdash; &ldquo;here are the invaders in <em>your</em> backyard, and here's USGS already working on them.&rdquo; A <strong>clearly labeled regional wrapper</strong> (&ldquo;Southeast Invaders,&rdquo; &ldquo;Great Lakes Invaders&rdquo;) reinforces the local message and lets people grab the right pack on their way out of an event. Especially powerful as a region-tailored handout for a member of Congress whose district is affected.</p>
       </div>
@@ -406,45 +434,45 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       <div class="ex-pack">
         <div class="ex-head reg">Southeast Invaders</div>
         <ul>
-          <li>Burmese Python <span>S. Florida</span></li>
-          <li>Lionfish <span>SE Atlantic / Gulf / Caribbean</span></li>
-          <li>Hydrilla <span>Florida &amp; Southeast waters</span></li>
-          <li>Blue Catfish <span>Chesapeake &amp; Southeast rivers</span></li>
-          <li>Feral Hog <span>heavy across the South</span></li>
-          <li>Red Imported Fire Ant <span>Southern U.S.</span></li>
+          <li><img src="assets/cards/03_front.jpg" alt="" loading="lazy"><span class="nm">Burmese Python</span><span>S. Florida</span></li>
+          <li><img src="assets/cards/14_front.jpg" alt="" loading="lazy"><span class="nm">Lionfish</span><span>SE Atlantic / Gulf / Caribbean</span></li>
+          <li><img src="assets/cards/13_front.jpg" alt="" loading="lazy"><span class="nm">Hydrilla</span><span>Florida &amp; Southeast waters</span></li>
+          <li><img src="assets/cards/18_front.jpg" alt="" loading="lazy"><span class="nm">Blue Catfish</span><span>Chesapeake &amp; Southeast rivers</span></li>
+          <li><img src="assets/cards/06_front.jpg" alt="" loading="lazy"><span class="nm">Feral Hog</span><span>heavy across the South</span></li>
+          <li><img src="assets/cards/10_front.jpg" alt="" loading="lazy"><span class="nm">Red Imported Fire Ant</span><span>Southern U.S.</span></li>
         </ul>
       </div>
       <div class="ex-pack">
         <div class="ex-head reg">Great Lakes Invaders</div>
         <ul>
-          <li>Sea Lamprey <span>all five Great Lakes</span></li>
-          <li>Zebra Mussel <span>Great Lakes &amp; eastern basins</span></li>
-          <li>Silver Carp <span>Mississippi/Ohio, nearing the Lakes</span></li>
-          <li>Bighead Carp <span>Mississippi/Ohio, nearing the Lakes</span></li>
-          <li>Black Rat <span>cities &amp; ports region-wide</span></li>
-          <li>Kudzu <span>spreading northward</span></li>
+          <li><img src="assets/cards/11_front.jpg" alt="" loading="lazy"><span class="nm">Sea Lamprey</span><span>all five Great Lakes</span></li>
+          <li><img src="assets/cards/05_front.jpg" alt="" loading="lazy"><span class="nm">Zebra Mussel</span><span>Great Lakes &amp; eastern basins</span></li>
+          <li><img src="assets/cards/07_front.jpg" alt="" loading="lazy"><span class="nm">Silver Carp</span><span>Mississippi/Ohio, nearing the Lakes</span></li>
+          <li><img src="assets/cards/12_front.jpg" alt="" loading="lazy"><span class="nm">Bighead Carp</span><span>Mississippi/Ohio, nearing the Lakes</span></li>
+          <li><img src="assets/cards/01_front.jpg" alt="" loading="lazy"><span class="nm">Black Rat</span><span>cities &amp; ports region-wide</span></li>
+          <li><img src="assets/cards/09_front.jpg" alt="" loading="lazy"><span class="nm">Kudzu</span><span>spreading northward</span></li>
         </ul>
       </div>
       <div class="ex-pack">
         <div class="ex-head reg">West Coast Invaders</div>
         <ul>
-          <li>Golden Mussel <span>CA Delta / SF Bay (new)</span></li>
-          <li>Cheatgrass <span>Great Basin &amp; West rangelands</span></li>
-          <li>Feral Hog <span>established across California</span></li>
-          <li>Black Rat <span>coastal cities &amp; ports</span></li>
-          <li>Zebra Mussel <span>a looming Western threat</span></li>
-          <li>Red Imported Fire Ant <span>Southern California</span></li>
+          <li><img src="assets/cards/19_front.jpg" alt="" loading="lazy"><span class="nm">Golden Mussel</span><span>CA Delta / SF Bay (new)</span></li>
+          <li><img src="assets/cards/15_front.jpg" alt="" loading="lazy"><span class="nm">Cheatgrass</span><span>Great Basin &amp; West rangelands</span></li>
+          <li><img src="assets/cards/06_front.jpg" alt="" loading="lazy"><span class="nm">Feral Hog</span><span>established across California</span></li>
+          <li><img src="assets/cards/01_front.jpg" alt="" loading="lazy"><span class="nm">Black Rat</span><span>coastal cities &amp; ports</span></li>
+          <li><img src="assets/cards/05_front.jpg" alt="" loading="lazy"><span class="nm">Zebra Mussel</span><span>a looming Western threat</span></li>
+          <li><img src="assets/cards/10_front.jpg" alt="" loading="lazy"><span class="nm">Red Imported Fire Ant</span><span>Southern California</span></li>
         </ul>
       </div>
       <div class="ex-pack flag">
         <div class="ex-head">Flagship &mdash; Best of the Best</div>
         <ul>
-          <li>Black Carp <span>gold-standard card</span></li>
-          <li>Sea Lamprey <span>strongest back-of-card</span></li>
-          <li>Southern House Mosquito <span>flagship USGS story</span></li>
-          <li>Burmese Python <span>instantly iconic</span></li>
-          <li>Lionfish <span>striking hero art</span></li>
-          <li class="horizon">+ 1 Horizon Scan card <span>&ldquo;what's coming next&rdquo;</span></li>
+          <li><img src="assets/cards/20_front.jpg" alt="" loading="lazy"><span class="nm">Black Carp</span><span>gold-standard card</span></li>
+          <li><img src="assets/cards/11_front.jpg" alt="" loading="lazy"><span class="nm">Sea Lamprey</span><span>strongest back-of-card</span></li>
+          <li><img src="assets/cards/08_front.jpg" alt="" loading="lazy"><span class="nm">Southern House Mosquito</span><span>flagship USGS story</span></li>
+          <li><img src="assets/cards/03_front.jpg" alt="" loading="lazy"><span class="nm">Burmese Python</span><span>instantly iconic</span></li>
+          <li><img src="assets/cards/14_front.jpg" alt="" loading="lazy"><span class="nm">Lionfish</span><span>striking hero art</span></li>
+          <li class="horizon"><span class="nm">+ 1 Horizon Scan card</span><span>&ldquo;what's coming next&rdquo;</span></li>
         </ul>
         <p class="ex-note">Curated for impact, unmarked wrapper &mdash; the 30-second &ldquo;what we're doing&rdquo; pitch.</p>
       </div>
@@ -452,7 +480,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
     <div class="region-note">
       <h4>How we'd define &ldquo;regions&rdquo; &mdash; leadership &amp; Comms call</h4>
-      <p>There's no need to lock a scheme now. A &ldquo;region&rdquo; could be drawn along several different lines, depending on the audience. A few to consider:</p>
+      <p>There's no need to lock in a scheme now &mdash; we can define &ldquo;region&rdquo; in any number of ways depending on strategic purpose. A few to consider:</p>
       <ul>
         <li><strong>DOI / USGS Unified Regions</strong> &mdash; the 12 regions the Department already uses (e.g., Pacific, Columbia&ndash;Pacific Northwest, Upper Colorado, Mississippi Basin, South Atlantic&ndash;Gulf, Great Lakes, North Atlantic&ndash;Appalachian, Alaska, etc.). The most &ldquo;on-brand&rdquo; cut &mdash; it aligns packs with how USGS itself is organized.</li>
         <li><strong>Watersheds (large HUCs)</strong> &mdash; group by major basin (HUC-2 regions like the Great Lakes, Ohio, Upper/Lower Mississippi, California). This is literally how the aquatic species are already mapped on the card backs, so it's the most scientifically natural cut for the water invaders.</li>
@@ -554,6 +582,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   </div>
 </footer>
 
+<script>
+/* nav scroll-spy: box the tab for whatever section you're viewing */
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var map = links.map(function(a){ var id=a.getAttribute('href').slice(1); return {a:a, el:document.getElementById(id)}; }).filter(function(m){return m.el;});
+  if(!map.length) return;
+  function spy(){
+    var y = window.scrollY + 90; // offset for sticky bar
+    var cur = map[0];
+    map.forEach(function(m){ if(m.el.offsetTop <= y) cur = m; });
+    links.forEach(function(a){ a.classList.remove('on'); });
+    cur.a.classList.add('on');
+  }
+  window.addEventListener('scroll', spy, {passive:true});
+  window.addEventListener('resize', spy);
+  spy();
+})();
+</script>
 <script src="data/cards.js"></script>
 <script src="app.js"></script>
 </body>

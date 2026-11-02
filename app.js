@@ -11,8 +11,9 @@
     // Paste a Microsoft Form URL here later to show a "fill the form"
     // option alongside the email buttons. Leave '' to hide it.
     formUrl: '',
-    // Which cards to fan across the hero (by num). Pick your strongest.
-    heroFan: [3, 14, 1, 6, 11]
+    // Which cards to fan across the hero (by num). Center (3rd) is the front-most hero.
+    // Lionfish center (most eye-catching); mix of taxa (insect, mollusk, fish, plant, mammal).
+    heroFan: [8, 19, 14, 9, 6]
   };
 
   var CARDS = (window.CARDS || []).slice().sort(function (a, b) { return a.num - b.num; });
