@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invasive Species Cards — Master Correction Table (20 cards)</title>
+<style>
+  :root{ --ink:#12202f; --soft:#5a6672; --line:#d7d2c6; --usgs:#0a2342; --gold:#b8902f;
+         --drop:#fbeaea; --new:#eaf4ec; --keep:#ffffff; --flag:#fff6dd; }
+  *{box-sizing:border-box}
+  body{font-family:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+       color:var(--ink);margin:0;background:#f4f1ea;line-height:1.5;font-size:14px}
+  header{background:var(--usgs);color:#fff;padding:22px 26px}
+  header h1{margin:0 0 6px;font-size:1.5rem}
+  header p{margin:0;color:#cdd9e8;max-width:90ch}
+  .wrap{padding:22px 26px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 16px;font-size:13px}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .sw{width:14px;height:14px;border:1px solid var(--line);border-radius:3px;display:inline-block}
+  .controls{margin:0 0 14px}
+  .controls input{padding:8px 12px;border:1px solid var(--line);border-radius:7px;font-size:14px;width:280px;max-width:100%}
+  .controls button{padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:7px;cursor:pointer;font-size:13px;margin-left:6px}
+  table{border-collapse:collapse;width:100%;background:#fff;box-shadow:0 10px 30px -22px rgba(10,35,66,.6)}
+  th,td{border:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left}
+  th{background:var(--usgs);color:#fff;position:sticky;top:0;z-index:2;font-size:12px;letter-spacing:.02em}
+  td.num{font-weight:700;font-size:1.05rem;text-align:center;white-space:nowrap}
+  tr.drop{background:var(--drop)}
+  tr.newbuild{background:var(--new)}
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;letter-spacing:.03em}
+  .tag.keep{background:#e5efe6;color:#1f5130}
+  .tag.swap{background:#f5e0e0;color:#7a1f1f}
+  .tag.build{background:#dcebe0;color:#14532a}
+  .prio{font-weight:700;text-align:center;white-space:nowrap}
+  .p1{color:#b00020} .p2{color:#b8902f} .p3{color:#2f6b3d}
+  .flag{background:var(--flag)}
+  .usgsq{text-align:center;white-space:nowrap;font-weight:700}
+  .ok{color:#1f7a3d} .no{color:#b00020} .warn{color:#b8902f}
+  small{color:var(--soft)}
+  td ul{margin:4px 0 0;padding-left:16px}
+  td li{margin:2px 0}
+  .species{font-weight:700}
+  .sci{font-style:italic;color:var(--soft);font-size:12px}
+  @media print{ header{background:#fff;color:#000;border-bottom:2px solid #000}
+    header p{color:#333} th{background:#eee;color:#000} .controls{display:none} body{font-size:11px} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Invasive Species Trading Cards &mdash; Master Correction Table</h1>
+  <p>The final 20-card pitch set after curation (2026-10-26). Go card by card. Each row lists what to change:
+  color scheme / Introduction Banner, hero image, USGS player (presence + representation + action), back side
+  (photo, text balance, map), and the QR / USGS-lead signal. Rows are color-coded: white = built keeper,
+  green = new build-from-scratch slot (replaced a non-USGS insect). Open in a browser; use your browser's
+  Print &rarr; Save as PDF to keep a copy.</p>
+</header>
+<div class="wrap">
+  <div class="legend">
+    <span><i class="sw" style="background:#fff"></i> Built keeper</span>
+    <span><i class="sw" style="background:#eaf4ec"></i> New build (replaced a dropped insect)</span>
+    <span><i class="sw" style="background:#fff6dd"></i> QR / credibility flag</span>
+    <span><b class="p1">P1</b> must-fix before pitch</span>
+    <span><b class="p2">P2</b> high-value</span>
+    <span><b class="p3">P3</b> polish</span>
+  </div>
+  <div class="controls">
+    <input id="q" type="search" placeholder="Filter by species, issue, priority...">
+    <button onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+  <table id="t">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Species</th>
+        <th>Status</th>
+        <th>QR / USGS&nbsp;lead</th>
+        <th>Hero image</th>
+        <th>USGS player (present? who? action?)</th>
+        <th>Introduction Banner &amp; team colors</th>
+        <th>Back side (photo / text / map)</th>
+        <th>Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <!-- 1 -->
+    <tr class="keep">
+      <td class="num">1</td>
+      <td><span class="species">Black Rat</span><br><span class="sci">Rattus rattus</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built, flagship</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Rat is excellent &mdash; gross, menacing, true anti-hero. Golden-hour slide. Keep the hero; this is strong.</td>
+      <td>Present (fielder top-right + blurred 2nd). Reads <b>white male</b>, and he's a bystander. <b>Diversify</b> the prominent player; make him actively fielding/tagging.</td>
+      <td>You flagged the banner: the <b>top-level</b> export uses the flatter gold banner; the 1.2 treatment (navy ribbon + green title) popped more. Reconsider banner for the flagship. Eyedropper the rat's green + warm dusk tones.</td>
+      <td>Strong back. Photo good, map detailed. <b>Text imbalance</b>: Detection box is a huge paragraph, Management/Pathways tiny &mdash; rebalance / trim to telegraphic.</td>
+      <td class="prio p2">P2</td>
+    </tr>
+
+    <!-- 2 -->
+    <tr class="keep">
+      <td class="num">2</td>
+      <td><span class="species">Brown Treesnake</span><br><span class="sci">Boiga irregularis</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Snake strong, dynamic fielding catch. Keep.</td>
+      <td>Present + active (fielder lower-left, "USGS 22"). Reads <b>white male</b>. <b>Diversify</b> (optional).</td>
+      <td>Green/gold banner works with the uniform. Eyedropper the snake's yellow belly for the gold accent to tie banner to hero.</td>
+      <td>Good. Balanced. Guam map clean.</td>
+      <td class="prio p3">P3</td>
+    </tr>
+
+    <!-- 3 -->
+    <tr class="keep">
+      <td class="num">3</td>
+      <td><span class="species">Burmese Python</span><br><span class="sci">Python bivittatus</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Python pitching is excellent. Keep the creature.</td>
+      <td class="flag"><b>NO USGS PLAYER AT ALL.</b> Add a prominent, active, diverse USGS opponent (e.g. a batter/fielder) so the "home team vs invader" matchup reads. <b>P1.</b></td>
+      <td>Orange/brown banner ties to the python's markings nicely. Minor: ensure title pops against the busy field.</td>
+      <td>Model back &mdash; beautiful photo, clean FL map + locator inset. Balanced. Leave.</td>
+      <td class="prio p1">P1</td>
+    </tr>
+
+    <!-- 4 NEW -->
+    <tr class="keep">
+      <td class="num">4</td>
+      <td><span class="species">Spotted Lanternfly</span><br><span class="sci">Lycorma delicatula</span><br><span class="tag keep">RESTORED</span><br><small>targeted hero edits</small></td>
+      <td>Built (restored)</td>
+      <td class="usgsq warn flag">USGS via CRU*</td>
+      <td><b>CRITICISM: weak/static hero.</b> Targeted edits (not a remake): make the lanternfly more dynamic/menacing (mid-leap red-hindwing flash).</td>
+      <td><b>CRITICISM: no USGS player.</b> Add one (fielder/batter), prominent + active + diverse.</td>
+      <td>Red/charcoal wing theme is fine. Eyedropper the bright-red hindwing for accent pop.</td>
+      <td><b>CRITICISM: map is a web-screenshot</b> that breaks the clean style &mdash; rebuild in your county style (PA epicenter). QR fixed to USGS CRU canine-detection pub (70262018) + "USGS role" line. Keep the strong red-underwing species photo.</td>
+      <td class="prio p2">P2</td>
+    </tr>
+
+    <!-- 5 -->
+    <tr class="keep">
+      <td class="num">5</td>
+      <td><span class="species">Zebra Mussel</span><br><span class="sci">Dreissena polymorpha</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Catcher pose good. Keep.</td>
+      <td><b>Good representation</b> &mdash; USGS player (left, teal) reads as a <b>person of color</b>. Could be more active (he's standing). Optional: make him make a play.</td>
+      <td>Navy banner works. Eyedropper the shell's tan stripes for an accent.</td>
+      <td><b>Species photo is soft/low-contrast</b> (blurry mussels). Replace with a crisper USGS mussel photo. Map clean.</td>
+      <td class="prio p3">P3</td>
+    </tr>
+
+    <!-- 6 -->
+    <tr class="keep">
+      <td class="num">6</td>
+      <td><span class="species">Feral Hog</span><br><span class="sci">Sus scrofa</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Hog is menacing (red eyes, tusks) &mdash; keep; it is NOT too cute. Strong, dynamic (USGS diving tag in foreground).</td>
+      <td><b>Prominent + active</b> (diving tag, "USGS 15"). Best action so far. Reads <b>white male</b>. <b>Diversify</b> (optional).</td>
+      <td>Gold/tan banner slightly washed against the bright scene. Consider deepening or outlining the title for pop.</td>
+      <td>Back: photo credit is NPS (ok). No mapData (continental). Fine. Check text balance.</td>
+      <td class="prio p3">P3</td>
+    </tr>
+
+    <!-- 7 -->
+    <tr class="keep">
+      <td class="num">7</td>
+      <td><span class="species">Silver Carp</span><br><span class="sci">Hypophthalmichthys molitrix</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Leaping catch = dynamic, good. Keep the carp.</td>
+      <td class="flag"><b>NO clear USGS player.</b> Add a prominent, active, diverse USGS opponent. <b>P1.</b></td>
+      <td><b>Gray/silver banner is muted against the bright scene</b> &mdash; weak pop. Eyedropper the green jersey + water blues; darken/outline the title.</td>
+      <td><b>Outstanding back photo</b> (USGS crew in boat, carp leaping). Keep. BUT Detection text is chatty prose ("These fish have a strange behavior...") &mdash; <b>rewrite telegraphic</b>.</td>
+      <td class="prio p1">P1</td>
+    </tr>
+
+    <!-- 8 NEW -->
+    <tr class="newbuild">
+      <td class="num">8</td>
+      <td><span class="species">Culex Mosquito</span><br><span class="sci">Culex quinquefasciatus</span><br><span class="tag build">NEW BUILD</span><br><small>moved from #10; replaced Asian Longhorned Beetle</small></td>
+      <td>Build from scratch</td>
+      <td class="usgsq ok flag">USGS (confirm URL)</td>
+      <td><b>CRITICISM: N/A (unbuilt) &mdash; execution risk.</b> Generate fresh hero: lean mosquito, long needle proboscis held like a weapon, humped thorax, translucent wings, pitching. Must read as a menacing closer, not a weak bug. Jersey <b>8</b> (numeral free).</td>
+      <td><b>Representation showcase.</b> Opponent in data = a USGS field scientist (ideally reflecting the Native Hawaiian / Pacific Islander workforce) cradling a native honeycreeper. Make it prominent.</td>
+      <td>Mosquito-at-dusk theme (dark brown-black, sickly olive-green disease accent, pale scale-band cream). Eyedropper after hero.</td>
+      <td>New back &mdash; <b>USGS flagship story</b>: avian malaria driving Hawaiian honeycreepers (&lsquo;akikiki, &lsquo;akeke&lsquo;e) to extinction; USGS PIERC leads suppression ("Birds, Not Mosquitoes"). Confirm best USGS QR. Island-group map (main Hawaiian Islands). <b>VALIDATE science</b> (new entry).</td>
+      <td class="prio p1">P1</td>
+    </tr>
+
+    <!-- 9 -->
+    <tr class="keep">
+      <td class="num">9</td>
+      <td><span class="species">Kudzu</span><br><span class="sci">Pueraria montana var. lobata</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq warn">mixed</td>
+      <td>Kudzu creature is great/creepy. Keep.</td>
+      <td><b>Best representation on the fronts</b> &mdash; USGS fielder (left) clearly reads as a <b>woman</b>, active. Keep.</td>
+      <td>Purple/green banner is striking. Fine. Eyedropper the vine green for consistency.</td>
+      <td><b>Gorgeous map</b> (projected-infestation density). BUT <b>severe text imbalance</b>: "First US Detection" is a huge block, big empty gaps under Detection/Management. Rebalance + trim prose. Photo is static (wall of vines) &mdash; optional swap for a more dramatic kudzu-smothered-structure shot.</td>
+      <td class="prio p2">P2</td>
+    </tr>
+
+    <!-- 10 NEW -->
+    <tr class="newbuild">
+      <td class="num">10</td>
+      <td><span class="species">Red Imported Fire Ant</span><br><span class="sci">Solenopsis invicta</span><br><span class="tag keep">RESTORED</span><br><small>targeted hero edits</small></td>
+      <td>Built (restored)</td>
+      <td class="usgsq warn flag">USGS via CRU*</td>
+      <td><b>CRITICISM: minimal &mdash; one of the better built cards.</b> Ant reads nicely aggressive/menacing. Optional: sharpen the menace. Targeted edits only.</td>
+      <td><b>Already strong</b> &mdash; two USGS players, one reads as a person of color. Optional: make the action read more clearly. No remake.</td>
+      <td>Rusty-red/soil theme works. Fine.</td>
+      <td><b>Credibility was the only real weakness &mdash; now fixed.</b> QR points to USGS CRU pub (70192046, "RIFA reduces herpetofauna richness &amp; abundance") + "USGS role" line. Map was APHIS quarantine image; optional to rebuild in clean style (low priority).</td>
+      <td class="prio p2">P2</td>
+    </tr>
+
+    <!-- 11 -->
+    <tr class="keep">
+      <td class="num">11</td>
+      <td><span class="species">Sea Lamprey</span><br><span class="sci">Petromyzon marinus</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Lamprey is superb (sucker-mouth, diving slide). Keep &mdash; one of the best heroes.</td>
+      <td class="flag">USGS player is <b>just a disembodied glove/arm</b> at the edge; forearm reads white. <b>Strengthen</b>: show a full, active, diverse USGS fielder making the tag.</td>
+      <td>Red/slate banner works with the jersey. Fine.</td>
+      <td><b>Your best back</b> &mdash; two photos (handler + the mouth close-up), dramatic map. Keep as a model for the others.</td>
+      <td class="prio p2">P2</td>
+    </tr>
+
+    <!-- 12 -->
+    <tr class="keep">
+      <td class="num">12</td>
+      <td><span class="species">Bighead Carp</span><br><span class="sci">Hypophthalmichthys nobilis</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Carp pitching is good. Keep.</td>
+      <td class="flag"><b>NO USGS player</b> (only blurred teammates). Add a prominent, active, diverse USGS opponent. <b>P1.</b></td>
+      <td>Orange/gray banner ok; could pop more &mdash; eyedropper the orange jersey.</td>
+      <td><b>Excellent back photo</b> (two USGS scientists holding the giant carp). Keep. Balanced. Map clean.</td>
+      <td class="prio p1">P1</td>
+    </tr>
+
+    <!-- 13 -->
+    <tr class="keep">
+      <td class="num">13</td>
+      <td><span class="species">Hydrilla</span><br><span class="sci">Hydrilla verticillata</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Hydrilla creature excellent (glowing eyes, moss). Keep.</td>
+      <td>Present but <b>buried/passive</b> (background-left, standing, white male). <b>Strengthen</b>: bring forward, make active, diversify.</td>
+      <td>Teal/purple banner works. Fine.</td>
+      <td>Good. Map clean. Check text balance.</td>
+      <td class="prio p2">P2</td>
+    </tr>
+
+    <!-- 14 -->
+    <tr class="keep">
+      <td class="num">14</td>
+      <td><span class="species">Lionfish</span><br><span class="sci">Pterois volitans</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Lionfish is outstanding (spines, teeth). Keep.</td>
+      <td>USGS catcher foreground-left, active; gender/ethnicity hard to read under mask. Background fielder may read as a person of color. <b>OK</b> &mdash; optional: confirm a visibly diverse player.</td>
+      <td>Purple/orange banner is bold. Fine.</td>
+      <td>Good. Map clean.</td>
+      <td class="prio p3">P3</td>
+    </tr>
+
+    <!-- 15 -->
+    <tr class="keep">
+      <td class="num">15</td>
+      <td><span class="species">Cheatgrass</span><br><span class="sci">Bromus tectorum</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Cheatgrass creature on fire = great. Keep.</td>
+      <td>USGS fielder lower-left, diving catch, active; reads <b>white male</b>. <b>Diversify</b> (optional).</td>
+      <td>Red/straw banner ok. Fine.</td>
+      <td><b>Most imbalanced back</b>: huge "First Detection" + "Impacts" blocks, tiny others; wall of tiny citation text on the map. <b>Rewrite telegraphic, rebalance, clean the map citations.</b> Two-photo layout is good.</td>
+      <td class="prio p2">P2</td>
+    </tr>
+
+    <!-- 16 -->
+    <tr class="keep">
+      <td class="num">16</td>
+      <td><span class="species">Coconut Rhinoceros Beetle</span><br><span class="sci">Oryctes rhinoceros</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built (kept per your call &mdash; USGS/PIERC Pacific-island work)</td>
+      <td class="usgsq warn flag">USDA page*</td>
+      <td>Beetle is superb (horn, menace). Keep.</td>
+      <td>USGS player left, active tag; reads <b>white male</b>. <b>Diversify</b> (optional).</td>
+      <td>Brown-on-brown banner &mdash; <b>low contrast</b>. Eyedropper a brighter accent (the teal USGS uniform?) to make the title pop.</td>
+      <td>Back ok. <b>QR FLAG:</b> points to USDA APHIS &mdash; add a "USGS role" line (PIERC Pacific-island work) so the card's own text establishes the USGS connection. Map = APHIS islands.</td>
+      <td class="prio p2">P2</td>
+    </tr>
+
+    <!-- 17 -->
+    <tr class="keep">
+      <td class="num">17</td>
+      <td><span class="species">Northern Snakehead</span><br><span class="sci">Channa argus</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Snakehead batting is good. Keep.</td>
+      <td><b>Excellent representation</b> &mdash; USGS fielder (left) reads as a <b>woman</b> + a diverse catcher. Active. Keep.</td>
+      <td>Gold/green banner works. Fine.</td>
+      <td>Good back, clean map. BUT the photo is <b>an angler in flannel, not a visibly-USGS worker</b> &mdash; optional swap for a USGS-uniformed/field shot so it reinforces the thesis.</td>
+      <td class="prio p3">P3</td>
+    </tr>
+
+    <!-- 18 -->
+    <tr class="keep">
+      <td class="num">18</td>
+      <td><span class="species">Blue Catfish</span><br><span class="sci">Ictalurus furcatus</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Catfish catcher pose good. Keep.</td>
+      <td>USGS batter foreground (legs/glove) + background player reads as a <b>person of color</b>. <b>OK</b>.</td>
+      <td><b>Pale/washed banner</b> &mdash; weak pop. Eyedropper the catfish slate-blue + the navy jersey; darken the title.</td>
+      <td>Good. Map clean.</td>
+      <td class="prio p3">P3</td>
+    </tr>
+
+    <!-- 19 -->
+    <tr class="keep">
+      <td class="num">19</td>
+      <td><span class="species">Golden Mussel</span><br><span class="sci">Limnoperna fortunei</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Mussel fielding pose good. Keep.</td>
+      <td>USGS baserunner (right), active running, reads as a <b>woman</b>. Good.</td>
+      <td>Gold/black banner works. Fine.</td>
+      <td><b>Species photo monochrome/soft</b> &mdash; optional crisper golden-mussel photo. Map clean (new CA invader).</td>
+      <td class="prio p3">P3</td>
+    </tr>
+
+    <!-- 20 -->
+    <tr class="keep">
+      <td class="num">20</td>
+      <td><span class="species">Black Carp</span><br><span class="sci">Mylopharyngodon piceus</span><br><span class="tag keep">KEEP</span></td>
+      <td>Built</td>
+      <td class="usgsq ok">USGS</td>
+      <td>Carp pitching good. Keep.</td>
+      <td><b>GOLD STANDARD representation</b> &mdash; USGS baserunner (right) reads as a <b>Black woman</b>, prominent + active. Use as the model for the players we fix on other cards.</td>
+      <td>Dark pinstripe banner works. Fine.</td>
+      <td>Good back (real USGS scientist holding the carp). Map fill is very dark/heavy &mdash; optional lighten. Balanced.</td>
+      <td class="prio p3">P3</td>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <p style="margin-top:18px;max-width:95ch;color:#5a6672;font-size:13px">
+    <b>* QR flag:</b> Screwworm (#8) and Coconut Rhino Beetle (#16) have best-public-info pages at USDA, but USGS
+    does real work on both (eDNA detection; Pacific-island research). Add a short &ldquo;USGS role&rdquo; line on
+    those backs &mdash; it turns a possible &ldquo;why is this here?&rdquo; into a &ldquo;USGS builds the science
+    others use&rdquo; strength. Culex (#10) is a USGS-led story; confirm the best PIERC / &ldquo;Birds, Not
+    Mosquitoes&rdquo; URL for its QR.<br><br>
+    <b>Model cards to copy from:</b> players &rarr; #20 Black Carp &amp; #17 Snakehead; backs &rarr; #11 Sea Lamprey;
+    front hero tone &rarr; #14 Lionfish, #7 Silver Carp, #16 Beetle.
+  </p>
+</div>
+
+<script>
+  var q = document.getElementById('q');
+  q.addEventListener('input', function(){
+    var t = q.value.toLowerCase();
+    document.querySelectorAll('#t tbody tr').forEach(function(r){
+      r.style.display = r.textContent.toLowerCase().indexOf(t) >= 0 ? '' : 'none';
+    });
+  });
+</script>
+</body>
+</html>

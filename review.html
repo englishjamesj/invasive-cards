@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review the Trading Cards &mdash; USGS Invasive Species</title>
+<meta name="description" content="A quick, friendly review tool for subject-matter experts to check the science on the USGS invasive-species trading cards.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<!-- link preview (shows the card icon + friendly title when the link is shared) -->
+<meta property="og:title" content="Review the USGS Invasive Species Trading Cards">
+<meta property="og:description" content="Pick the species you know, check the facts, and suggest any edits. Takes about five minutes.">
+<meta property="og:image" content="favicon.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SME REVIEW WORKBENCH  (review.html)
+   Single-file, dependency-free. Reads data/cards.js + assets.
+   Purpose: make checking the science EASY and almost fun.
+   Default path = "looks good, change nothing." Back-side science
+   boxes are the stars (that's where edits are expected). Front /
+   hero / player / colors are quiet optional notes.
+   Submit = per card, copy a tidy auto-labeled block + open the
+   MS Form, paste, done. No login, no setup, soft claiming.
+   ============================================================ */
+:root{
+  --ink:#0f1a2b; --ink-soft:#44525f; --paper:#f4f1ea; --paper-2:#ece7dc;
+  --usgs:#0a2342; --usgs-2:#13467a; --field:#2f6b3d; --accent:#c6a04a;
+  --danger:#9c2b2b; --ok:#2f7a43;
+  --line:rgba(15,26,43,.14);
+  --shadow:0 18px 40px -18px rgba(10,35,66,.55);
+  --shadow-lg:0 40px 90px -30px rgba(10,35,66,.7);
+  --radius:14px; --maxw:1120px;
+  --fs:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --fd:'Oswald',var(--fs);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:var(--paper);font-family:var(--fs);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--usgs-2)}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:.01em;color:var(--usgs)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--fd);text-transform:uppercase;letter-spacing:.18em;font-size:.8rem;color:var(--accent);font-weight:600}
+
+/* ---- top bar ---- */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(244,241,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.brand{font-family:var(--fd);font-weight:700;color:var(--usgs);text-decoration:none;font-size:1.02rem;letter-spacing:.02em;white-space:nowrap}
+.brand b{color:var(--accent)}
+.who{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--ink-soft)}
+.who input{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-family:var(--fs);font-size:.95rem;width:130px}
+.who .tag{font-family:var(--fd);background:var(--usgs);color:#fff;border-radius:999px;padding:4px 12px;letter-spacing:.04em;display:none}
+
+/* ---- hero / intro ---- */
+.intro{background:radial-gradient(1000px 440px at 80% -20%, rgba(19,70,122,.22), transparent 60%),linear-gradient(160deg,#0a2342 0%,#0c2b52 55%,#123f2a 150%);color:#fff}
+.intro .wrap{padding:42px 24px 46px}
+.intro h1{color:#fff;font-size:clamp(1.8rem,4vw,2.9rem);margin:.25em 0 .3em}
+.intro h1 .hl{color:var(--accent)}
+.intro p{font-size:1.12rem;color:#dbe6f2;max-width:64ch;margin:0 0 .4em}
+.steps{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+.step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:.98rem;color:#eaf1f8}
+.step b{font-family:var(--fd);color:var(--accent);font-size:1.1rem}
+
+/* ---- claim roster ---- */
+#claimSec .wrap{padding:40px 24px 8px}
+.sec-head{max-width:70ch;margin-bottom:22px}
+.sec-head h2{font-size:clamp(1.4rem,2.6vw,2rem);margin:.1em 0 .3em}
+.sec-head p{color:var(--ink-soft);margin:0}
+.roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.chip{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .08s}
+.chip:hover{border-color:var(--accent);box-shadow:0 8px 20px -16px rgba(10,35,66,.6)}
+.chip:active{transform:translateY(1px)}
+.chip .thumb{width:40px;height:56px;border-radius:5px;object-fit:cover;background:#ddd;flex:0 0 auto;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.chip .meta{min-width:0}
+.chip .nm{font-family:var(--fd);font-weight:600;color:var(--usgs);font-size:1rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip .sc{font-style:italic;color:var(--ink-soft);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip .box{margin-left:auto;width:26px;height:26px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;color:#fff;font-weight:700;flex:0 0 auto}
+.chip.claimed{border-color:var(--ok);background:#f2faf4}
+.chip.claimed .box{background:var(--ok);border-color:var(--ok)}
+.chip.edited .box{background:var(--accent);border-color:var(--accent)}
+.hint{font-size:.9rem;color:var(--ink-soft);margin:14px 0 0}
+
+/* ---- review deck ---- */
+#deckSec .wrap{padding:30px 24px 70px}
+.deck-empty{background:#fff;border:1px dashed var(--line);border-radius:var(--radius);padding:30px;text-align:center;color:var(--ink-soft)}
+.cardblock{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 34px -24px rgba(10,35,66,.6);margin-bottom:28px;overflow:hidden}
+.cb-head{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--paper-2);border-bottom:1px solid var(--line)}
+.cb-head .n{font-family:var(--fd);background:var(--usgs);color:#fff;border-radius:999px;padding:4px 12px;letter-spacing:.04em;font-size:.85rem}
+.cb-head .nm{font-family:var(--fd);font-weight:700;color:var(--usgs);font-size:1.25rem;line-height:1}
+.cb-head .sc{font-style:italic;color:var(--ink-soft);font-size:.92rem}
+.cb-head .status{margin-left:auto;font-size:.86rem;font-weight:600;color:var(--ink-soft)}
+.cb-head .status.on{color:var(--accent)}
+.cb-head .drop{border:0;background:transparent;cursor:pointer;color:var(--ink-soft);font-size:.9rem;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;padding:6px 10px;border-radius:8px}
+.cb-head .drop:hover{background:#fff}
+.cb-body{display:grid;grid-template-columns:330px 1fr;gap:24px;padding:22px 20px}
+.cb-body.collapsed{display:none}
+
+/* card image + flip */
+.cv{position:relative}
+.cv .flipwrap{perspective:1400px}
+.cv .inner{position:relative;width:100%;aspect-ratio:1000/1400;transition:transform .7s cubic-bezier(.2,.75,.2,1);transform-style:preserve-3d}
+.cv .inner.flipped{transform:rotateY(180deg)}
+.cv .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:#ddd}
+.cv .face img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.cv .back{transform:rotateY(180deg)}
+.cv .vtools{display:flex;gap:8px;margin-top:10px;justify-content:center}
+.cv .vtools button{font-family:var(--fd);text-transform:uppercase;letter-spacing:.05em;font-size:.78rem;border:1px solid var(--line);background:#fff;color:var(--usgs);padding:8px 14px;border-radius:8px;cursor:pointer}
+.cv .vtools button:hover{border-color:var(--accent)}
+.cv .tip{text-align:center;font-size:.82rem;color:var(--ink-soft);margin-top:8px}
+
+/* edit column */
+.edithead{font-family:var(--fd);text-transform:uppercase;letter-spacing:.07em;font-size:.82rem;color:var(--usgs);margin:0 0 4px}
+.editsub{font-size:.9rem;color:var(--ink-soft);margin:0 0 14px}
+.field{margin-bottom:14px}
+.field label{display:flex;align-items:center;gap:8px;font-family:var(--fd);text-transform:uppercase;letter-spacing:.05em;font-size:.76rem;color:var(--usgs);margin-bottom:5px}
+.field label .ch{display:none;background:var(--accent);color:#3a2d06;border-radius:999px;font-size:.64rem;padding:2px 8px;letter-spacing:.06em}
+.field.changed label .ch{display:inline-block}
+.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-family:var(--fs);font-size:.98rem;line-height:1.5;resize:vertical;min-height:56px;background:#fff;transition:border-color .15s,background .15s}
+.field textarea:focus{outline:0;border-color:var(--usgs-2)}
+.field.changed textarea{border-color:var(--accent);background:#fffdf4}
+.field .revert{display:none;background:none;border:0;color:var(--usgs-2);font-size:.8rem;cursor:pointer;margin-top:3px;padding:0}
+.field.changed .revert{display:inline}
+
+.optional{margin-top:18px;border-top:1px dashed var(--line);padding-top:16px}
+.optional summary{cursor:pointer;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;color:var(--ink-soft);list-style:none}
+.optional summary::-webkit-details-marker{display:none}
+.optional summary::before{content:"\25B8  ";color:var(--accent)}
+.optional[open] summary::before{content:"\25BE  "}
+.optional .note{font-size:.86rem;color:var(--ink-soft);margin:8px 0 14px}
+
+/* submit row */
+.cb-foot{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px 20px;border-top:1px solid var(--line);background:var(--paper-2)}
+.btn{font-family:var(--fd);text-transform:uppercase;letter-spacing:.07em;font-weight:600;font-size:.9rem;border:0;cursor:pointer;padding:13px 20px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:transform .12s,box-shadow .2s,opacity .2s}
+.btn:active{transform:translateY(1px)}
+.btn-gold{background:var(--accent);color:#2a2008;box-shadow:0 12px 24px -14px rgba(198,160,74,.8)}
+.btn-gold:hover{box-shadow:0 16px 30px -12px rgba(198,160,74,.9)}
+.btn-ghost{background:#fff;color:var(--usgs);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent)}
+.btn[disabled]{opacity:.5;cursor:default;box-shadow:none}
+.foot-msg{font-size:.92rem;color:var(--ink-soft)}
+.foot-msg.ok{color:var(--ok);font-weight:600}
+.foot-msg.changed{color:var(--accent);font-weight:600}
+
+/* guided hand-off panel (shown after Send) */
+.copybox{display:none;margin:0 20px 20px;padding:18px 20px;background:#fffaf0;border:2px solid var(--accent);border-radius:12px}
+.copybox.show{display:block}
+.cbx-head{font-family:var(--fd);font-weight:600;color:var(--usgs);font-size:1.05rem;margin-bottom:10px}
+.cbx-steps{margin:0;padding-left:0;list-style:none;counter-reset:none}
+.cbx-steps li{margin:0 0 12px;font-size:1rem;color:var(--ink);line-height:1.5}
+.cbx-steps li:last-child{margin-bottom:0}
+.cbx-steps .openform{margin-right:8px}
+.cbx-note{font-size:.85rem;color:var(--ink-soft)}
+.cbx-steps kbd{font-family:ui-monospace,Consolas,monospace;background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;font-size:.85em}
+.cbx-preview{margin-top:14px;border-top:1px dashed var(--accent);padding-top:12px}
+.cbx-preview summary{cursor:pointer;font-size:.86rem;color:var(--usgs-2);list-style:none}
+.cbx-preview summary::-webkit-details-marker{display:none}
+.cbx-preview summary::before{content:"\25B8  ";color:var(--accent)}
+.cbx-preview[open] summary::before{content:"\25BE  "}
+.cbx-preview textarea{width:100%;min-height:120px;margin-top:10px;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;line-height:1.45;background:#fff;resize:vertical}
+.cbx-preview .copyagain{margin-top:8px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;background:rgba(6,14,26,.88);backdrop-filter:blur(4px);padding:24px}
+.lb.open{display:flex}
+.lb img{max-width:min(94vw,640px);max-height:92vh;border-radius:12px;box-shadow:var(--shadow-lg);object-fit:contain}
+.lb .x{position:absolute;top:18px;right:22px;font-family:var(--fd);letter-spacing:.06em;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.14);color:#fff;padding:9px 15px;border-radius:9px;cursor:pointer}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(140%);background:var(--usgs);color:#fff;padding:14px 22px;border-radius:12px;box-shadow:var(--shadow-lg);font-weight:600;z-index:90;transition:transform .35s cubic-bezier(.2,.8,.2,1);max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+footer{background:var(--usgs);color:#cdd9e8;padding:30px 0;font-size:.92rem;margin-top:10px}
+footer a{color:#fff}
+
+@media (max-width:760px){
+  .cb-body{grid-template-columns:1fr}
+  .cv{max-width:300px;margin:0 auto}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">USGS <b>Invaders</b> &mdash; Expert Review</a>
+    <div class="who">
+      <span id="whoLabel">Your initials:</span>
+      <input id="initials" maxlength="6" placeholder="e.g. WES" aria-label="Your initials">
+      <span class="tag" id="whoTag"></span>
+    </div>
+  </div>
+</header>
+<a id="top"></a>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="wrap">
+    <div class="eyebrow">Subject-Matter Expert Review</div>
+    <h1>Help me get the science right.<br><span class="hl">It takes about five minutes.</span></h1>
+    <p>These are draft trading cards that turn USGS invasive-species science into something the public roots for. I just need expert eyes on the <strong>facts</strong>. Pick the species you know, read the back, and fix any wording that isn&rsquo;t quite right. If it looks good, you&rsquo;re done &mdash; most cards won&rsquo;t need a thing.</p>
+    <div class="steps">
+      <div class="step"><b>1</b> Put your initials up top</div>
+      <div class="step"><b>2</b> Pick the cards you&rsquo;re expert in</div>
+      <div class="step"><b>3</b> Fix any wrong wording &amp; send that card</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLAIM ROSTER ============ -->
+<section id="claimSec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Step 2</div>
+      <h2>Which species do you know best?</h2>
+      <p>Tap any card you feel expert in &mdash; it drops into your review list below. Take as many or as few as you like. (It&rsquo;s fine if someone else also picked one.)</p>
+    </div>
+    <div class="roster" id="roster"></div>
+    <p class="hint" id="rosterHint"></p>
+  </div>
+</section>
+
+<!-- ============ REVIEW DECK ============ -->
+<section id="deckSec" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Step 3</div>
+      <h2>Your review list</h2>
+      <p>Read the back (click <strong>Flip</strong>), then edit any box whose wording is off. Changed boxes turn gold. When a card&rsquo;s done, hit <strong>Send edits for this card</strong>. Nothing to change? Just leave it &mdash; no need to send.</p>
+    </div>
+    <div id="deck"></div>
+    <div class="deck-empty" id="deckEmpty">Pick a species above and it&rsquo;ll show up here, ready to review.</div>
+  </div>
+</section>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Enlarged card">
+  <button class="x" id="lbX">Close &times;</button>
+  <img id="lbImg" alt="Enlarged card">
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    Thanks for lending your expertise. Questions? <a id="footMail" href="#">jjenglish@usgs.gov</a>
+  </div>
+</footer>
+
+<script src="data/cards.js"></script>
+<script src="review.js"></script>
+</body>
+</html>

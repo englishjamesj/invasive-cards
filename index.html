@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USGS Invasive Species Trading Cards &mdash; Portfolio</title>
+<meta name="description" content="A pitch portfolio: collectible trading cards that turn USGS invasive-species science into something the public instantly roots for.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   USGS Invasive Species Trading Cards - Pitch Portfolio
+   Single-file, dependency-free (fonts are progressive-enhance).
+   Works on GitHub Pages AND locally / offline from a folder.
+   ============================================================ */
+:root{
+  --ink:#0f1a2b;            /* near-black navy text            */
+  --ink-soft:#44525f;       /* secondary text                 */
+  --paper:#f4f1ea;          /* warm card-stock background      */
+  --paper-2:#ece7dc;        /* slightly deeper panel           */
+  --usgs:#0a2342;           /* deep USGS navy                  */
+  --usgs-2:#13467a;         /* mid navy                        */
+  --field:#2f6b3d;          /* ballfield green                 */
+  --accent:#c6a04a;         /* brass/gold                      */
+  --danger:#9c2b2b;         /* threat red (used sparingly)     */
+  --line:rgba(15,26,43,.14);
+  --shadow:0 18px 40px -18px rgba(10,35,66,.55);
+  --shadow-lg:0 40px 90px -30px rgba(10,35,66,.7);
+  --radius:14px;
+  --maxw:1180px;
+  --fs:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --fd:'Oswald',var(--fs);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);background:var(--paper);
+  font-family:var(--fs);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--usgs-2)}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.1;letter-spacing:.01em;color:var(--usgs)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--fd);text-transform:uppercase;letter-spacing:.18em;font-size:.8rem;color:var(--accent);font-weight:600}
+
+/* ---- top bar ---- */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(244,241,234,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:18px;height:60px}
+.brand{font-family:var(--fd);font-weight:700;color:var(--usgs);text-decoration:none;font-size:1.05rem;letter-spacing:.02em;white-space:nowrap}
+.brand b{color:var(--accent)}
+.nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.nav a{font-family:var(--fd);text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;color:var(--ink-soft);text-decoration:none;padding:8px 12px;border-radius:8px}
+.nav a:hover{color:var(--usgs);background:var(--paper-2)}
+
+/* ---- hero ---- */
+.hero{position:relative;overflow:hidden;background:
+  radial-gradient(1100px 500px at 78% -10%, rgba(19,70,122,.22), transparent 60%),
+  linear-gradient(160deg,#0a2342 0%,#0c2b52 48%,#123f2a 140%);
+  color:#fff}
+.hero .wrap{position:relative;z-index:2;padding:66px 24px 72px;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{color:#fff;font-size:clamp(2.1rem,4.6vw,3.6rem);margin:.3em 0 .35em}
+.hero h1 .hl{color:var(--accent)}
+.hero p.lede{font-size:1.2rem;color:#dbe6f2;max-width:42ch;margin:0 0 1.5em}
+.hero .eyebrow{color:#9fd3a6}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:var(--fd);text-transform:uppercase;letter-spacing:.07em;font-weight:600;font-size:.92rem;
+  border:0;cursor:pointer;padding:14px 22px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:transform .12s ease, box-shadow .2s ease}
+.btn:active{transform:translateY(1px)}
+.btn-gold{background:var(--accent);color:#2a2008;box-shadow:0 12px 24px -12px rgba(198,160,74,.8)}
+.btn-gold:hover{box-shadow:0 16px 30px -12px rgba(198,160,74,.9)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.28)}
+.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.hero-stage{position:relative;height:420px}
+/* fanned hero cards */
+.fan{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.fan .fcard{position:absolute;width:210px;border-radius:10px;box-shadow:var(--shadow-lg);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-origin:bottom center;border:3px solid rgba(255,255,255,.9)}
+.fan .fcard:nth-child(1){transform:rotate(-15deg) translate(-150px,14px) scale(.92)}
+.fan .fcard:nth-child(2){transform:rotate(-6deg) translate(-74px,-4px) scale(.97)}
+.fan .fcard:nth-child(3){transform:rotate(2deg) translate(6px,-12px) scale(1.02);z-index:3}
+.fan .fcard:nth-child(4){transform:rotate(10deg) translate(84px,0) scale(.97)}
+.fan .fcard:nth-child(5){transform:rotate(18deg) translate(158px,18px) scale(.9)}
+.hero-stage:hover .fan .fcard:nth-child(1){transform:rotate(-20deg) translate(-178px,10px) scale(.92)}
+.hero-stage:hover .fan .fcard:nth-child(5){transform:rotate(23deg) translate(186px,14px) scale(.9)}
+
+/* ---- section scaffolding ---- */
+section{padding:62px 0}
+section.alt{background:var(--paper-2)}
+.sec-head{max-width:62ch;margin-bottom:34px}
+.sec-head h2{font-size:clamp(1.6rem,3vw,2.3rem);margin:.1em 0 .35em}
+.sec-head p{color:var(--ink-soft);margin:0;font-size:1.08rem}
+
+/* ---- thesis / pitch cards ---- */
+.pitch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6)}
+.pc .ic{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--usgs);color:#fff;font-family:var(--fd);font-size:1.3rem;margin-bottom:14px}
+.pc h3{margin:.1em 0 .4em;font-size:1.22rem}
+.pc p{margin:0;color:var(--ink-soft);font-size:1rem}
+
+/* ---- use-case chips ---- */
+.uses{display:flex;flex-wrap:wrap;gap:12px}
+.use{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-weight:600;color:var(--usgs);display:flex;align-items:center;gap:9px}
+.use span{font-size:1.15rem}
+
+/* ---- gallery controls ---- */
+.g-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:26px}
+.search{flex:1;min-width:200px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.search input{border:0;outline:0;font-size:1rem;width:100%;font-family:var(--fs);background:transparent}
+.toggle{display:flex;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.toggle button{border:0;background:transparent;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;padding:10px 16px;cursor:pointer;color:var(--ink-soft)}
+.toggle button.on{background:var(--usgs);color:#fff}
+
+/* ---- gallery grid ---- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:30px}
+.grid.wall{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+
+/* ---- the card (flip) ---- */
+.card{perspective:1400px;cursor:pointer}
+.card .inner{position:relative;width:100%;aspect-ratio:1000/1400;transition:transform .7s cubic-bezier(.2,.75,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.card .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;overflow:hidden;
+  box-shadow:var(--shadow);background:#ddd;border:1px solid rgba(255,255,255,.6)}
+.card .face img{width:100%;height:100%;object-fit:cover}
+.card .back{transform:rotateY(180deg)}
+.card .cnum{position:absolute;top:8px;left:8px;z-index:3;background:rgba(10,35,66,.86);color:#fff;font-family:var(--fd);font-size:.72rem;letter-spacing:.05em;padding:3px 8px;border-radius:999px}
+.card .tools{position:absolute;bottom:8px;right:8px;z-index:3;display:flex;gap:6px;opacity:0;transition:opacity .2s}
+.card:hover .tools,.card:focus-within .tools{opacity:1}
+.card .tools button{border:0;cursor:pointer;width:34px;height:34px;border-radius:8px;background:rgba(10,35,66,.86);color:#fff;font-size:1rem;display:grid;place-items:center}
+.card .tools button:hover{background:var(--usgs-2)}
+.card .label{margin-top:10px;text-align:center}
+.card .label .nm{font-family:var(--fd);font-weight:600;color:var(--usgs);font-size:1.02rem;line-height:1.1}
+.card .label .sc{font-style:italic;color:var(--ink-soft);font-size:.86rem}
+.wall .card .label{display:none}
+.wall .card .tools{display:none}
+
+/* subtle cursor-tilt handled in JS via CSS vars */
+.card .inner{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.card.flipped .inner{transform:rotateY(180deg)}
+
+/* ---- lightbox ---- */
+.lb{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;
+  background:rgba(6,14,26,.86);backdrop-filter:blur(4px);padding:28px}
+.lb.open{display:flex}
+.lb-stage{perspective:1800px;max-width:min(92vw,560px);width:100%}
+.lb-inner{position:relative;width:100%;aspect-ratio:1000/1400;transition:transform .7s cubic-bezier(.2,.75,.2,1);transform-style:preserve-3d}
+.lb-inner.flipped{transform:rotateY(180deg)}
+.lb-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.lb-face img{width:100%;height:100%;object-fit:contain;background:#0a1626}
+.lb-back{transform:rotateY(180deg)}
+.lb-bar{position:absolute;top:18px;right:22px;display:flex;gap:10px;z-index:3}
+.lb-bar button,.lb-nav button{font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.82rem;
+  border:0;cursor:pointer;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
+  padding:10px 16px;border-radius:9px}
+.lb-bar button:hover,.lb-nav button:hover{background:rgba(255,255,255,.26)}
+.lb-nav{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;z-index:3}
+.lb-nav .cap{color:#dbe6f2;font-family:var(--fd);letter-spacing:.04em;min-width:170px;text-align:center}
+.lb-feedback{position:absolute;bottom:18px;right:22px;z-index:3}
+
+/* ---- feedback / review section ---- */
+.review{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.review .note{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.review h3{margin-top:0}
+.sci-edit{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.sci-pick{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font-family:var(--fs);font-size:1rem;margin-bottom:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.76rem;color:var(--usgs);margin-bottom:5px}
+.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-family:var(--fs);font-size:.98rem;line-height:1.5;resize:vertical;min-height:62px}
+.field .orig{font-size:.82rem;color:var(--ink-soft);margin-top:4px;display:none}
+.field.changed textarea{border-color:var(--accent);background:#fffdf6}
+.field.changed .orig{display:block}
+
+/* ---- footer ---- */
+footer{background:var(--usgs);color:#cdd9e8;padding:40px 0;font-size:.95rem}
+footer a{color:#fff}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+.pill-note{display:inline-block;background:#fff6dd;border:1px solid var(--accent);color:#6b531a;padding:4px 12px;border-radius:999px;font-size:.82rem;font-weight:600}
+
+/* ---- responsive ---- */
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;gap:10px}
+  .hero-stage{height:320px;order:-1}
+  .pitch-grid{grid-template-columns:1fr}
+  .review{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+  .card .inner,.lb-inner{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">USGS <b>Invaders</b> &mdash; Trading Card Series</a>
+    <nav class="nav">
+      <a href="#pitch">The Idea</a>
+      <a href="#uses">How It's Used</a>
+      <a href="#gallery">The Cards</a>
+      <a href="#review">Give Feedback</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow">A USGS Public-Engagement Concept</div>
+      <h1>Meet the invaders.<br><span class="hl">Root for the home team.</span></h1>
+      <p class="lede">Collectible trading cards that cast invasive species as the opposing team &mdash; and USGS scientists as the home team that studies and beats them. Real science, told so anyone instantly gets it.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#gallery">See the cards &rarr;</a>
+        <a class="btn btn-ghost" href="#pitch">Why it works</a>
+      </div>
+    </div>
+    <div class="hero-stage"><div class="fan" id="fan"></div></div>
+  </div>
+</section>
+
+<!-- ============ THE IDEA / THESIS ============ -->
+<section id="pitch">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The Idea</div>
+      <h2>Invasive species are an abstract threat. These cards make them a rival you can see.</h2>
+      <p>Every card is an &ldquo;anti-hero&rdquo;: a real, formidable invader rendered as a visiting player. On the other side of the ball is a USGS scientist in uniform &mdash; the people who actually detect, study, and fight these species in the field. The baseball-card format turns a hard-to-explain mission into something a kid, a teacher, or a decision-maker understands in three seconds and wants to collect.</p>
+    </div>
+    <div class="pitch-grid">
+      <div class="pc"><div class="ic">1</div><h3>Instantly understood</h3><p>No jargon, no briefing needed. The format does the explaining: threat vs. the team that beats it. It reads the same to a 9-year-old and a Deputy Director.</p></div>
+      <div class="pc"><div class="ic">2</div><h3>Built to be wanted</h3><p>Trading cards work because people want the set. That &ldquo;gotta collect them all&rdquo; pull drives repeat engagement at events, in classrooms, and online &mdash; for free.</p></div>
+      <div class="pc"><div class="ic">3</div><h3>It is us</h3><p>The scientists on these cards reflect the real USGS workforce &mdash; the women and men who do this work. The science is sourced from USGS and partner agencies, not invented.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USE CASES ============ -->
+<section id="uses" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">How It's Used</div>
+      <h2>One asset, many front doors to USGS science.</h2>
+      <p>The same card set works across nearly every public-facing channel we already staff &mdash; at almost no marginal cost.</p>
+    </div>
+    <div class="uses">
+      <div class="use"><span>&#127919;</span> Outreach &amp; tabling events</div>
+      <div class="use"><span>&#127891;</span> K&ndash;12 &amp; STEM classrooms</div>
+      <div class="use"><span>&#127970;</span> State fairs &amp; festivals</div>
+      <div class="use"><span>&#128241;</span> Social media series</div>
+      <div class="use"><span>&#128230;</span> Field-office handouts</div>
+      <div class="use"><span>&#127942;</span> Collect-the-set engagement</div>
+      <div class="use"><span>&#128218;</span> Press &amp; partner kits</div>
+    </div>
+    <p style="margin-top:28px;max-width:70ch;color:var(--ink-soft)">
+      <span class="pill-note">What it costs</span>&nbsp; Built by one person with a free, offline card-builder tool and AI-generated artwork (about $20/month). No new systems, no vendor, no licensing. The 20 cards here are a working proof of concept; the full series extends the same template.
+    </p>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The Cards</div>
+      <h2>The starting lineup &mdash; 20 cards.</h2>
+      <p>Click a card to flip it and read the science. Use the <strong>enlarge</strong> button to inspect the artwork up close. Front art shows the invader as the opposing player; backs carry USGS-sourced facts.</p>
+    </div>
+    <div class="g-controls">
+      <label class="search">
+        <span aria-hidden="true">&#128269;</span>
+        <input id="q" type="search" placeholder="Search a species (e.g. python, carp, lionfish)&hellip;" aria-label="Search species">
+      </label>
+      <div class="toggle" role="tablist" aria-label="View">
+        <button id="viewGrid" class="on">Gallery</button>
+        <button id="viewWall">Collectible wall</button>
+      </div>
+    </div>
+    <div id="grid" class="grid"></div>
+  </div>
+</section>
+
+<!-- ============ REVIEW / FEEDBACK ============ -->
+<section id="review" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Give Feedback</div>
+      <h2>Tell me what to change.</h2>
+      <p>Two ways to weigh in. High-level reactions and direction on the left; precise science edits to a specific card on the right. Everything comes straight to me &mdash; nothing is public.</p>
+    </div>
+    <div class="review">
+      <!-- general / high-level -->
+      <div class="note">
+        <h3>General notes &amp; direction</h3>
+        <p style="color:var(--ink-soft);margin-top:0">Big-picture reactions, the pitch itself, the concept, audiences, anything. Great for higher-level feedback.</p>
+        <div class="field">
+          <label for="gn">Your notes</label>
+          <textarea id="gn" rows="6" placeholder="What works? What doesn't? What would make this a yes?"></textarea>
+        </div>
+        <button class="btn btn-gold" id="sendGeneral">Email my notes &rarr;</button>
+        <p id="formNote" style="font-size:.85rem;color:var(--ink-soft);margin-top:14px"></p>
+      </div>
+      <!-- per-card science edit -->
+      <div class="sci-edit">
+        <h3>Suggest a science edit</h3>
+        <p style="color:var(--ink-soft);margin-top:0">Pick a card, edit the exact text from its science side, and send me your version. Changed boxes are highlighted.</p>
+        <select class="sci-pick" id="sciPick" aria-label="Choose a card to edit"></select>
+        <div id="sciFields"></div>
+        <button class="btn btn-gold" id="sendSci">Email my edits &rarr;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Enlarged card">
+  <div class="lb-bar">
+    <button id="lbFlip">Flip</button>
+    <button id="lbClose">Close &times;</button>
+  </div>
+  <div class="lb-stage">
+    <div class="lb-inner" id="lbInner">
+      <div class="lb-face lb-front"><img id="lbFront" alt="Card front"></div>
+      <div class="lb-face lb-back"><img id="lbBack" alt="Card back"></div>
+    </div>
+  </div>
+  <div class="lb-nav">
+    <button id="lbPrev">&larr; Prev</button>
+    <div class="cap" id="lbCap"></div>
+    <button id="lbNext">Next &rarr;</button>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div>
+      <strong>USGS Invasive Species Trading Card Series</strong><br>
+      Proof-of-concept portfolio &middot; 20 of a planned series.<br>
+      Science sourced from USGS and partner agencies.
+    </div>
+    <div>
+      Questions or feedback?<br>
+      <a id="footMail" href="#">jjenglish@usgs.gov</a>
+    </div>
+  </div>
+</footer>
+
+<script src="data/cards.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
