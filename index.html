@@ -99,6 +99,51 @@ section.alt{background:var(--paper-2)}
 .pc h3{margin:.1em 0 .4em;font-size:1.22rem}
 .pc p{margin:0;color:var(--ink-soft);font-size:1rem}
 
+/* ---- cost tiers ---- */
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tier{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6);display:flex;flex-direction:column}
+.tier.featured{border-color:var(--accent);box-shadow:0 16px 40px -24px rgba(198,160,74,.7);position:relative}
+.tier.featured::after{content:"Most likely";position:absolute;top:-11px;right:18px;background:var(--accent);color:#2a2008;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.tier-tag{font-family:var(--fd);text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;color:var(--accent);font-weight:700}
+.tier-qty{font-family:var(--fd);font-size:1.7rem;color:var(--usgs);line-height:1.1;margin-top:6px}
+.tier-qty span{font-family:var(--fs);font-size:.92rem;color:var(--ink-soft);font-weight:400}
+.tier-total{color:var(--ink-soft);font-size:.95rem;margin:2px 0 14px}
+.tier-cost{font-family:var(--fd);font-size:1.55rem;color:var(--field);font-weight:700;letter-spacing:.01em}
+.tier-note{color:var(--ink-soft);font-size:.95rem;margin:12px 0 0}
+.costs-fine{max-width:80ch;margin:28px auto 0;color:var(--ink-soft);font-size:.86rem;line-height:1.55}
+
+/* ---- packaging grid ---- */
+.pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pack{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6)}
+.pack-ic{font-size:1.7rem;line-height:1;margin-bottom:10px}
+.pack h3{margin:.1em 0 .4em;font-size:1.12rem;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pack h3 .pack-spec{font-family:var(--fs);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#2a2008;background:var(--accent);border-radius:999px;padding:2px 9px}
+.pack p{margin:0;color:var(--ink-soft);font-size:.97rem}
+
+/* ---- example packs ---- */
+.ex-title{margin:44px 0 4px;font-size:1.3rem;color:var(--usgs)}
+.ex-sub{max-width:80ch;margin:0 0 24px;color:var(--ink-soft);font-size:.95rem}
+.ex-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.ex-pack{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px -22px rgba(10,35,66,.6);display:flex;flex-direction:column}
+.ex-head{font-family:var(--fd);font-weight:700;letter-spacing:.02em;color:#fff;background:var(--usgs);padding:12px 16px;font-size:1.02rem}
+.ex-head.reg{background:var(--field)}
+.ex-pack.flag{border-color:var(--accent);box-shadow:0 16px 40px -24px rgba(198,160,74,.7)}
+.ex-pack.flag .ex-head{background:linear-gradient(135deg,#8a6d1f,#c6a04a)}
+.ex-pack ul{list-style:none;margin:0;padding:12px 16px;flex:1}
+.ex-pack li{font-weight:600;color:var(--ink);font-size:.95rem;padding:7px 0;border-bottom:1px solid var(--line);line-height:1.25}
+.ex-pack li:last-child{border-bottom:0}
+.ex-pack li span{display:block;font-weight:400;font-size:.8rem;color:var(--ink-soft)}
+.ex-pack li.fill{color:var(--ink-soft)}
+.ex-pack li.horizon{color:#8a6d1f}
+.ex-note{margin:0;padding:10px 16px 14px;font-size:.82rem;color:var(--ink-soft);font-style:italic}
+.region-note{margin:28px auto 0;max-width:80ch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:22px 24px}
+.region-note h4{font-family:var(--fd);color:var(--usgs);margin:0 0 8px;font-size:1.08rem}
+.region-note p{margin:0 0 10px;color:var(--ink-soft);font-size:.95rem}
+.region-note ul{margin:0 0 10px;padding-left:20px;color:var(--ink-soft);font-size:.95rem}
+.region-note li{margin-bottom:6px}
+.region-note li strong{color:var(--ink)}
+.region-fine{font-size:.85rem;font-style:italic;margin-bottom:0!important}
+
 /* ---- use-case chips ---- */
 .uses{display:flex;flex-wrap:wrap;gap:12px}
 .use{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-weight:600;color:var(--usgs);display:flex;align-items:center;gap:9px}
@@ -184,6 +229,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .hero-stage{height:320px;order:-1}
   .pitch-grid{grid-template-columns:1fr}
   .review{grid-template-columns:1fr}
+  .tier-grid{grid-template-columns:1fr}
+  .pack-grid{grid-template-columns:1fr}
+  .ex-grid{grid-template-columns:1fr}
+}
+@media (max-width:1100px) and (min-width:861px){
+  .pack-grid{grid-template-columns:repeat(2,1fr)}
+  .ex-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;scroll-behavior:auto!important}
@@ -200,6 +252,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <nav class="nav">
       <a href="#pitch">The Idea</a>
       <a href="#uses">How It's Used</a>
+      <a href="#costs">Cost</a>
+      <a href="#packaging">Packaging</a>
       <a href="#gallery">The Cards</a>
       <a href="#review">Give Feedback</a>
     </nav>
@@ -258,8 +312,157 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       <div class="use"><span>&#128218;</span> Press &amp; partner kits</div>
     </div>
     <p style="margin-top:28px;max-width:70ch;color:var(--ink-soft)">
-      <span class="pill-note">What it costs</span>&nbsp; Built by one person with a free, offline card-builder tool and AI-generated artwork (about $20/month). No new systems, no vendor, no licensing. The 20 cards here are a working proof of concept; the full series extends the same template.
+      <span class="pill-note">What it costs to make</span>&nbsp; Built by one person with a free, offline card-builder tool and AI-generated artwork (about $20/month). No new systems, no vendor, no licensing. The 21 cards here are a working proof of concept; the full series builds to 50 species on the same template.
     </p>
+  </div>
+</section>
+
+<!-- ============ WHAT IT COSTS TO PRINT ============ -->
+<section id="costs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What It Costs to Print</div>
+      <h2>Premium cards, priced by how many we print.</h2>
+      <p>The design is done. The only real cost to field the full 50-card series is printing &mdash; and that scales with quantity. Below are planning-level estimates for <strong>top-quality</strong> cards (2.5&times;3.5 in, heavy 310gsm stock, full-color both sides, protective coating, rounded corners). We hold quality constant and let quantity flex to match budget and reception.</p>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier">
+        <div class="tier-tag">Pilot</div>
+        <div class="tier-qty">1,000 <span>per species</span></div>
+        <div class="tier-total">&asymp; 50,000 cards</div>
+        <div class="tier-cost">~$4,000 &ndash; $7,500</div>
+        <p class="tier-note">A test run: enough to seed a few events and the 20 Science Centers, gauge reception, and refine before scaling.</p>
+      </div>
+      <div class="tier featured">
+        <div class="tier-tag">Outreach</div>
+        <div class="tier-qty">5,000 <span>per species</span></div>
+        <div class="tier-total">&asymp; 250,000 cards</div>
+        <div class="tier-cost">~$15,000 &ndash; $28,000</div>
+        <p class="tier-note">A real program year: steady supply to every Science Center for open houses, school visits, and conference handouts.</p>
+      </div>
+      <div class="tier">
+        <div class="tier-tag">Campaign</div>
+        <div class="tier-qty">10,000 <span>per species</span></div>
+        <div class="tier-total">&asymp; 500,000 cards</div>
+        <div class="tier-cost">~$25,000 &ndash; $50,000</div>
+        <p class="tier-note">A national push: high volume at the lowest per-card cost, for sustained public engagement across all channels.</p>
+      </div>
+    </div>
+
+    <p class="costs-fine">
+      Figures are planning-level estimates for budgeting, not quotes &mdash; roughly $0.05&ndash;$0.15 per card at these volumes, with per-card cost dropping as quantity rises (offset-printing setup is spread over more cards). Sourced from published 2026 trade pricing for bulk custom card printing
+      (<a href="https://wjplayingcard.com/game-card-printing-costs/" target="_blank" rel="noopener">wjplayingcard.com</a>,
+      <a href="https://www.mrplayingcard.com/blog/custom-trading-cards-printing-guide" target="_blank" rel="noopener">mrplayingcard.com</a>);
+      figures rephrased and recomputed for this estimate. Actual cost depends on the chosen vendor, finish, foil/specialty cards, packaging, and freight &mdash; a formal quote through USGS procurement / the printer would firm these up. Premium foil &ldquo;Scouting&rdquo; cards (see below) and specialty packaging carry setup minimums and a modest premium over the per-card figures above.
+    </p>
+  </div>
+</section>
+
+<!-- ============ HOW WE'D PACKAGE THEM ============ -->
+<section id="packaging" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">How We'd Package &amp; Use Them</div>
+      <h2>One card set, packaged for the moment.</h2>
+      <p>The cards are the asset; packaging is a flexible toolkit. The same 50 cards can be bundled different ways for different audiences &mdash; from a pocket-sized giveaway for a school visit to a curated set for Capitol Hill. A few strategic formats:</p>
+    </div>
+
+    <div class="pack-grid">
+      <div class="pack">
+        <div class="pack-ic">&#128230;</div>
+        <h3>Center packs <span class="pack-spec">6 cards</span></h3>
+        <p>The workhorse. <strong>5 serialized species + 1 <abbr title="Horizon Scan">Horizon Scan</abbr> card</strong>, released in 10 waves (cards 1&ndash;5, then 6&ndash;10&hellip;) that build to the full 50. Every pack in a wave is identical &mdash; simple to print and ship evenly to the Science Centers for open houses and school visits, and the staggered release keeps people coming back to complete the set.</p>
+      </div>
+      <div class="pack">
+        <div class="pack-ic">&#127970;</div>
+        <h3>Conference packs <span class="pack-spec">12 cards</span></h3>
+        <p>Simply <strong>two Center packs bundled</strong> (cards 1&ndash;10 + Scouting cards 1 &amp; 2, and so on) &mdash; a more substantial handout for professional meetings. No new design or collation: it's the same packs, banded in pairs.</p>
+      </div>
+      <div class="pack">
+        <div class="pack-ic">&#11088;</div>
+        <h3>Flagship packs <span class="pack-spec">curated</span></h3>
+        <p>The best of the best, in a quietly premium <em>unmarked</em> wrapper &mdash; the cards speak for themselves, with no &ldquo;best of&rdquo; label. Kept at HQ for leadership and Capitol Hill outreach: the strongest cards plus a Horizon Scan card, to show what the program is in 30 seconds.</p>
+      </div>
+      <div class="pack">
+        <div class="pack-ic">&#128506;</div>
+        <h3>Regional packs <span class="pack-spec">if Comms likes it</span></h3>
+        <p>An option worth exploring: a regionally focused pack that speaks to a local audience &mdash; &ldquo;here are the invaders in <em>your</em> backyard, and here's USGS already working on them.&rdquo; A <strong>clearly labeled regional wrapper</strong> (&ldquo;Southeast Invaders,&rdquo; &ldquo;Great Lakes Invaders&rdquo;) reinforces the local message and lets people grab the right pack on their way out of an event. Especially powerful as a region-tailored handout for a member of Congress whose district is affected.</p>
+      </div>
+      <div class="pack">
+        <div class="pack-ic">&#128203;</div>
+        <h3>Collector checklist &amp; album</h3>
+        <p>A simple roster of the full 50 (plus the Horizon Scan slots) turns one-off handouts into a set people want to complete &mdash; driving repeat engagement at every event, at no real added cost.</p>
+      </div>
+    </div>
+
+    <p class="costs-fine">
+      Packaging is a strategy, not a fixed cost line &mdash; the right format depends on the audience and the channel, and distribution to Congressional offices would route through USGS Communications / Congressional Liaison. These are options to mix and match, not a single prescribed product.
+    </p>
+
+    <h3 class="ex-title">What those packs could look like &mdash; built from the first 21</h3>
+    <p class="ex-sub">Illustrative examples drawn from the cards made so far &mdash; just to show the idea. The full 50-card series gives every region plenty to pull from.</p>
+    <div class="ex-grid">
+      <div class="ex-pack">
+        <div class="ex-head reg">Southeast Invaders</div>
+        <ul>
+          <li>Burmese Python <span>S. Florida</span></li>
+          <li>Lionfish <span>SE Atlantic / Gulf / Caribbean</span></li>
+          <li>Hydrilla <span>Florida &amp; Southeast waters</span></li>
+          <li>Blue Catfish <span>Chesapeake &amp; Southeast rivers</span></li>
+          <li>Feral Hog <span>heavy across the South</span></li>
+          <li>Red Imported Fire Ant <span>Southern U.S.</span></li>
+        </ul>
+      </div>
+      <div class="ex-pack">
+        <div class="ex-head reg">Great Lakes Invaders</div>
+        <ul>
+          <li>Sea Lamprey <span>all five Great Lakes</span></li>
+          <li>Zebra Mussel <span>Great Lakes &amp; eastern basins</span></li>
+          <li>Silver Carp <span>Mississippi/Ohio, nearing the Lakes</span></li>
+          <li>Bighead Carp <span>Mississippi/Ohio, nearing the Lakes</span></li>
+          <li>Black Rat <span>cities &amp; ports region-wide</span></li>
+          <li>Kudzu <span>spreading northward</span></li>
+        </ul>
+      </div>
+      <div class="ex-pack">
+        <div class="ex-head reg">West Coast Invaders</div>
+        <ul>
+          <li>Golden Mussel <span>CA Delta / SF Bay (new)</span></li>
+          <li>Cheatgrass <span>Great Basin &amp; West rangelands</span></li>
+          <li>Feral Hog <span>established across California</span></li>
+          <li>Black Rat <span>coastal cities &amp; ports</span></li>
+          <li>Zebra Mussel <span>a looming Western threat</span></li>
+          <li>Red Imported Fire Ant <span>Southern California</span></li>
+        </ul>
+      </div>
+      <div class="ex-pack flag">
+        <div class="ex-head">Flagship &mdash; Best of the Best</div>
+        <ul>
+          <li>Black Carp <span>gold-standard card</span></li>
+          <li>Sea Lamprey <span>strongest back-of-card</span></li>
+          <li>Southern House Mosquito <span>flagship USGS story</span></li>
+          <li>Burmese Python <span>instantly iconic</span></li>
+          <li>Lionfish <span>striking hero art</span></li>
+          <li class="horizon">+ 1 Horizon Scan card <span>&ldquo;what's coming next&rdquo;</span></li>
+        </ul>
+        <p class="ex-note">Curated for impact, unmarked wrapper &mdash; the 30-second &ldquo;what we're doing&rdquo; pitch.</p>
+      </div>
+    </div>
+
+    <div class="region-note">
+      <h4>How we'd define &ldquo;regions&rdquo; &mdash; leadership &amp; Comms call</h4>
+      <p>There's no need to lock a scheme now. A &ldquo;region&rdquo; could be drawn along several different lines, depending on the audience. A few to consider:</p>
+      <ul>
+        <li><strong>DOI / USGS Unified Regions</strong> &mdash; the 12 regions the Department already uses (e.g., Pacific, Columbia&ndash;Pacific Northwest, Upper Colorado, Mississippi Basin, South Atlantic&ndash;Gulf, Great Lakes, North Atlantic&ndash;Appalachian, Alaska, etc.). The most &ldquo;on-brand&rdquo; cut &mdash; it aligns packs with how USGS itself is organized.</li>
+        <li><strong>Watersheds (large HUCs)</strong> &mdash; group by major basin (HUC-2 regions like the Great Lakes, Ohio, Upper/Lower Mississippi, California). This is literally how the aquatic species are already mapped on the card backs, so it's the most scientifically natural cut for the water invaders.</li>
+        <li><strong>Broad ecological regions</strong> &mdash; plain-language zones (Southeast, Great Lakes, Gulf, Pacific &amp; Islands, Great Basin/West) that a general public audience reads instantly.</li>
+        <li><strong>State delegations</strong> &mdash; a single state's species; the simplest, most defensible cut for a specific member's office.</li>
+        <li><strong>Congressional caucuses &amp; task forces</strong> &mdash; several map neatly to this work (e.g., Great Lakes Task Force, Western Caucus, Chesapeake Bay Watershed and Everglades groups, an Invasive Species Caucus). In some cases an existing caucus effectively defines the region for us &mdash; current rosters would be confirmed with Congressional Liaison.</li>
+        <li><strong>Committee audiences</strong> &mdash; members on Natural Resources or Interior Appropriations, where the budget relevance is highest (less geographic, more strategic).</li>
+      </ul>
+      <p class="region-fine">These aren't mutually exclusive &mdash; the same card can sit in a DOI-region pack and a caucus pack. Which lens to use &mdash; and who receives anything on the Hill &mdash; would be decided by USGS leadership and Communications / Congressional Liaison. The card set supports any of these cuts; the species and their maps stay the same.</p>
+    </div>
   </div>
 </section>
 
@@ -268,8 +471,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">The Cards</div>
-      <h2>The starting lineup &mdash; 20 cards.</h2>
-      <p>Click a card to flip it and read the science. Use the <strong>enlarge</strong> button to inspect the artwork up close. Front art shows the invader as the opposing player; backs carry USGS-sourced facts.</p>
+      <h2>The starting lineup &mdash; the first 21 of a planned 50.</h2>
+      <p>Click a card to flip it and read the science. Use the <strong>enlarge</strong> button to inspect the artwork up close. Front art shows the invader as the opposing player; backs carry USGS-sourced facts. These 21 are a working proof of concept; the full series builds to 50 species on the same template.</p>
     </div>
     <div class="g-controls">
       <label class="search">
@@ -341,7 +544,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="wrap">
     <div>
       <strong>USGS Invasive Species Trading Card Series</strong><br>
-      Proof-of-concept portfolio &middot; 20 of a planned series.<br>
+      Proof-of-concept portfolio &middot; first 21 of a planned 50-card series.<br>
       Science sourced from USGS and partner agencies.
     </div>
     <div>
