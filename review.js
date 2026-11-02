@@ -35,7 +35,24 @@
     // but we keep a safe ceiling: beyond it we still open the form (initials
     // + card pre-filled) and have the SME paste the edits, so nothing is
     // ever lost or silently truncated.
-    maxUrlLen: 8000
+    maxUrlLen: 8000,
+
+    // -----------------------------------------------------------------
+    //  >>> EDIT ME:  "MOST NEEDED" NUDGE  <<<
+    //  A friendly note at the top of the page steering reviewers toward
+    //  the species that still need eyes, so coverage spreads out instead
+    //  of everyone piling onto the popular cards. There is no automatic
+    //  tracking - YOU update this list as responses come in.
+    //
+    //  HOW TO EDIT: just change the names in the list below, then re-upload
+    //  review.js to the repo. To HIDE the box entirely, set it to:  []
+    //  (empty list). Names are free text - whatever reads best to you.
+    // -----------------------------------------------------------------
+    nudgeSpecies: [
+      'Cheatgrass', 'Hydrilla', 'Black Carp', 'Blue Catfish', 'Southern House Mosquito'
+    ],
+    // Optional: the lead-in wording before the list. Leave as-is or tweak.
+    nudgeLead: 'We especially need expert eyes on these next'
   };
 
   // The EXACT radio-option labels in the form's "Which card?" question.
@@ -180,6 +197,7 @@
     rosterHint.textContent = n
       ? ('You\u2019ve picked ' + n + ' card' + (n === 1 ? '' : 's') + '. They\u2019re in your review list below.')
       : 'Nothing picked yet \u2014 tap a card above to start.';
+    if (typeof markNudgeDone === 'function') markNudgeDone();
   }
 
   // ---- deck (per-card review blocks) --------------------------------
@@ -304,11 +322,19 @@
 
     // footer: submit + safety copy box
     var foot = el('div', 'cb-foot');
-    var send = el('button', 'btn btn-gold', 'Send edits for this card &rarr;');
+    var send = el('button', 'btn btn-gold', 'Send this card to the form &rarr;');
     send.disabled = true;
-    var msg = el('span', 'foot-msg ok', 'Looks good so far \u2014 nothing to send.');
+    // "Looks good" = a POSITIVE signal. A clean card still gets submitted as
+    // "reviewed, no changes" so you can tell "an expert checked it and it's
+    // fine" apart from "nobody ever looked at it." Always available.
+    var okbtn = el('button', 'btn btn-ghost btn-ok', 'Looks good \u2014 no changes &#10003;');
+    var msg = el('span', 'foot-msg ok', 'Checked it and it\u2019s right? Hit \u201cLooks good.\u201d Found something off? Edit the box, then Send.');
     foot.appendChild(send);
+    foot.appendChild(okbtn);
     foot.appendChild(msg);
+    // persistent note so the "a form will open" expectation is set BEFORE clicking
+    foot.appendChild(el('div', 'foot-note',
+      'Either button opens our Microsoft form in a new tab, already filled in for this card \u2014 you just click <strong>Submit</strong> there, then come back for any other cards.'));
     blk.appendChild(foot);
 
     var copybox = el('div', 'copybox');
@@ -327,6 +353,7 @@
 
     // wire submit
     send.addEventListener('click', function () { submitCard(blk, c); });
+    okbtn.addEventListener('click', function () { submitApproval(blk, c); });
     copybox.querySelector('.copyagain').addEventListener('click', function () {
       copyText(copybox.querySelector('textarea').value); toast('Copied again \u2014 paste into the form.');
     });
@@ -367,16 +394,19 @@
   function onEdit(blk, c) {
     var ch = changedFields(blk, c);
     var send = blk.querySelector('.btn-gold');
+    var okbtn = blk.querySelector('.btn-ok');
     var msg = blk.querySelector('.foot-msg');
     edited[c.num] = ch.length > 0;
     if (ch.length) {
       send.disabled = false;
+      if (okbtn) okbtn.style.display = 'none'; // editing = send edits, not "looks good"
       msg.className = 'foot-msg changed';
       msg.textContent = ch.length + ' box' + (ch.length === 1 ? '' : 'es') + ' changed \u2014 ready to send.';
     } else {
       send.disabled = true;
+      if (okbtn) okbtn.style.display = '';
       msg.className = 'foot-msg ok';
-      msg.textContent = 'Looks good so far \u2014 nothing to send.';
+      msg.textContent = 'Checked it and it\u2019s right? Hit \u201cLooks good.\u201d Found something off? Edit the box, then Send.';
     }
     reflectClaims();
   }
@@ -427,6 +457,26 @@
     return u;
   }
 
+  // Build a short "do the rest the same way" line for after a send. This is
+  // the reassurance SMEs want right after their FIRST submit: you send one
+  // card at a time, this page stays open, your other cards are still here.
+  function nextCardHint(justSent) {
+    // other claimed cards that currently have unsent edits
+    var pending = claims.filter(function (num) {
+      return num !== justSent.num && edited[num];
+    });
+    var base = ' <span class="next">This page stays open, so after you Submit just come back here';
+    if (pending.length === 1) {
+      return base + ' \u2014 your other edited card (' + esc(common(byNum[pending[0]])) +
+        ') is still ready. Send it the same way: one card at a time.</span>';
+    }
+    if (pending.length > 1) {
+      return base + ' \u2014 your other ' + pending.length +
+        ' edited cards are still ready. Send each the same way: one card at a time.</span>';
+    }
+    return base + ' for any other cards. You send one card at a time, and this page remembers where you were.</span>';
+  }
+
   // ---- submit one card ----------------------------------------------
   // GCC-safe one-click flow: build the form's PRE-FILL url with the SME's
   // real initials, card, and edits, then open it. The form appears already
@@ -443,6 +493,9 @@
     var changes = changedFields(blk, c);
     if (!changes.length) { toast('No changes on this card \u2014 nothing to send.'); return; }
 
+    // "What's next" reassurance: one card at a time, this page stays put.
+    var nextLine = nextCardHint(c);
+
     var block = buildBlock(c, changes);
     var fullUrl = buildPrefillUrl(c, block, true);
     var msg = blk.querySelector('.foot-msg');
@@ -456,8 +509,8 @@
       blk.querySelector('.btn-gold').textContent = 'Re-open the filled form';
       blk.dataset.lasturl = fullUrl;
       msg.className = 'foot-msg ok';
-      msg.innerHTML = '&#10003; Form opened with your edits filled in \u2014 just click <strong>Submit</strong> in that tab.';
-      toast('Form opened, already filled \u2014 click Submit.');
+      msg.innerHTML = '&#10003; The form opened in a new tab with this card&#8217;s edits filled in \u2014 click <strong>Submit</strong> there to send it. Didn&#8217;t see a new tab? Use the button on the left.' + nextLine;
+      toast('Form opened in a new tab, already filled \u2014 click Submit there.');
     } else {
       // Long-edit path: pre-fill initials + card, paste the edits (one paste).
       copyText(block);
@@ -466,10 +519,47 @@
       blk.querySelector('.btn-gold').textContent = 'Re-copy this card\u2019s edits';
       blk.dataset.lasturl = buildPrefillUrl(c, '', false);
       msg.className = 'foot-msg changed';
-      msg.innerHTML = '&#9757; This edit is long, so paste it: the form opened with your name + card filled \u2014 paste (Ctrl+V) into the edits box, then Submit.';
+      msg.innerHTML = '&#9757; This edit is long, so paste it: the form opened with your name + card filled \u2014 paste (Ctrl+V) into the edits box, then Submit.' + nextLine;
       setTimeout(function () { copybox.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
       toast('Copied! Paste the edits into the form, then Submit.');
     }
+  }
+
+  // ---- "Looks good, no changes" approval ----------------------------
+  // Sends a POSITIVE review for a clean card so "an expert checked it and
+  // it's fine" is recorded as its own row - distinct from a card nobody
+  // ever opened. Same one-click pre-fill flow; the edits field carries a
+  // short, clearly-labeled "no changes" note (always well under the cap).
+  function submitApproval(blk, c) {
+    if (!getInitials()) {
+      toast('Add your initials up top first, so I know who to thank.');
+      initialsEl.focus();
+      return;
+    }
+    var who = getInitials();
+    var block =
+      'CARD #' + c.num + ' \u2014 ' + common(c) + ' (' + sci(c) + ')\n' +
+      'Reviewer: ' + who + '\n\n' +
+      'REVIEWED \u2014 NO CHANGES NEEDED. The science on this card looks correct to me as written.\n\n' +
+      '--- sent from the review page ---';
+    var url = buildPrefillUrl(c, block, true); // always short; one-click path
+    var msg = blk.querySelector('.foot-msg');
+    var copybox = blk.querySelector('.copybox');
+    copybox.querySelector('textarea').value = block;
+    copybox.classList.remove('show');
+
+    // mark as reviewed (an "approved" state distinct from "edited")
+    edited[c.num] = true;
+
+    var nextLine = nextCardHint(c);
+    window.open(url, '_blank', 'noopener');
+    blk.querySelector('.btn-gold').style.display = 'none';
+    blk.querySelector('.btn-ok').textContent = 'Re-open the filled form';
+    blk.dataset.lasturl = url;
+    msg.className = 'foot-msg ok';
+    msg.innerHTML = '&#10003; Thanks \u2014 the form opened marking this card <strong>reviewed, no changes</strong>. Click <strong>Submit</strong> in that tab to record it.' + nextLine;
+    toast('Form opened \u2014 click Submit to record your sign-off.');
+    reflectClaims();
   }
 
   // ---- lightbox ------------------------------------------------------
@@ -484,7 +574,57 @@
   var fm = document.getElementById('footMail');
   if (fm) fm.href = 'mailto:' + CONFIG.email;
 
+  // ---- "most needed" nudge ------------------------------------------
+  // Renders CONFIG.nudgeSpecies as a friendly steer-the-workload note.
+  // A listed name that matches a card's common name becomes a one-tap
+  // chip (claims that card + scrolls to it); any name that doesn't match
+  // a card still shows as plain text, so you can't "break" it with a typo.
+  function buildNudge() {
+    var host = document.getElementById('nudge');
+    if (!host) return;
+    var names = (CONFIG.nudgeSpecies || []).filter(function (s) { return String(s).trim() !== ''; });
+    if (!names.length) { host.classList.remove('show'); host.innerHTML = ''; return; }
+
+    // map lowercased common name -> card num, for click-to-claim
+    var byName = {};
+    CARDS.forEach(function (c) { byName[common(c).toLowerCase()] = c.num; });
+
+    var html = '<span class="lead">' + esc(CONFIG.nudgeLead || 'Most needed') + ':</span> ';
+    names.forEach(function (nm) {
+      var num = byName[String(nm).trim().toLowerCase()];
+      if (num != null) {
+        html += '<span class="pick" data-num="' + num + '">' + esc(nm) + '</span>';
+      } else {
+        html += '<span class="pick" data-nomatch="1" style="cursor:default">' + esc(nm) + '</span>';
+      }
+    });
+    host.innerHTML = html;
+    host.classList.add('show');
+
+    host.querySelectorAll('.pick[data-num]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var num = +chip.dataset.num;
+        if (claims.indexOf(num) < 0) toggleClaim(num); // claim + scroll handled inside
+        else {
+          var blk = document.querySelector('.cardblock[data-num="' + num + '"]');
+          if (blk) blk.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+    markNudgeDone();
+  }
+
+  // Grey out a nudge chip once that card is claimed, so it reads as handled.
+  function markNudgeDone() {
+    var host = document.getElementById('nudge');
+    if (!host) return;
+    host.querySelectorAll('.pick[data-num]').forEach(function (chip) {
+      chip.classList.toggle('done', claims.indexOf(+chip.dataset.num) >= 0);
+    });
+  }
+
   // ---- init ----------------------------------------------------------
   buildRoster();
+  buildNudge();
   renderDeck();
 })();

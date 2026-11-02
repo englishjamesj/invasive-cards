@@ -64,6 +64,9 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:.
 .steps{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
 .step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:.98rem;color:#eaf1f8}
 .step b{font-family:var(--fd);color:var(--accent);font-size:1.1rem}
+.intro-note{margin-top:18px;font-size:.98rem;color:#cfe0f0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;max-width:70ch}
+.intro-note strong{color:#fff}
+.intro-note em{color:var(--accent);font-style:normal}
 
 /* ---- claim roster ---- */
 #claimSec .wrap{padding:40px 24px 8px}
@@ -83,6 +86,14 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:.
 .chip.claimed .box{background:var(--ok);border-color:var(--ok)}
 .chip.edited .box{background:var(--accent);border-color:var(--accent)}
 .hint{font-size:.9rem;color:var(--ink-soft);margin:14px 0 0}
+
+/* "most needed" nudge (content set from review.js CONFIG.nudgeSpecies) */
+.nudge{display:none;margin:0 0 18px;padding:13px 18px;background:#fffaf0;border:1px solid var(--accent);border-left:4px solid var(--accent);border-radius:11px;font-size:.98rem;color:var(--ink);line-height:1.5}
+.nudge.show{display:block}
+.nudge .lead{font-family:var(--fd);text-transform:uppercase;letter-spacing:.05em;font-size:.76rem;color:var(--accent);font-weight:700;margin-right:6px}
+.nudge .pick{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 11px;margin:3px 5px 3px 0;font-weight:600;color:var(--usgs);cursor:pointer;transition:border-color .15s,background .15s}
+.nudge .pick:hover{border-color:var(--accent);background:#fffdf4}
+.nudge .pick.done{opacity:.5;text-decoration:line-through;cursor:default}
 
 /* ---- review deck ---- */
 #deckSec .wrap{padding:30px 24px 70px}
@@ -140,10 +151,15 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:.
 .btn-gold:hover{box-shadow:0 16px 30px -12px rgba(198,160,74,.9)}
 .btn-ghost{background:#fff;color:var(--usgs);border:1px solid var(--line)}
 .btn-ghost:hover{border-color:var(--accent)}
+.btn-ok{background:#fff;color:var(--ok);border:1px solid var(--ok)}
+.btn-ok:hover{background:#f2faf4;border-color:var(--ok)}
 .btn[disabled]{opacity:.5;cursor:default;box-shadow:none}
 .foot-msg{font-size:.92rem;color:var(--ink-soft)}
 .foot-msg.ok{color:var(--ok);font-weight:600}
 .foot-msg.changed{color:var(--accent);font-weight:600}
+.foot-note{flex-basis:100%;font-size:.84rem;color:var(--ink-soft);margin-top:2px;line-height:1.45}
+.foot-note strong{color:var(--usgs)}
+.foot-msg .next{display:block;margin-top:6px;font-weight:600;color:var(--usgs-2)}
 
 /* guided hand-off panel (shown after Send) */
 .copybox{display:none;margin:0 20px 20px;padding:18px 20px;background:#fffaf0;border:2px solid var(--accent);border-radius:12px}
@@ -207,8 +223,10 @@ footer a{color:#fff}
     <div class="steps">
       <div class="step"><b>1</b> Put your initials up top</div>
       <div class="step"><b>2</b> Pick the cards you&rsquo;re expert in</div>
-      <div class="step"><b>3</b> Fix any wrong wording &amp; send that card</div>
+      <div class="step"><b>3</b> Fix any wrong wording on a card</div>
+      <div class="step"><b>4</b> Send it &mdash; a short form opens, you click Submit</div>
     </div>
+    <p class="intro-note">You send <strong>one card at a time</strong>. Each <em>Send</em> opens our Microsoft form in a new tab, already filled in for that card &mdash; you just click <strong>Submit</strong>, then come back here for the next one. Picked several species? You&rsquo;ll do this once per card, and each arrives as its own tidy entry.</p>
   </div>
 </section>
 
@@ -220,6 +238,7 @@ footer a{color:#fff}
       <h2>Which species do you know best?</h2>
       <p>Tap any card you feel expert in &mdash; it drops into your review list below. Take as many or as few as you like. (It&rsquo;s fine if someone else also picked one.)</p>
     </div>
+    <div class="nudge" id="nudge"></div>
     <div class="roster" id="roster"></div>
     <p class="hint" id="rosterHint"></p>
   </div>
@@ -231,7 +250,7 @@ footer a{color:#fff}
     <div class="sec-head">
       <div class="eyebrow">Step 3</div>
       <h2>Your review list</h2>
-      <p>Read the back (click <strong>Flip</strong>), then edit any box whose wording is off. Changed boxes turn gold. When a card&rsquo;s done, hit <strong>Send edits for this card</strong>. Nothing to change? Just leave it &mdash; no need to send.</p>
+      <p>Read the back (click <strong>Flip</strong>), then edit any box whose wording is off. Changed boxes turn gold. When a card&rsquo;s done, hit <strong>Send this card to the form</strong> &mdash; our Microsoft form opens in a new tab already filled in, and you just click <strong>Submit</strong> there. Do that for each card you changed (one trip to the form per card). Nothing to change on a card? Just leave it &mdash; no need to send.</p>
     </div>
     <div id="deck"></div>
     <div class="deck-empty" id="deckEmpty">Pick a species above and it&rsquo;ll show up here, ready to review.</div>
