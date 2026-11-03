@@ -143,6 +143,20 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:.
 .optional[open] summary::before{content:"\25BE  "}
 .optional .note{font-size:.86rem;color:var(--ink-soft);margin:8px 0 14px}
 
+/* states & territories checkbox panel */
+.statesrow{margin:0 0 16px}
+.statesrow-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.86rem;margin-bottom:7px}
+.statesrow-head strong{font-family:var(--fd);text-transform:uppercase;letter-spacing:.05em;font-size:.78rem;color:var(--usgs)}
+.statesrow-head .srh{color:var(--ink-soft);font-size:.82rem}
+.statesrow-head .clearrow{background:none;border:0;color:var(--usgs-2);font-size:.78rem;cursor:pointer;padding:0;text-decoration:underline}
+.statesrow-head .statecount{margin-left:auto;color:var(--ink-soft);font-size:.78rem}
+.stategrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:4px}
+.stbox{display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:7px;padding:4px 6px;font-size:.8rem;cursor:pointer;background:#fff;user-select:none;transition:border-color .12s,background .12s}
+.stbox:hover{border-color:var(--usgs-2)}
+.stbox input{margin:0;cursor:pointer}
+.stbox input:checked + span{font-weight:700;color:var(--usgs)}
+.stbox:has(input:checked){border-color:var(--accent);background:#fffdf4}
+
 /* submit row */
 .cb-foot{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px 20px;border-top:1px solid var(--line);background:var(--paper-2)}
 .btn{font-family:var(--fd);text-transform:uppercase;letter-spacing:.07em;font-weight:600;font-size:.9rem;border:0;cursor:pointer;padding:13px 20px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:transform .12s,box-shadow .2s,opacity .2s}
@@ -227,6 +241,7 @@ footer a{color:#fff}
       <div class="step"><b>4</b> Send it &mdash; a short form opens, you click Submit</div>
     </div>
     <p class="intro-note">You send <strong>one card at a time</strong>. Each <em>Send</em> opens our Microsoft form in a new tab, already filled in for that card &mdash; you just click <strong>Submit</strong>, then come back here for the next one. Picked several species? You&rsquo;ll do this once per card, and each arrives as its own tidy entry.</p>
+    <p class="intro-note"><em>One more thing about states:</em> a species can be <strong>invasive in one state and native in another</strong> &mdash; the same fish may be a prized local in one place and a costly invader two states over. On each card you can mark where it&rsquo;s <strong>invasive</strong>, where it&rsquo;s <strong>native</strong>, and where it&rsquo;s <strong>on deck</strong> (headed that way). We pre-checked our best guess &mdash; please fix it.</p>
   </div>
 </section>
 
@@ -273,6 +288,7 @@ footer a{color:#fff}
 </footer>
 
 <script src="data/cards.js"></script>
+<script src="data/card_states.js"></script>
 <script src="review.js"></script>
 </body>
 </html>

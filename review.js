@@ -81,6 +81,42 @@
     ['x_other', 'Anything else']
   ];
 
+  // ---- STATE / TERRITORY capture (added 2026-11-02) ------------------
+  // Two checkbox rows per card so SMEs CLICK states instead of typing them:
+  //   present = "Known infestation in the state" (established NOW, 2026)
+  //   onDeck  = "Invaders On Deck" (approaching / at risk, not yet established)
+  // Boxes PRE-CHECK from window.CARD_STATES (data/card_states.js). The checked
+  // sets compile into the SAME pre-fill edit block every other note uses, so
+  // NO new MS Form question is needed and the live review flow can't break.
+  // Only states the SME CHANGED from the pre-checked baseline are reported
+  // (added / removed), keeping the submission tidy and diff-like.
+  var JURIS = [
+    ['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],
+    ['CO','Colorado'],['CT','Connecticut'],['DE','Delaware'],['DC','D.C.'],['FL','Florida'],
+    ['GA','Georgia'],['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],
+    ['IA','Iowa'],['KS','Kansas'],['KY','Kentucky'],['LA','Louisiana'],['ME','Maine'],
+    ['MD','Maryland'],['MA','Massachusetts'],['MI','Michigan'],['MN','Minnesota'],['MS','Mississippi'],
+    ['MO','Missouri'],['MT','Montana'],['NE','Nebraska'],['NV','Nevada'],['NH','New Hampshire'],
+    ['NJ','New Jersey'],['NM','New Mexico'],['NY','New York'],['NC','North Carolina'],['ND','North Dakota'],
+    ['OH','Ohio'],['OK','Oklahoma'],['OR','Oregon'],['PA','Pennsylvania'],['RI','Rhode Island'],
+    ['SC','South Carolina'],['SD','South Dakota'],['TN','Tennessee'],['TX','Texas'],['UT','Utah'],
+    ['VT','Vermont'],['VA','Virginia'],['WA','Washington'],['WV','West Virginia'],['WI','Wisconsin'],
+    ['WY','Wyoming'],
+    ['PR','Puerto Rico'],['GU','Guam'],['VI','U.S. Virgin Islands'],['AS','American Samoa'],['MP','No. Mariana Is.']
+  ];
+  // THREE buckets so species that are INVASIVE in some states but NATIVE in
+  // others read honestly (e.g. Sea Lamprey, Blue Catfish, Walleye). A clean
+  // foreign invader just has an empty `native` list.
+  var STATE_ROWS = [
+    ['present', 'Known infestation in the state', 'Established \u0026 invasive here now (2026).'],
+    ['native',  'Native here (belongs in this state)', 'Naturally occurs here \u2014 NOT invasive in this state.'],
+    ['onDeck',  'Invaders On Deck',               'Approaching / at risk \u2014 not established here yet.']
+  ];
+  function cardStates(num) {
+    var s = (window.CARD_STATES && window.CARD_STATES[num]) || {};
+    return { present: (s.present || []).slice(), native: (s.native || []).slice(), onDeck: (s.onDeck || []).slice() };
+  }
+
   var CARDS = (window.CARDS || []).slice().sort(function (a, b) { return a.num - b.num; });
   var byNum = {};
   CARDS.forEach(function (c) { byNum[c.num] = c; });
@@ -305,18 +341,62 @@
     det.appendChild(el('p', 'note', 'Totally optional. A quick note is plenty \u2014 I\u2019ll handle the rest.'));
     EXTRA.forEach(function (pair) {
       var key = pair[0], lab = pair[1];
+      // Tailored placeholders for the two state lists; generic for the rest.
+      var ph = '(leave blank if fine)';
+      if (key === 'x_states')   ph = 'e.g. FL, GA, AL, TX \u2014 where it\u2019s established now (leave blank if unsure)';
+      if (key === 'x_doorstep') ph = 'e.g. MN, WI \u2014 at risk / knocking on the door (leave blank if unsure)';
       var wrap = el('div', 'field');
       wrap.dataset.key = key;
       wrap.dataset.extra = '1';
       wrap.innerHTML =
         '<label>' + esc(lab) + ' <span class="ch">noted</span></label>' +
-        '<textarea rows="2" placeholder="(leave blank if fine)"></textarea>';
+        '<textarea rows="2" placeholder="' + esc(ph) + '"></textarea>';
       var ta = wrap.querySelector('textarea');
       ta.dataset.orig = '';
       ta.addEventListener('input', function () { onEdit(blk, c); });
       det.appendChild(wrap);
     });
     edit.appendChild(det);
+
+    // -- states & territories panel (collapsible, pre-checked from CARD_STATES)
+    var baseline = cardStates(c.num);
+    blk._statesBaseline = baseline;            // remember the seed for diffing
+    var sdet = el('details', 'optional states');
+    sdet.appendChild(el('summary', null, 'States \u0026 territories \u2014 where is it, and where\u2019s it headed? (optional)'));
+    sdet.appendChild(el('p', 'note',
+      'Tick the states you know. We pre-checked our best guess \u2014 please fix it. ' +
+      'Leave it alone if you\u2019re not sure.'));
+    STATE_ROWS.forEach(function (row) {
+      var rowKey = row[0], rowLab = row[1], rowHint = row[2];
+      var pre = baseline[rowKey] || [];
+      var wrap = el('div', 'statesrow');
+      wrap.dataset.row = rowKey;
+      var head = el('div', 'statesrow-head',
+        '<strong>' + esc(rowLab) + '</strong> <span class="srh">' + esc(rowHint) + '</span>' +
+        ' <button type="button" class="clearrow">clear</button>' +
+        '<span class="statecount"></span>');
+      wrap.appendChild(head);
+      var grid = el('div', 'stategrid');
+      JURIS.forEach(function (j) {
+        var code = j[0], name = j[1];
+        var id = 'st_' + c.num + '_' + rowKey + '_' + code;
+        var lab = el('label', 'stbox');
+        lab.title = name;
+        lab.innerHTML = '<input type="checkbox" id="' + id + '" value="' + code + '"' +
+          (pre.indexOf(code) >= 0 ? ' checked' : '') + '><span>' + esc(code) + '</span>';
+        var cb = lab.querySelector('input');
+        cb.addEventListener('change', function () { onEdit(blk, c); });
+        grid.appendChild(lab);
+      });
+      wrap.appendChild(grid);
+      head.querySelector('.clearrow').addEventListener('click', function () {
+        grid.querySelectorAll('input').forEach(function (cb) { cb.checked = false; });
+        onEdit(blk, c);
+      });
+      sdet.appendChild(wrap);
+    });
+    edit.appendChild(sdet);
+
     body.appendChild(edit);
     blk.appendChild(body);
 
@@ -373,6 +453,29 @@
     return blk;
   }
 
+  // ---- states: read current checks, diff vs the pre-checked baseline ----
+  // Returns per-row { checked:[], added:[], removed:[], changed:bool } plus a
+  // top-level changed flag. Also refreshes each row's live count label.
+  function readStates(blk) {
+    var baseline = blk._statesBaseline || { present: [], native: [], onDeck: [] };
+    var out = { changed: false, rows: {} };
+    blk.querySelectorAll('.statesrow').forEach(function (wrap) {
+      var rowKey = wrap.dataset.row;
+      var checked = [];
+      wrap.querySelectorAll('input:checked').forEach(function (cb) { checked.push(cb.value); });
+      var base = baseline[rowKey] || [];
+      var added = checked.filter(function (s) { return base.indexOf(s) < 0; });
+      var removed = base.filter(function (s) { return checked.indexOf(s) < 0; });
+      var changed = added.length > 0 || removed.length > 0;
+      out.rows[rowKey] = { checked: checked, added: added, removed: removed, changed: changed };
+      if (changed) out.changed = true;
+      var cnt = wrap.querySelector('.statecount');
+      if (cnt) cnt.textContent = checked.length + ' selected' +
+        (changed ? ' \u00b7 edited' : '');
+    });
+    return out;
+  }
+
   // ---- change tracking ----------------------------------------------
   function changedFields(blk, c) {
     var out = [];
@@ -393,26 +496,34 @@
 
   function onEdit(blk, c) {
     var ch = changedFields(blk, c);
+    var st = readStates(blk);
     var send = blk.querySelector('.btn-gold');
     var okbtn = blk.querySelector('.btn-ok');
     var msg = blk.querySelector('.foot-msg');
-    edited[c.num] = ch.length > 0;
-    if (ch.length) {
+    var anyText = ch.length > 0;
+    var anyChange = anyText || st.changed;
+    edited[c.num] = anyChange;
+    if (anyChange) {
       send.disabled = false;
       if (okbtn) okbtn.style.display = 'none'; // editing = send edits, not "looks good"
       msg.className = 'foot-msg changed';
-      msg.textContent = ch.length + ' box' + (ch.length === 1 ? '' : 'es') + ' changed \u2014 ready to send.';
+      var bits = [];
+      if (anyText) bits.push(ch.length + ' box' + (ch.length === 1 ? '' : 'es'));
+      if (st.changed) bits.push('state edits');
+      msg.textContent = bits.join(' + ') + ' \u2014 ready to send.';
     } else {
       send.disabled = true;
       if (okbtn) okbtn.style.display = '';
       msg.className = 'foot-msg ok';
-      msg.textContent = 'Checked it and it\u2019s right? Hit \u201cLooks good.\u201d Found something off? Edit the box, then Send.';
+      msg.textContent = 'Checked it and it\u2019s right? Hit \u201cLooks good.\u201d Found something off? Edit a box or the states, then Send.';
     }
     reflectClaims();
   }
 
   // ---- build the submission block -----------------------------------
-  function buildBlock(c, changes) {
+  // `states` (optional) = the readStates(blk) result; only rows the SME
+  // actually changed are reported, as a full corrected list plus the diff.
+  function buildBlock(c, changes, states) {
     var who = getInitials() || '(initials not given)';
     var L = [];
     L.push('CARD #' + c.num + ' \u2014 ' + common(c) + ' (' + sci(c) + ')');
@@ -429,6 +540,19 @@
       }
       L.push('');
     });
+    if (states && states.changed) {
+      var rowLabel = { present: 'Known infestation in the state', native: 'Native here (belongs in this state)', onDeck: 'Invaders On Deck' };
+      STATE_ROWS.forEach(function (row) {
+        var k = row[0];
+        var r = states.rows[k];
+        if (!r || !r.changed) return;
+        L.push('STATES \u2014 ' + rowLabel[k] + ' (SME-corrected):');
+        L.push('  NOW: ' + (r.checked.length ? r.checked.join(', ') : '(none)'));
+        if (r.added.length)   L.push('  + added:   ' + r.added.join(', '));
+        if (r.removed.length) L.push('  - removed: ' + r.removed.join(', '));
+        L.push('');
+      });
+    }
     L.push('--- sent from the review page ---');
     return L.join('\n');
   }
@@ -491,12 +615,13 @@
       return;
     }
     var changes = changedFields(blk, c);
-    if (!changes.length) { toast('No changes on this card \u2014 nothing to send.'); return; }
+    var states = readStates(blk);
+    if (!changes.length && !states.changed) { toast('No changes on this card \u2014 nothing to send.'); return; }
 
     // "What's next" reassurance: one card at a time, this page stays put.
     var nextLine = nextCardHint(c);
 
-    var block = buildBlock(c, changes);
+    var block = buildBlock(c, changes, states);
     var fullUrl = buildPrefillUrl(c, block, true);
     var msg = blk.querySelector('.foot-msg');
     var copybox = blk.querySelector('.copybox');
