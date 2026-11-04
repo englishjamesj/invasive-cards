@@ -513,10 +513,7 @@
       // No state picked: show a facet-only grid (region/taxon/wave) or a prompt.
       if (!f.state) {
         if (!facetsActive(f)) {
-          results.innerHTML =
-            '<div class="slicer-none">Pick a <b>state or territory</b> above to split the series into ' +
-            '<b>Invasive here</b>, <b>Native here</b>, and <b>Invaders On Deck</b> &mdash; ' +
-            'or set a region, taxon, or wave to browse a cross-state slice.</div>';
+          // (the "pick a state" instruction now lives above the tool in index.html)
           return;
         }
         var matched = CARDS.filter(function (c) { return facetMatch(c.num, f); });
