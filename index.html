@@ -238,6 +238,58 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 .pill-note{display:inline-block;background:#fff6dd;border:1px solid var(--accent);color:#6b531a;padding:4px 12px;border-radius:999px;font-size:.82rem;font-weight:600}
 
+/* ---- sort by state (slicer) ---- */
+.slicer-lead{max-width:82ch;margin:0 0 22px;color:var(--ink-soft);font-size:1.02rem}
+.slicer-lead strong{color:var(--ink)}
+.clarify{margin:0 0 26px;max-width:84ch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 20px;color:var(--ink-soft);font-size:.96rem;line-height:1.55}
+.clarify b{color:var(--ink)}
+.slicer-controls{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6);margin-bottom:26px}
+.sc-row{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:flex-end}
+.sc-field{display:flex;flex-direction:column;gap:6px}
+.sc-field label{font-family:var(--fd);text-transform:uppercase;letter-spacing:.07em;font-size:.72rem;color:var(--usgs);font-weight:600}
+.sc-field select{padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-family:var(--fs);font-size:.98rem;background:#fff;min-width:168px}
+.sc-field.grow{flex:1;min-width:200px}
+.seg{display:inline-flex;background:var(--paper-2);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{border:0;background:transparent;font-family:var(--fd);text-transform:uppercase;letter-spacing:.05em;font-size:.74rem;padding:9px 14px;cursor:pointer;color:var(--ink-soft)}
+.seg button.on{background:var(--usgs);color:#fff}
+.sc-help{margin:12px 0 0;font-size:.84rem;color:var(--ink-soft);line-height:1.5}
+.sc-reset{background:transparent;border:1px solid var(--line);color:var(--ink-soft);font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.74rem;padding:9px 14px;border-radius:9px;cursor:pointer}
+.sc-reset:hover{background:var(--paper-2);color:var(--usgs)}
+.slicer-summary{font-family:var(--fd);color:var(--usgs);font-size:1.12rem;margin:0 0 6px}
+.slicer-summary .cnt{color:var(--field)}
+.state-blurb{color:var(--ink-soft);font-size:.95rem;margin:0 0 22px;max-width:84ch}
+.bucket{margin:0 0 30px}
+.bucket-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:7px;margin-bottom:16px}
+.bucket-head h3{margin:0;font-size:1.22rem;display:flex;align-items:center;gap:9px}
+.bucket-head .dot{width:13px;height:13px;border-radius:3px;display:inline-block;flex:none}
+.bucket-head .b-count{font-family:var(--fd);color:#fff;font-size:.74rem;letter-spacing:.04em;padding:2px 9px;border-radius:999px;background:var(--ink-soft)}
+.bucket-head .b-sub{color:var(--ink-soft);font-size:.9rem;font-style:italic}
+.dot-present{background:var(--danger)}
+.dot-native{background:var(--field)}
+.dot-ondeck{background:var(--accent)}
+.bucket.b-present .b-count{background:var(--danger)}
+.bucket.b-native .b-count{background:var(--field)}
+.bucket.b-ondeck .b-count{background:#a07d1e}
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:16px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 8px 22px -18px rgba(10,35,66,.6);cursor:pointer;display:flex;flex-direction:column;transition:transform .14s ease,box-shadow .2s ease}
+.mini:hover,.mini:focus-visible{transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(10,35,66,.65);outline:none}
+.mini .thumb{position:relative;aspect-ratio:1000/1400;background:#dfe3ea}
+.mini .thumb img{width:100%;height:100%;object-fit:cover}
+.mini .mnum{position:absolute;top:6px;left:6px;background:rgba(10,35,66,.86);color:#fff;font-family:var(--fd);font-size:.66rem;letter-spacing:.04em;padding:2px 7px;border-radius:999px}
+.mini .flag{position:absolute;top:6px;right:6px;font-family:var(--fd);font-size:.6rem;letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:999px;color:#fff}
+.flag-wide{background:rgba(44,82,59,.92)}
+.flag-yr{background:rgba(156,43,43,.92)}
+.mini .mcap{padding:8px 9px 10px}
+.mini .mcap .nm{font-family:var(--fd);font-weight:600;color:var(--usgs);font-size:.9rem;line-height:1.12}
+.mini .mcap .sc{font-style:italic;color:var(--ink-soft);font-size:.76rem;margin-top:1px}
+.bucket-empty{color:var(--ink-soft);font-style:italic;font-size:.95rem;padding:2px 0 4px}
+.wide-note{margin:18px 0 0;background:var(--paper-2);border:1px dashed var(--line);border-radius:10px;padding:12px 16px;color:var(--ink-soft);font-size:.86rem;line-height:1.5}
+.wide-note b{color:var(--ink)}
+.pitch-foot{margin:30px auto 0;max-width:84ch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--field);border-radius:12px;padding:18px 22px;color:var(--ink-soft);font-size:.95rem;line-height:1.55}
+.pitch-foot h4{font-family:var(--fd);color:var(--usgs);margin:0 0 7px;font-size:1.06rem}
+.pitch-foot b{color:var(--ink)}
+.slicer-none{color:var(--ink-soft);font-size:1rem;background:#fff;border:1px dashed var(--line);border-radius:12px;padding:22px}
+
 /* ---- responsive ---- */
 @media (max-width:860px){
   .hero .wrap{grid-template-columns:1fr;gap:10px}
@@ -248,6 +300,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .tier-grid{grid-template-columns:1fr}
   .pack-grid{grid-template-columns:1fr}
   .ex-grid{grid-template-columns:1fr}
+  .sc-row{flex-direction:column;align-items:stretch}
+  .sc-field select{min-width:0;width:100%}
 }
 @media (max-width:1100px) and (min-width:861px){
   .pack-grid{grid-template-columns:repeat(2,1fr)}
@@ -270,6 +324,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       <a href="#uses">How It's Used</a>
       <a href="#costs">Cost</a>
       <a href="#packaging">Packaging</a>
+      <a href="#slicer">Sort by State</a>
       <a href="#gallery">The Cards</a>
       <a href="#review">Give Feedback</a>
     </nav>
@@ -494,6 +549,75 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   </div>
 </section>
 
+<!-- ============ SORT BY STATE (SLICER) ============ -->
+<section id="slicer">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Sort by State &middot; Live Demo</div>
+      <h2>Slice the series any way Comms or leadership wants.</h2>
+      <p>Same 21 cards, sorted on the fly. Pick a state or territory and the set regroups into the invaders that are <strong>here now</strong>, the species that are <strong>native here</strong>, and the ones that are <strong>on deck</strong>. Layer on region, taxon, or release wave to build a pack for any audience &mdash; a member's district, a classroom unit, a conference theme.</p>
+    </div>
+
+    <p class="slicer-lead">This is a working proof of concept on the first 21 cards. The same engine extends to all 50 once they're built &mdash; and the state data is being validated by subject-matter experts as their input comes in. Think of it as <strong>optionality</strong>: the roster is one dataset; how we cut it is a decision we can make per audience, not a thing we lock in now.</p>
+
+    <p class="clarify">
+      <b>One species, different roles.</b> A species can be invasive in one state and native in another &mdash; the same fish may be a prized local in one place and a costly invader two states over. These cards flag <b>where it's invasive, where it's native, and where it's on deck</b>, so the story reads honestly everywhere. (See Sea Lamprey, Blue Catfish.)
+    </p>
+
+    <div class="slicer-controls">
+      <div class="sc-row">
+        <div class="sc-field grow">
+          <label for="slState">State / territory</label>
+          <select id="slState" aria-label="State or territory"></select>
+        </div>
+        <div class="sc-field">
+          <label for="slRegion">Region lens</label>
+          <select id="slRegion" aria-label="Ecoregion"></select>
+        </div>
+        <div class="sc-field">
+          <label for="slTaxon">Taxon</label>
+          <select id="slTaxon" aria-label="Taxon"></select>
+        </div>
+        <div class="sc-field">
+          <label for="slWave">Release wave</label>
+          <select id="slWave" aria-label="Release wave"></select>
+        </div>
+      </div>
+      <div class="sc-row" style="margin-top:16px">
+        <div class="sc-field">
+          <label>Show statuses</label>
+          <div class="seg" id="slStatusSeg" role="group" aria-label="Which statuses to show">
+            <button data-status="present" class="on" aria-pressed="true">Invasive here</button>
+            <button data-status="onDeck" class="on" aria-pressed="true">On deck</button>
+            <button data-status="native" class="on" aria-pressed="true">Native here</button>
+          </div>
+        </div>
+        <div class="sc-field">
+          <label for="slCombine">Combine state + facets by</label>
+          <div class="seg" id="slCombineSeg" role="group" aria-label="Union or intersection">
+            <button data-combine="union" aria-pressed="false">Union (any)</button>
+            <button data-combine="intersection" class="on" aria-pressed="true">Intersection (all)</button>
+          </div>
+        </div>
+        <div class="sc-field">
+          <label>&nbsp;</label>
+          <button class="sc-reset" id="slReset" type="button">Reset filters</button>
+        </div>
+      </div>
+      <p class="sc-help">
+        <b>Union</b> = a card shows if it matches the state <em>or</em> any facet you set. <b>Intersection</b> = it must match the state <em>and</em> every facet. &ldquo;Invasive here&rdquo; and &ldquo;On deck&rdquo; are what a state pack usually leads with; toggle &ldquo;Native here&rdquo; to show the teaching cases too.
+      </p>
+    </div>
+
+    <div id="slResults"></div>
+
+    <div class="pitch-foot">
+      <h4>Why this matters for the pitch</h4>
+      <p>Nothing here is a fixed product &mdash; it's <b>optionality on one dataset</b>. The cards and their science stay the same; the cut is a Comms/leadership call made per audience. A state visit, a caucus, a watershed, a classroom &mdash; the same 50 cards reshuffle in a click, no reprinting the roster, no new design. This demo runs on the first 21; the engine is built to carry all 50 the moment they're done.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ GALLERY ============ -->
 <section id="gallery">
   <div class="wrap">
@@ -601,6 +725,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 })();
 </script>
 <script src="data/cards.js"></script>
+<script src="data/card_states.js"></script>
+<script src="data/card_facets.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
