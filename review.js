@@ -48,8 +48,12 @@
     //  review.js to the repo. To HIDE the box entirely, set it to:  []
     //  (empty list). Names are free text - whatever reads best to you.
     // -----------------------------------------------------------------
+    // Updated 2026-11-06: swapped in the cards that still have NO review (plus Black Rat, which
+    // has only one short "no changes"). Dropped the previous names that are now covered — incl.
+    // Hydrilla (Ian Pfingsten reviewed it via screenshot), Spotted Lanternfly, Feral Hog, Fire Ant,
+    // Blue Catfish, Coconut Rhino Beetle. Cheatgrass + Southern House Mosquito stay (still unreviewed).
     nudgeSpecies: [
-      'Cheatgrass', 'Hydrilla', 'Coconut Rhinoceros Beetle', 'Spotted Lanternfly', 'Feral Hog', 'Red Imported Fire Ant', 'Blue Catfish', 'Southern House Mosquito'
+      'Brown Treesnake', 'Burmese Python', 'Golden Mussel', 'Kudzu', 'Cheatgrass', 'Southern House Mosquito', 'Black Rat'
     ],
     // Optional: the lead-in wording before the list. Leave as-is or tweak.
     nudgeLead: 'We especially need expert eyes on these next'
