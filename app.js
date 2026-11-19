@@ -86,7 +86,7 @@
       back.innerHTML = '<div style="display:grid;place-items:center;height:100%;color:#888">No back</div>';
     }
 
-    var num = el('div', 'cnum', c.kind ? 'EXAMPLE' : '#' + c.num);
+    var num = el('div', 'cnum', c.kind ? '' : '#' + c.num);
 
     var tools = el('div', 'tools');
     var bFlip = el('button', null, '&#8635;'); bFlip.title = 'Flip'; bFlip.setAttribute('aria-label', 'Flip card');

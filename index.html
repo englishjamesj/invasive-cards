@@ -179,11 +179,12 @@ section.alt{background:var(--paper-2)}
 .card{perspective:1400px;cursor:pointer}
 .card .inner{position:relative;width:100%;aspect-ratio:1000/1400;transition:transform .7s cubic-bezier(.2,.75,.2,1);transform-style:preserve-3d}
 .card.flipped .inner{transform:rotateY(180deg)}
+.card.flipped .cnum,.card .cnum:empty{display:none}
 .card .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;overflow:hidden;
   box-shadow:var(--shadow);background:#ddd;border:1px solid rgba(255,255,255,.6)}
 .card .face img{width:100%;height:100%;object-fit:cover}
 .card .back{transform:rotateY(180deg)}
-.card .cnum{position:absolute;top:8px;left:8px;z-index:3;background:rgba(10,35,66,.86);color:#fff;font-family:var(--fd);font-size:.72rem;letter-spacing:.05em;padding:3px 8px;border-radius:999px}
+.card .cnum{position:absolute;top:8px;right:8px;z-index:3;background:rgba(10,35,66,.86);color:#fff;font-family:var(--fd);font-size:.72rem;letter-spacing:.05em;padding:3px 8px;border-radius:999px}
 .card .tools{position:absolute;bottom:8px;right:8px;z-index:3;display:flex;gap:6px;opacity:0;transition:opacity .2s}
 .card:hover .tools,.card:focus-within .tools{opacity:1}
 .card .tools button{border:0;cursor:pointer;width:34px;height:34px;border-radius:8px;background:rgba(10,35,66,.86);color:#fff;font-size:1rem;display:grid;place-items:center}
@@ -197,6 +198,7 @@ section.alt{background:var(--paper-2)}
 /* subtle cursor-tilt handled in JS via CSS vars */
 .card .inner{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
 .card.flipped .inner{transform:rotateY(180deg)}
+.card.flipped .cnum,.card .cnum:empty{display:none}
 
 /* ---- lightbox ---- */
 .lb{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;
@@ -562,9 +564,6 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
       <div class="use"><span>&#127942;</span> Collect-the-set engagement</div>
       <div class="use"><span>&#128218;</span> Press &amp; partner kits</div>
     </div>
-    <p style="margin-top:28px;max-width:70ch;color:var(--ink-soft)">
-      <span class="pill-note">How it's made</span>&nbsp; One person, a free offline card builder, and AI artwork. No new systems or vendors. The 21 cards here are the proof of concept; the series builds to 50+.
-    </p>
   </div>
 </section>
 
