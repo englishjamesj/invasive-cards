@@ -50,8 +50,8 @@ h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.1;letter-spacing:.0
 .topbar .wrap{display:flex;align-items:center;gap:18px;height:60px}
 .brand{font-family:var(--fd);font-weight:700;color:var(--usgs);text-decoration:none;font-size:1.05rem;letter-spacing:.02em;white-space:nowrap}
 .brand b{color:var(--accent)}
-.nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
-.nav a{font-family:var(--fd);text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;color:var(--ink-soft);text-decoration:none;padding:8px 12px;border-radius:8px}
+.nav{margin-left:auto;display:flex;gap:2px;flex-wrap:wrap}
+.nav a{font-family:var(--fd);text-transform:uppercase;letter-spacing:.05em;font-size:.78rem;color:var(--ink-soft);text-decoration:none;padding:8px 9px;white-space:nowrap;border-radius:8px}
 .nav a:hover{color:var(--usgs);background:var(--paper-2)}
 .nav a.on{color:var(--usgs);background:#fff;box-shadow:inset 0 0 0 1.5px var(--accent)}
 
@@ -301,7 +301,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 sup.dag a,a.dag{color:#8a6d1f;text-decoration:none;font-weight:700}
 sup.dag a:hover,a.dag:hover{text-decoration:underline}
 
-/* ---- Horizon Scan Watch List ---- */
+/* ---- Horizon Scanning ---- */
 .hz{background:linear-gradient(160deg,#0a2342 0%,#0c2b52 60%,#14304a 100%);color:#e8eef6}
 .hz h2,.hz h3{color:#fff}
 .hz .eyebrow{color:var(--accent)}
@@ -321,6 +321,70 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
 .hz-cost p.fine{font-size:.82rem;color:#9fb3cc;margin:8px 0 0}
 .hz-cost strong{color:#fff}
 
+/* ---- example cards (Horizon Scanning + Special Topics) ---- */
+.ex-host{width:100%;max-width:340px;margin:0 auto}
+.ex-host>img{width:100%;border-radius:12px;box-shadow:var(--shadow-lg)}
+.ex-host .card .label{display:none}
+.hz-card figcaption,.st-card figcaption{margin-top:12px}
+.st{background:#eef3f8}
+.st-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:start}
+.st-card{margin:0;text-align:center}
+.st-card figcaption{font-family:var(--fd);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--ink-soft)}
+.st-lead{font-size:1.1rem;margin:.4em 0 1em}
+.st-topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:12px 0}
+.st-group{background:#fff;border:1px solid #d5dee8;border-radius:12px;padding:12px 16px}
+.st-group h4{margin:0 0 6px;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;color:var(--usgs)}
+.st-group ul{list-style:none;margin:0;padding:0}
+.st-group li{padding:5px 0;border-top:1px solid #edf1f5;font-size:.92rem}
+.st-group li:first-child{border-top:0}
+.st-group li b{display:block;font-family:var(--fd);color:var(--ink);font-size:.9rem}
+.st-group li span{color:var(--ink-soft)}
+.st .fine{font-size:.82rem;color:var(--ink-soft)}
+/* ---- 2026-11-19 restructure ---- */
+.role3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch;margin:6px 0 26px}
+.r3{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6)}
+.r3 b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--usgs);color:#fff;font-family:var(--fd);margin-bottom:8px}
+.r3 h3{margin:0 0 4px;font-size:1.08rem}
+.r3 p{margin:0;color:var(--ink-soft);font-size:.95rem}
+.r3-arrow{align-self:center;font-size:1.8rem;color:var(--accent)}
+.backs-demo{display:grid;grid-template-columns:.6fr 1.4fr;gap:36px;align-items:center;margin:0 0 22px}
+.bd-card{margin:0;text-align:center}
+.bd-card img{width:100%;max-width:320px;border-radius:12px;box-shadow:var(--shadow-lg)}
+.bd-card figcaption{font-family:var(--fd);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--ink-soft);margin-top:10px}
+.bd-example{font-size:1.05rem;border-left:4px solid var(--accent);padding:4px 0 4px 14px}
+.bd-boxes{margin:12px 0 0;padding-left:22px}
+.bd-boxes li{margin:6px 0}
+.bd-boxes b{font-family:var(--fd);color:var(--usgs);margin-right:6px}
+.kinds3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.k3{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;color:inherit;text-decoration:none}
+.k3 h3{margin:0 0 4px;font-size:1.1rem;color:var(--usgs)}
+.k3 p{margin:0;color:var(--ink-soft);font-size:.95rem}
+.k3a:hover{box-shadow:0 0 0 2px var(--accent)}
+.hz-more summary{color:#fff}
+.hz-more{background:transparent}
+.st-pack{background:#fff;border:1px solid #d5dee8;border-radius:12px;padding:10px 14px;font-size:.95rem}
+.sites{columns:2;margin:10px 0 0;padding-left:20px}
+.sites li{margin:4px 0;break-inside:avoid}
+.ask3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:14px}
+.a3{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+.a3 b{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#1a1a1a;font-family:var(--fd);margin-bottom:8px}
+.a3 h3{margin:0 0 4px}
+.a3 p{margin:0;color:var(--ink-soft)}
+@media (max-width:860px){.role3,.kinds3,.ask3{grid-template-columns:1fr}.r3-arrow{display:none}.backs-demo{grid-template-columns:1fr}.sites{columns:1}}
+.role4{grid-template-columns:1fr auto 1fr auto 1fr auto 1fr}
+.more.xp{margin:6px 0 0;max-width:none}
+.hz-more,.st .more,.hz .hz-more{max-width:none;margin-left:0}
+.xp-lead{font-size:1.1rem;max-width:70ch;margin:.4em 0 1em}
+.hz .xp-lead{color:#c9d6e6}
+.hz .xp-lead strong{color:#fff}
+.xp>summary{display:inline-block;font-size:.9rem;padding:10px 18px;border-radius:999px;background:var(--accent);color:#1a1a1a}
+.xp[open]>summary{margin-bottom:22px}
+.hz .xp>summary::marker,.st .xp>summary::marker{color:#1a1a1a}
+.mixes{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:16px 22px;margin:22px 0 6px}
+.mixes h3{margin:0 0 6px;font-size:1.1rem}
+.mixes ul{margin:0;padding-left:20px}
+.mixes li{margin:4px 0}
+@media (max-width:860px){.role4{grid-template-columns:1fr}}
 /* ---- responsive ---- */
 @media (max-width:860px){
   .stat-row{grid-template-columns:1fr}
@@ -355,14 +419,16 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
   <div class="wrap">
     <a class="brand" href="#top">USGS <b>Invaders</b> &mdash; Trading Card Series</a>
     <nav class="nav">
-      <a href="#pitch">The Idea</a>
-      <a href="#uses">How It's Used</a>
-      <a href="#costs">Cost</a>
-      <a href="#packaging">Packaging</a>
-      <a href="#slicer">Sort by State</a>
-      <a href="#gallery">The Cards</a>
-      <a href="#horizon">Watch List</a>
-      <a href="#review">Give Feedback</a>
+      <a href="#pitch">Idea</a>
+      <a href="#gallery">Cards</a>
+      <a href="#backs">Backs</a>
+      <a href="#uses">Uses</a>
+      <a href="#packaging">Packs</a>
+      <a href="#slicer">By State</a>
+      <a href="#horizon">Horizon Scanning</a>
+      <a href="#special">Special Topics</a>
+      <a href="#buyin">Buy-In</a>
+      <a href="#review">Feedback</a>
     </nav>
   </div>
 </header>
@@ -395,8 +461,8 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
     </div>
     <div class="stat-row">
       <div><div class="bignum">21<small>cards built, on the way to 50+</small></div></div>
-      <div><div class="bignum">3 sec<small>to understand the idea</small></div></div>
-      <div><div class="bignum">7<small>ready channels, from classrooms to press kits</small></div></div>
+      <div><div class="bignum">3<small>kinds of cards: species, Horizon Scanning, Special Topics</small></div></div>
+      <div><div class="bignum">5<small>boxes of real USGS science on the back of every card</small></div></div>
     </div>
     <div class="pitch-grid">
       <div class="pc"><div class="ic">1</div><h3>Instantly understood</h3><p>Threat vs. the team that beats it. A 9-year-old and a Deputy Director read it the same way.</p></div>
@@ -415,6 +481,67 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
         <figure><img src="assets/cards/11_back.jpg" alt="Sea Lamprey card, back &mdash; USGS science" loading="lazy"><figcaption>Back</figcaption></figure>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The Cards</div>
+      <h2>The starting lineup: 21 of a planned 50+.</h2>
+      <p>Click a card to flip it and read the science. Use <strong>enlarge</strong> to look closer.</p>
+    </div>
+    <div class="g-controls">
+      <label class="search">
+        <span aria-hidden="true">&#128269;</span>
+        <input id="q" type="search" placeholder="Search a species (e.g. python, carp, lionfish)&hellip;" aria-label="Search species">
+      </label>
+      <div class="toggle" role="tablist" aria-label="View">
+        <button id="viewGrid" class="on">Gallery</button>
+        <button id="viewWall">Collectible wall</button>
+      </div>
+    </div>
+    <div id="grid" class="grid"></div>
+    <details class="more" style="margin-top:22px"><summary>What do the five numbers on the front mean?</summary>
+      <p style="max-width:80ch">They are a way to compare invaders at a glance, the way a baseball card compares players, rated 0 to 100: Spread, Impact, Resilience, Stealth, and a just-for-fun Gross-Factor. They are our best judgment, started from what USGS and partners have documented for each species. They are <strong>not</strong> official USGS measurements. The facts on the back of each card are the sourced science. The Horizon Scanning cards are different: their ratings come from expert scoring.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ THE BACKS: USGS IS THE HERO ============ -->
+<section id="backs" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The Back of the Card</div>
+      <h2>The invader is the hook. USGS is the hero.</h2>
+      <p>Every back shows what USGS scientists actually do, and what it makes possible.</p>
+    </div>
+    <div class="role3 role4">
+      <div class="r3"><b>1</b><h3>The problem</h3><p>An invader is doing harm, and partners need to know what to do about it.</p></div>
+      <div class="r3-arrow" aria-hidden="true">&rarr;</div>
+      <div class="r3"><b>2</b><h3>USGS does this</h3><p>Finds it, maps it, tracks it, or tests a way to stop it.</p></div>
+      <div class="r3-arrow" aria-hidden="true">&rarr;</div>
+      <div class="r3"><b>3</b><h3>So the partner can</h3><p>Aim the work: choose where to look, what to treat, and what to try.</p></div>
+      <div class="r3-arrow" aria-hidden="true">&rarr;</div>
+      <div class="r3"><b>4</b><h3>So the result is</h3><p>The invader is stopped sooner, with less money and effort wasted.</p></div>
+    </div>
+    <div class="backs-demo">
+      <figure class="bd-card"><img src="assets/cards/03_back.jpg" alt="Back of the Burmese Python card, showing five science boxes" loading="lazy"><figcaption>Burmese Python, back</figcaption></figure>
+      <div class="bd-copy">
+        <p class="bd-example"><strong>Real example, Burmese Python:</strong> Florida pays contractors to remove pythons, but no one has a solid count of how many remain. USGS turns the removal records into models, so managers can judge whether removal is working and aim it better.</p>
+        <ol class="bd-boxes">
+          <li><b>Impacts</b> What it costs nature and people, in real numbers.</li>
+          <li><b>How it got here</b> Where it is from, and what went wrong.</li>
+          <li><b>How USGS finds it</b> The tools: tracking, maps, DNA clues.</li>
+          <li><b>How USGS helps stop it</b> What partners do, and what USGS gives them.</li>
+          <li><b>Take action</b> How a reader can report a sighting. The report becomes data.</li>
+        </ol>
+      </div>
+    </div>
+    <details class="more"><summary>More on USGS&rsquo;s role</summary>
+      <p style="max-width:80ch">USGS finds invaders, tracks them, predicts where they will go next, and tests ways to stop them. Partners such as the U.S. Fish and Wildlife Service, USDA, states, tribes, and universities usually run the control work. The cards credit each partner by name and say plainly what USGS provides. Where a problem is unsolved, the card says what scientists are doing next.</p>
+    </details>
   </div>
 </section>
 
@@ -441,50 +568,6 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ WHAT IT COSTS TO PRINT ============ -->
-<section id="costs">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">What It Costs to Print</div>
-      <h2>Premium cards. Price flexes with quantity.</h2>
-      <p>The design is done. Printing is the only real cost. Same top quality at every tier (heavy 310gsm stock, full color both sides, coated, rounded corners). Pick the quantity to fit budget.</p>
-    </div>
-
-    <div class="tier-grid">
-      <div class="tier">
-        <div class="tier-tag">Pilot</div>
-        <div class="tier-qty">1,000 <span>per species</span></div>
-        <div class="tier-total">&asymp; 50,000 cards</div>
-        <div class="tier-cost">~$4,000 &ndash; $7,500</div>
-        <p class="tier-note">A test run. Seed a few events and the 20 Science Centers, then refine.</p>
-      </div>
-      <div class="tier">
-        <div class="tier-tag">Outreach</div>
-        <div class="tier-qty">5,000 <span>per species</span></div>
-        <div class="tier-total">&asymp; 250,000 cards</div>
-        <div class="tier-cost">~$15,000 &ndash; $28,000</div>
-        <p class="tier-note">A real program year. Steady supply for every Science Center.</p>
-      </div>
-      <div class="tier">
-        <div class="tier-tag">Campaign</div>
-        <div class="tier-qty">10,000 <span>per species</span></div>
-        <div class="tier-total">&asymp; 500,000 cards</div>
-        <div class="tier-cost">~$25,000 &ndash; $50,000</div>
-        <p class="tier-note">A national push at the lowest per-card cost.</p>
-      </div>
-    </div>
-
-    <p class="costs-fine" style="margin-bottom:0"><strong>Estimates, not quotes.</strong> About $0.05&ndash;$0.15 per card, falling as quantity rises.</p>
-    <details class="more"><summary>Sources &amp; fine print</summary>
-    <p class="costs-fine" style="margin-top:0">
-      Planning-level figures for budgeting. Offset-printing setup is spread over more cards at higher volume. Based on published 2026 trade pricing for bulk custom card printing
-      (<a href="https://wjplayingcard.com/game-card-printing-costs/" target="_blank" rel="noopener">wjplayingcard.com</a>,
-      <a href="https://www.mrplayingcard.com/blog/custom-trading-cards-printing-guide" target="_blank" rel="noopener">mrplayingcard.com</a>);
-      figures rephrased and recomputed for this estimate. Actual cost depends on the chosen vendor, finish, foil/specialty cards, packaging, and freight &mdash; a formal quote through USGS procurement / the printer would firm these up. The foil Horizon Scan cards and specialty packaging add setup minimums and a modest premium; see the <a class="dag" href="#horizon">Watch List</a> for the foil estimate.
-    </p></details>
-  </div>
-</section>
-
 <!-- ============ HOW WE'D PACKAGE THEM ============ -->
 <section id="packaging" class="alt">
   <div class="wrap">
@@ -497,18 +580,18 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
     <div class="pack-grid">
       <div class="pack">
         <div class="pack-ic">&#128230;</div>
-        <h3>Center packs <span class="pack-spec">6 cards</span></h3>
-        <p>The workhorse. <strong>5 serialized + 1 Horizon</strong><sup class="dag"><a href="#horizon" title="About the Horizon Scan card">&dagger;</a></sup>, released in waves that build to the full set (50+). Every pack in a wave is identical, so it is simple to print and ship. New waves bring people back to finish the set.</p>
+        <h3>Center packs <span class="pack-spec">6&ndash;7 cards</span></h3>
+        <p>The workhorse. <strong>5 species cards + 1 Horizon Scanning card</strong><sup class="dag"><a href="#horizon" title="About the Horizon Scanning card">&dagger;</a></sup> (and a Special Topics card in every pack or every other pack), released in waves that build to the full set (50+). Every pack in a wave is identical, so it is simple to print and ship. New waves bring people back to finish the set.</p>
       </div>
       <div class="pack">
         <div class="pack-ic">&#127970;</div>
-        <h3>Conference packs <span class="pack-spec">12 cards</span></h3>
+        <h3>Conference packs <span class="pack-spec">13 cards</span></h3>
         <p><strong>Two Center packs, banded together.</strong> A weightier handout for professional meetings. No new design.</p>
       </div>
       <div class="pack">
         <div class="pack-ic">&#11088;</div>
         <h3>Flagship packs <span class="pack-spec">curated</span></h3>
-        <p>The best of the best in a plain premium wrapper. Kept at HQ for leadership and Capitol Hill: the strongest cards plus 1 Horizon<sup class="dag"><a href="#horizon" title="About the Horizon Scan card">&dagger;</a></sup>. The program in 30 seconds.<sup class="dag">*</sup></p>
+        <p>The best of the best in a plain premium wrapper. Kept at HQ for leadership and Capitol Hill: the strongest cards plus 1 Horizon Scanning card<sup class="dag"><a href="#horizon" title="About the Horizon Scanning card">&dagger;</a></sup>. The program in 30 seconds.<sup class="dag">*</sup></p>
         <p class="flag-note">* Just an example of one possible suite. Any actual Flagship collection would be decided by Leadership, the Communications team, and the Biological Threats Program.</p>
       </div>
       <div class="pack">
@@ -519,7 +602,7 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
       <div class="pack">
         <div class="pack-ic">&#128203;</div>
         <h3>Collector checklist &amp; album</h3>
-        <p>A roster of the full set (50+), plus the Horizon slots<sup class="dag"><a href="#horizon" title="About the Horizon Scan card">&dagger;</a></sup>. It turns a handout into a set people want to finish.</p>
+        <p>A roster of the full set (50+), plus the Horizon Scanning card slots<sup class="dag"><a href="#horizon" title="About the Horizon Scanning card">&dagger;</a></sup>. It turns a handout into a set people want to finish.</p>
       </div>
     </div>
 
@@ -527,7 +610,8 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
       Options to mix and match, not one fixed product. Hill distribution would route through USGS Communications / Congressional Liaison.
     </p>
 
-    <h3 class="ex-title">What those packs could look like</h3>
+    <details class="more"><summary>See example packs built from the first 21 cards</summary>
+    <h3 class="ex-title" style="margin-top:14px">What those packs could look like</h3>
     <p class="ex-sub">Illustrations built from the first 21 cards. The full 50+ gives every region plenty to pull from.</p>
     <div class="ex-grid">
       <div class="ex-pack">
@@ -571,11 +655,12 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
           <li><img src="assets/cards/08_front.jpg" alt="" loading="lazy"><span class="nm">Southern House Mosquito</span><span>flagship USGS story</span></li>
           <li><img src="assets/cards/03_front.jpg" alt="" loading="lazy"><span class="nm">Burmese Python</span><span>instantly iconic</span></li>
           <li><img src="assets/cards/14_front.jpg" alt="" loading="lazy"><span class="nm">Lionfish</span><span>striking hero art</span></li>
-          <li class="horizon"><span class="nm">+ 1 Horizon Scan card<sup class="dag"><a href="#horizon" title="About the Horizon Scan card">&dagger;</a></sup></span><span>&ldquo;what's coming next&rdquo;</span></li>
+          <li class="horizon"><span class="nm">+ 1 Horizon Scanning card<sup class="dag"><a href="#horizon" title="About the Horizon Scanning card">&dagger;</a></sup></span><span>&ldquo;what's coming next&rdquo;</span></li>
         </ul>
         <p class="ex-note">* Example only. The real Flagship set would be chosen by Leadership, the Communications team, and the Biological Threats Program.</p>
       </div>
     </div>
+    </details>
 
 <details class="more"><summary>How we'd define &ldquo;regions&rdquo; (a leadership &amp; Comms call)</summary>
     <div class="region-note">
@@ -617,7 +702,8 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
       <b>One species, different roles.</b> A fish can be a prized local in one state and a costly invader two states over. The cards flag where each species is invasive, native, or on deck. (See Sea Lamprey, Blue Catfish.)
     </p>
 
-    <p class="slicer-lead" style="margin-bottom:12px"><strong>Try it:</strong> pick a <strong>state or territory</strong> below to split the series into <strong>Invasive here</strong>, <strong>Native here</strong>, and <strong>On deck</strong>. Or set a region, taxon, or wave to browse a cross-state slice.</p>
+    <details class="more"><summary>Try the live tool &mdash; pick a state and watch the series regroup</summary>
+    <p class="slicer-lead" style="margin:10px 0 12px"><strong>Try it:</strong> pick a <strong>state or territory</strong> below to split the series into <strong>Invasive here</strong>, <strong>Native here</strong>, and <strong>On deck</strong>. Or set a region, taxon, or wave to browse a cross-state slice.</p>
 
     <div class="slicer-controls">
       <div class="sc-row">
@@ -665,6 +751,7 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
     </div>
 
     <div id="slResults"></div>
+    </details>
 
     <div class="pitch-foot">
       <h4>Why this matters</h4>
@@ -673,55 +760,162 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ GALLERY ============ -->
-<section id="gallery">
+<!-- ============ THREE KINDS OF CARDS ============ -->
+<section id="kinds">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">The Cards</div>
-      <h2>The starting lineup: 21 of a planned 50+.</h2>
-      <p>Click a card to flip it and read the science. Use <strong>enlarge</strong> to look closer.</p>
+      <div class="eyebrow">Three Kinds of Cards</div>
+      <h2>One game. Three ways to learn.</h2>
     </div>
-    <div class="g-controls">
-      <label class="search">
-        <span aria-hidden="true">&#128269;</span>
-        <input id="q" type="search" placeholder="Search a species (e.g. python, carp, lionfish)&hellip;" aria-label="Search species">
-      </label>
-      <div class="toggle" role="tablist" aria-label="View">
-        <button id="viewGrid" class="on">Gallery</button>
-        <button id="viewWall">Collectible wall</button>
-      </div>
+    <div class="kinds3">
+      <div class="k3"><h3>Species cards</h3><p>An invader that is already here, dressed as the visiting player. The numbered core of the set.</p></div>
+      <a class="k3 k3a" href="#horizon"><h3>Horizon Scanning cards</h3><p>A species that has not arrived yet, but experts flagged as a high risk. Gold foil.</p></a>
+      <a class="k3 k3a" href="#special"><h3>Special Topics cards</h3><p>Not an animal or plant: a tool, a rule, or a story, such as the eDNA water-sampling robot.</p></a>
     </div>
-    <div id="grid" class="grid"></div>
   </div>
 </section>
 
-<!-- ============ HORIZON SCAN WATCH LIST (self-contained; target of the dagger footnotes) ============ -->
+<!-- ============ HORIZON SCANNING (self-contained; target of the dagger footnotes) ============ -->
 <section id="horizon" class="hz">
   <div class="wrap">
-    <div class="hz-grid">
-      <figure class="hz-card">
-        <img src="assets/horizon/horizon_template_front.png" alt="Horizon Scan Watch List card template: gold foil frame, ribbon, Scouting Report starburst and Watch badge" loading="lazy">
-        <figcaption>Template preview &middot; species and art to come &middot; gold = foil</figcaption>
-      </figure>
-      <div>
-        <div class="eyebrow">&dagger; Horizon Scan Watch List</div>
-        <h2>Not here yet. On the watch list.</h2>
-        <p style="font-size:1.12rem;color:#c9d6e6;margin:.4em 0 1.2em">Every Center pack carries one extra card: a species that has <strong style="color:#fff">not</strong> arrived in the U.S. but is flagged as a high-priority threat by USGS horizon scanning.</p>
-
-        <div class="hz-story">
-          <div class="hz-step"><b>Today: a prospect</b><span>Scouted overseas. Gray jersey, no team, number 00. Zero in the U.S. so far.</span></div>
-          <div class="hz-arrow" aria-hidden="true">&rarr;</div>
-          <div class="hz-step"><b>If it establishes: a team</b><span>It earns a numbered jersey and joins the serialized set.</span></div>
-        </div>
-
-        <div class="hz-cost">
-          <span class="tag">Estimate, not a quote</span>
-          <p><strong>About 1 in 6 printed cards is a Horizon card.</strong> That is about 8,300 foil cards at Pilot, 41,700 at Outreach, 83,000 at Campaign.</p>
-          <p><strong>Foil adds roughly $0.03&ndash;$0.12 per card</strong> (about $250&ndash;$1k / $1.25k&ndash;$5k / $2.5k&ndash;$10k), plus <strong>$300&ndash;$1.5k</strong> one-time tooling.</p>
-          <p class="fine">Planning assumptions; printers did not publish per-card foil prices at volume. A real quote firms it up. Foil is front only; one die serves every Horizon card.</p>
+    <div class="eyebrow">&dagger; Horizon Scanning cards</div>
+    <h2>Not here yet. On our radar.</h2>
+    <p class="xp-lead">A <strong>Horizon Scanning card</strong> shows a species that has <strong>not</strong> arrived in the U.S. but that experts rate as a high risk, so we can act before it gets here.</p>
+    <details class="more xp" data-autoopen><summary>Show the example card: Puff Adder</summary>
+      <div class="hz-grid">
+        <figure class="hz-card">
+          <div id="hzHost" class="ex-host">
+            <img src="assets/horizon/horizon_template_front.png" alt="Horizon Scanning card template (shown if the example card fails to load)" loading="lazy">
+          </div>
+          <figcaption>Example: Puff Adder &middot; click the card to flip it &middot; gold = foil</figcaption>
+        </figure>
+        <div>
+          <p style="font-size:1.08rem;color:#c9d6e6;margin:0 0 1em">The front rates how likely it is to <strong style="color:#fff">arrive</strong>, to <strong style="color:#fff">settle</strong>, and to do <strong style="color:#fff">harm</strong>, using baseballs. The back shows where in the U.S. it could settle, and how USGS watches for it.</p>
+          <div class="hz-story">
+            <div class="hz-step"><b>Today: a prospect</b><span>Scouted overseas. Gray jersey, no team, number 00. Zero in the U.S. so far.</span></div>
+            <div class="hz-arrow" aria-hidden="true">&rarr;</div>
+            <div class="hz-step"><b>If it establishes: a team</b><span>It earns a numbered jersey and joins the serialized set.</span></div>
+          </div>
+          <details class="more hz-more"><summary>What foil costs</summary>
+            <div class="hz-cost">
+              <span class="tag">Estimate, not a quote</span>
+              <p><strong>One Horizon Scanning card in every pack:</strong> about 10,000 foil cards at Level 1, 50,000 at Level 2, and 100,000 at Level 3.</p>
+              <p><strong>Foil adds roughly $0.03&ndash;$0.12 per foil card</strong> (about $300&ndash;$1.2k / $1.5k&ndash;$6k / $3k&ndash;$12k), plus <strong>$300&ndash;$1.5k</strong> one-time tooling.</p>
+              <p class="fine">Planning assumptions; printers did not publish per-card foil prices at volume. A real quote firms it up. Foil is front only; one die serves every Horizon Scanning card.</p>
+            </div>
+          </details>
         </div>
       </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ SPECIAL TOPICS ============ -->
+<section id="special" class="st">
+  <div class="wrap">
+    <div class="eyebrow">Special Topics cards</div>
+    <h2>Not a species. A tool, a rule, or a story.</h2>
+    <p class="xp-lead">Some of the best science behind invasive species work is not an animal or a plant. It is a robot that samples water, a law that stops a species at the border, or a case that taught us a lesson.</p>
+    <details class="more xp" data-autoopen><summary>Show the example card: READI-Net</summary>
+      <div class="st-grid">
+        <figure class="st-card">
+          <div id="stHost" class="ex-host"></div>
+          <figcaption>Example: READI-Net &middot; click the card to flip it</figcaption>
+        </figure>
+        <div>
+          <p>READI-Net is the USGS team and water-sampling robot that look for tiny bits of DNA (eDNA) so managers can look closer, early. These cards put USGS tools and the people behind them in the same card format.</p>
+          <p class="st-pack"><strong>In the packs:</strong> one Special Topics card could ride along in every pack, or in every other pack, so a two-pack Conference bundle gets one.</p>
+          <details class="more"><summary>Other topics under consideration</summary>
+            <div id="stTopics" class="st-topics"></div>
+            <p class="fine">Topics are ideas under consideration, not a final list. Only READI-Net is built as an example.</p>
+          </details>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ LEVELS OF BUY-IN ============ -->
+<section id="buyin">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Levels of Buy-In</div>
+      <h2>Choose how many packs.</h2>
+      <p>The full set is about 10 pack designs. Pack 1 holds cards 1&ndash;5 plus Horizon Scanning card 1. Pack 2 holds cards 6&ndash;10, Horizon Scanning card 2, and Special Topics card 1, and so on. Every USGS science location gets packs for its tables, classrooms, and visitors.</p>
     </div>
+    <div class="tier-grid">
+      <div class="tier">
+        <div class="tier-tag">Level 1 &middot; Every site</div>
+        <div class="tier-qty">10,000 <span>packs</span></div>
+        <div class="tier-total">1,000 of each pack design &middot; &asymp; 830 per site</div>
+        <div class="tier-cost">~$5,000 &ndash; $10,000</div>
+        <p class="tier-note">Every site has a supply for events, classrooms, and visits.</p>
+      </div>
+      <div class="tier">
+        <div class="tier-tag">Level 2 &middot; A full program year</div>
+        <div class="tier-qty">50,000 <span>packs</span></div>
+        <div class="tier-total">5,000 of each pack design &middot; &asymp; 4,200 per site</div>
+        <div class="tier-cost">~$20,000 &ndash; $36,000</div>
+        <p class="tier-note">A steady supply all year, and packs to trade at events.</p>
+      </div>
+      <div class="tier">
+        <div class="tier-tag">Level 3 &middot; The whole network</div>
+        <div class="tier-qty">100,000 <span>packs</span></div>
+        <div class="tier-total">10,000 of each pack design &middot; &asymp; 8,300 per site</div>
+        <div class="tier-cost">~$33,000 &ndash; $65,000</div>
+        <p class="tier-note">The lowest cost per card, and the level that adds the special mixes below.</p>
+      </div>
+    </div>
+    <div class="mixes">
+      <h3>Level 3 also unlocks special mixes</h3>
+      <ul>
+        <li><strong>Best of the Best:</strong> a curated Flagship pack for HQ and Capitol Hill.</li>
+        <li><strong>Regional mixes:</strong> the invaders in your part of the country, such as Southeast or Great Lakes.</li>
+        <li><strong>State sets:</strong> one state&rsquo;s species, for a visit from that state&rsquo;s delegation.</li>
+        <li><strong>Local Horizon Scanning card:</strong> each regional or state pack gets a Horizon Scanning species rated high risk (4 or 5) for the ecoregions in that area.</li>
+      </ul>
+      <p class="fine" style="margin:6px 0 0">Made from the same 50+ cards. How many of each mix to print would be set with Communications and the printer. Room to add the Cooperative Research Units and Climate Adaptation Centers.</p>
+    </div>
+    <p class="costs-fine" style="margin-bottom:0"><strong>Estimates, not quotes.</strong> A pack is 5 species cards, 1 Horizon Scanning card, and a Special Topics card in about half of the packs (about 6.5 cards per pack). Cost per card runs about $0.05&ndash;$0.15 and falls as quantity rises.</p>
+    <details class="more"><summary>The 12 locations these levels are split across</summary>
+      <ul class="sites">
+        <li>Alaska Science Center</li>
+        <li>Columbia Environmental Research Center</li>
+        <li>Eastern Ecological Science Center (2 locations)</li>
+        <li>Forest and Rangeland Ecosystem Science Center</li>
+        <li>Fort Collins Science Center</li>
+        <li>Great Lakes Science Center</li>
+        <li>Northern Prairie Wildlife Research Center</li>
+        <li>Northern Rocky Mountain Science Center</li>
+        <li>Pacific Island Ecosystems Research Center</li>
+        <li>Southwest Biological Science Center (does invasive species work and is supported by this effort)</li>
+        <li>USGS Headquarters, Reston, Virginia</li>
+      </ul>
+      <p class="fine" style="margin:6px 0 0">Per-site numbers divide the pack total evenly across the 12 locations. Cooperative Research Units and Climate Adaptation Centers are not counted yet.</p>
+    </details>
+    <details class="more"><summary>Sources &amp; fine print</summary>
+    <p class="costs-fine" style="margin-top:0">
+      Planning-level figures for budgeting. Offset-printing setup is spread over more cards at higher volume. Based on published 2026 trade pricing for bulk custom card printing
+      (<a href="https://wjplayingcard.com/game-card-printing-costs/" target="_blank" rel="noopener">wjplayingcard.com</a>,
+      <a href="https://www.mrplayingcard.com/blog/custom-trading-cards-printing-guide" target="_blank" rel="noopener">mrplayingcard.com</a>);
+      figures rephrased and recomputed for this estimate. Actual cost depends on the chosen vendor, finish, foil/specialty cards, packaging, and freight &mdash; a formal quote through USGS procurement / the printer would firm these up. The foil Horizon Scanning cards and specialty packaging add setup minimums and a modest premium; see the <a class="dag" href="#horizon">Horizon Scanning</a> section.
+    </p></details>
+  </div>
+</section>
+
+<!-- ============ THE ASK ============ -->
+<section id="ask" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What We Need From You</div>
+      <h2>Three decisions to move forward.</h2>
+    </div>
+    <div class="ask3">
+      <div class="a3"><b>1</b><h3>A level of buy-in</h3><p>Level 1, 2, or 3: how many packs, and for how many locations.</p></div>
+      <div class="a3"><b>2</b><h3>The pack mix</h3><p>Center, Conference, Flagship, or Regional packs, and whether a Special Topics card rides in every pack or every other pack.</p></div>
+      <div class="a3"><b>3</b><h3>Approval to proceed</h3><p>Communications review of names and partner credits, then a printer quote.</p></div>
+    </div>
+    <p class="costs-fine">The design is done. 21 species cards are built, with a Horizon Scanning example and a Special Topics example.</p>
   </div>
 </section>
 
@@ -810,6 +1004,7 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
 })();
 </script>
 <script src="data/cards.js"></script>
+<script src="data/examples.js"></script>
 <script src="data/card_states.js"></script>
 <script src="data/card_facets.js"></script>
 <script src="app.js"></script>

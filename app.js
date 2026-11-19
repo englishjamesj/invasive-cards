@@ -16,6 +16,9 @@
     heroFan: [8, 19, 14, 9, 6]
   };
 
+  var EX = window.EXAMPLES || { cards: [], topics: [] };
+  var exampleList = EX.cards || [];   // Horizon Scanning + Special Topics example cards (data/examples.js)
+
   var CARDS = (window.CARDS || []).slice().sort(function (a, b) { return a.num - b.num; });
   var byNum = {};
   CARDS.forEach(function (c) { byNum[c.num] = c; });
@@ -83,7 +86,7 @@
       back.innerHTML = '<div style="display:grid;place-items:center;height:100%;color:#888">No back</div>';
     }
 
-    var num = el('div', 'cnum', '#' + c.num);
+    var num = el('div', 'cnum', c.kind ? 'EXAMPLE' : '#' + c.num);
 
     var tools = el('div', 'tools');
     var bFlip = el('button', null, '&#8635;'); bFlip.title = 'Flip'; bFlip.setAttribute('aria-label', 'Flip card');
@@ -104,7 +107,7 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
     });
     bFlip.addEventListener('click', flip);
-    bZoom.addEventListener('click', function (e) { e.stopPropagation(); openLightbox(c.num); });
+    bZoom.addEventListener('click', function (e) { e.stopPropagation(); openLightbox(c.num, c.kind ? exampleList : null); });
 
     // cursor tilt (skipped when reduced-motion)
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -165,26 +168,28 @@
   var lbBack = document.getElementById('lbBack');
   var lbCap = document.getElementById('lbCap');
   var lbIndex = 0;
+  var lbList = currentList;   // the list the lightbox steps through (gallery or example cards)
 
-  function openLightbox(num) {
-    lbIndex = currentList.findIndex(function (c) { return c.num === num; });
+  function openLightbox(num, list) {
+    lbList = list || currentList;
+    lbIndex = lbList.findIndex(function (c) { return c.num === num; });
     if (lbIndex < 0) lbIndex = 0;
     showLightbox();
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
   function showLightbox() {
-    var c = currentList[lbIndex];
+    var c = lbList[lbIndex];
     if (!c) return;
     lbInner.classList.remove('flipped');
     lbFront.src = c.frontZoom || c.front;
     lbFront.alt = common(c) + ' front';
     if (c.backZoom || c.back) { lbBack.src = c.backZoom || c.back; lbBack.alt = common(c) + ' back'; }
-    lbCap.textContent = '#' + c.num + '  ' + common(c);
+    lbCap.textContent = (c.kind ? c.num : '#' + c.num) + '  ' + common(c);
   }
   function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow = ''; }
   function step(d) {
-    lbIndex = (lbIndex + d + currentList.length) % currentList.length;
+    lbIndex = (lbIndex + d + lbList.length) % lbList.length;
     showLightbox();
   }
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
@@ -615,7 +620,40 @@
     render();
   }
 
+  // ---- EXAMPLE CARDS: Horizon Scanning + Special Topics -------------
+  function renderExamples() {
+    var hosts = { horizon: document.getElementById('hzHost'), special: document.getElementById('stHost') };
+    exampleList.forEach(function (c) {
+      var host = hosts[c.kind];
+      if (host) { host.innerHTML = ''; host.appendChild(cardNode(c)); }
+    });
+    var tl = document.getElementById('stTopics');
+    if (tl && EX.topics && EX.topics.length) {
+      var groups = {}, order = [];
+      EX.topics.forEach(function (t) {
+        if (t.key === 'readinet') return;   // shown as the example card above
+        if (!groups[t.group]) { groups[t.group] = []; order.push(t.group); }
+        groups[t.group].push(t);
+      });
+      tl.innerHTML = order.map(function (g) {
+        return '<div class="st-group"><h4>' + esc(g) + '</h4><ul>' + groups[g].map(function (t) {
+          return '<li><b>' + esc(t.title) + '</b><span>' + esc(t.line) + '</span></li>';
+        }).join('') + '</ul></div>';
+      }).join('');
+    }
+  }
+
+  // Open an expandable example card when a link (nav, dagger, tile) points at its section.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a || a.getAttribute('href').length < 2) return;
+    var t = document.querySelector(a.getAttribute('href'));
+    var d = t && t.querySelector('details[data-autoopen]');
+    if (d) d.open = true;
+  });
+
   // ---- INIT ----------------------------------------------------------
+  renderExamples();
   buildFan();
   renderGrid(CARDS);
   wireControls();
