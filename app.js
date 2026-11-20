@@ -107,7 +107,7 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
     });
     bFlip.addEventListener('click', flip);
-    bZoom.addEventListener('click', function (e) { e.stopPropagation(); openLightbox(c.num, c.kind ? exampleList : null); });
+    bZoom.addEventListener('click', function (e) { e.stopPropagation(); openLightbox(c.num, c.kind ? exampleList : null, card.classList.contains('flipped')); });
 
     // cursor tilt (skipped when reduced-motion)
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -170,7 +170,9 @@
   var lbIndex = 0;
   var lbList = currentList;   // the list the lightbox steps through (gallery or example cards)
 
-  function openLightbox(num, list) {
+  var lbFlipFirst = false;   // open on the back when the card on the page was showing its back
+  function openLightbox(num, list, showBack) {
+    lbFlipFirst = !!showBack;
     lbList = list || currentList;
     lbIndex = lbList.findIndex(function (c) { return c.num === num; });
     if (lbIndex < 0) lbIndex = 0;
@@ -181,7 +183,8 @@
   function showLightbox() {
     var c = lbList[lbIndex];
     if (!c) return;
-    lbInner.classList.remove('flipped');
+    lbInner.classList.toggle('flipped', lbFlipFirst);
+    lbFlipFirst = false;
     lbFront.src = c.frontZoom || c.front;
     lbFront.alt = common(c) + ' front';
     if (c.backZoom || c.back) { lbBack.src = c.backZoom || c.back; lbBack.alt = common(c) + ' back'; }
