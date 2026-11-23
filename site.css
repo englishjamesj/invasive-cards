@@ -480,7 +480,12 @@ details.fold>summary:focus-visible{outline:3px solid var(--accent);outline-offse
 .card .cnum{font-size:.8rem}
 
 /* ---- lightbox fits short screens ---- */
-.lb-stage{max-width:min(92vw,560px,calc((100vh - 170px)*.714));max-width:min(92vw,560px,calc((100dvh - 170px)*.714))}
+/* Enlarged card: as big as the window allows (up to 720 px wide). Prev/Next sit at the sides so they never cover the card. */
+.lb-stage{margin:0;padding:0;max-width:min(92vw,720px,calc((100vh - 36px)*.714));max-width:min(92vw,720px,calc((100dvh - 36px)*.714))}
+.lb-bar{position:fixed}
+.lb-nav{position:fixed;left:0;right:0;top:0;bottom:0;transform:none;align-items:center;justify-content:space-between;padding:0 16px;pointer-events:none}
+.lb-nav button{pointer-events:auto}
+.lb-nav .cap{position:fixed;top:24px;left:24px;min-width:0;text-align:left;pointer-events:none}
 
 /* ---- touch devices: no hover, so show the Enlarge button; tapping the card flips it ---- */
 @media (hover:none){
@@ -535,6 +540,9 @@ details.fold>summary:focus-visible{outline:3px solid var(--accent);outline-offse
   .use{padding:10px 14px;font-size:.98rem}
   .nextband{padding:44px 0}
   .lb{padding:12px}
+  .lb-stage{max-width:min(92vw,calc((100dvh - 150px)*.714))}
+  .lb-nav{top:auto;bottom:10px;height:auto;align-items:center;justify-content:center;padding:0}
+  .lb-nav .cap{position:static;text-align:center;pointer-events:auto}
   .lb-bar{top:10px;right:12px}
   .lb-nav{bottom:10px;gap:6px}
   .lb-nav .cap{min-width:0;font-size:.82rem;max-width:36vw}
