@@ -4,415 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>USGS Invasive Species Trading Cards &mdash; Portfolio</title>
-<meta name="description" content="A pitch portfolio: collectible trading cards that turn USGS invasive-species science into something the public instantly roots for.">
+<meta name="description" content="Collectible trading cards that make USGS invasive-species science easy to see, so people learn the dangers of invasive species and see USGS on the job.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-/* ============================================================
-   USGS Invasive Species Trading Cards - Pitch Portfolio
-   Single-file, dependency-free (fonts are progressive-enhance).
-   Works on GitHub Pages AND locally / offline from a folder.
-   ============================================================ */
-:root{
-  --ink:#0f1a2b;            /* near-black navy text            */
-  --ink-soft:#44525f;       /* secondary text                 */
-  --paper:#f4f1ea;          /* warm card-stock background      */
-  --paper-2:#ece7dc;        /* slightly deeper panel           */
-  --usgs:#0a2342;           /* deep USGS navy                  */
-  --usgs-2:#13467a;         /* mid navy                        */
-  --field:#2f6b3d;          /* ballfield green                 */
-  --accent:#c6a04a;         /* brass/gold                      */
-  --danger:#9c2b2b;         /* threat red (used sparingly)     */
-  --line:rgba(15,26,43,.14);
-  --shadow:0 18px 40px -18px rgba(10,35,66,.55);
-  --shadow-lg:0 40px 90px -30px rgba(10,35,66,.7);
-  --radius:14px;
-  --maxw:1180px;
-  --fs:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-  --fd:'Oswald',var(--fs);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;color:var(--ink);background:var(--paper);
-  font-family:var(--fs);font-size:17px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:var(--usgs-2)}
-h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.1;letter-spacing:.01em;color:var(--usgs)}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-.eyebrow{font-family:var(--fd);text-transform:uppercase;letter-spacing:.18em;font-size:.8rem;color:var(--accent);font-weight:600}
-
-/* ---- top bar ---- */
-.topbar{position:sticky;top:0;z-index:40;background:rgba(244,241,234,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.topbar .wrap{display:flex;align-items:center;gap:18px;height:60px}
-.brand{font-family:var(--fd);font-weight:700;color:var(--usgs);text-decoration:none;font-size:1.05rem;letter-spacing:.02em;white-space:nowrap}
-.brand b{color:var(--accent)}
-.nav{margin-left:auto;display:flex;gap:2px;flex-wrap:wrap}
-.nav a{font-family:var(--fd);text-transform:uppercase;letter-spacing:.05em;font-size:.78rem;color:var(--ink-soft);text-decoration:none;padding:8px 9px;white-space:nowrap;border-radius:8px}
-.nav a:hover{color:var(--usgs);background:var(--paper-2)}
-.nav a.on{color:var(--usgs);background:#fff;box-shadow:inset 0 0 0 1.5px var(--accent)}
-
-/* ---- hero ---- */
-.hero{position:relative;overflow:hidden;background:
-  radial-gradient(1100px 500px at 78% -10%, rgba(19,70,122,.22), transparent 60%),
-  linear-gradient(160deg,#0a2342 0%,#0c2b52 48%,#123f2a 140%);
-  color:#fff}
-.hero .wrap{position:relative;z-index:2;padding:66px 24px 72px;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
-.hero h1{color:#fff;font-size:clamp(2.1rem,4.6vw,3.6rem);margin:.3em 0 .35em}
-.hero h1 .hl{color:var(--accent)}
-.hero p.lede{font-size:1.2rem;color:#dbe6f2;max-width:42ch;margin:0 0 1.5em}
-.hero .eyebrow{color:#9fd3a6}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap}
-.btn{font-family:var(--fd);text-transform:uppercase;letter-spacing:.07em;font-weight:600;font-size:.92rem;
-  border:0;cursor:pointer;padding:14px 22px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:transform .12s ease, box-shadow .2s ease}
-.btn:active{transform:translateY(1px)}
-.btn-gold{background:var(--accent);color:#2a2008;box-shadow:0 12px 24px -12px rgba(198,160,74,.8)}
-.btn-gold:hover{box-shadow:0 16px 30px -12px rgba(198,160,74,.9)}
-.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.28)}
-.btn-ghost:hover{background:rgba(255,255,255,.16)}
-.hero-stage{position:relative;height:420px}
-/* fanned hero cards */
-.fan{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.fan .fcard{position:absolute;width:210px;border-radius:10px;box-shadow:var(--shadow-lg);
-  transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-origin:bottom center;border:3px solid rgba(255,255,255,.9)}
-.fan .fcard:nth-child(1){transform:rotate(-15deg) translate(-150px,14px) scale(.92)}
-.fan .fcard:nth-child(2){transform:rotate(-6deg) translate(-74px,-4px) scale(.97)}
-.fan .fcard:nth-child(3){transform:rotate(2deg) translate(6px,-12px) scale(1.02);z-index:3}
-.fan .fcard:nth-child(4){transform:rotate(10deg) translate(84px,0) scale(.97)}
-.fan .fcard:nth-child(5){transform:rotate(18deg) translate(158px,18px) scale(.9)}
-.hero-stage:hover .fan .fcard:nth-child(1){transform:rotate(-20deg) translate(-178px,10px) scale(.92)}
-.hero-stage:hover .fan .fcard:nth-child(5){transform:rotate(23deg) translate(186px,14px) scale(.9)}
-
-/* ---- section scaffolding ---- */
-section{padding:62px 0}
-section.alt{background:var(--paper-2)}
-.sec-head{max-width:62ch;margin-bottom:34px}
-.sec-head h2{font-size:clamp(1.6rem,3vw,2.3rem);margin:.1em 0 .35em}
-.sec-head p{color:var(--ink-soft);margin:0;font-size:1.08rem}
-
-/* ---- thesis / pitch cards ---- */
-.pitch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.pc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6)}
-.pc .ic{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--usgs);color:#fff;font-family:var(--fd);font-size:1.3rem;margin-bottom:14px}
-.pc h3{margin:.1em 0 .4em;font-size:1.22rem}
-.pc p{margin:0;color:var(--ink-soft);font-size:1rem}
-
-/* ---- cost tiers ---- */
-.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.tier{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6);display:flex;flex-direction:column}
-.tier-tag{font-family:var(--fd);text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;color:var(--accent);font-weight:700}
-.tier-qty{font-family:var(--fd);font-size:1.7rem;color:var(--usgs);line-height:1.1;margin-top:6px}
-.tier-qty span{font-family:var(--fs);font-size:.92rem;color:var(--ink-soft);font-weight:400}
-.tier-total{color:var(--ink-soft);font-size:.95rem;margin:2px 0 14px}
-.tier-cost{font-family:var(--fd);font-size:1.55rem;color:var(--field);font-weight:700;letter-spacing:.01em}
-.tier-note{color:var(--ink-soft);font-size:.95rem;margin:12px 0 0}
-.costs-fine{max-width:80ch;margin:28px auto 0;color:var(--ink-soft);font-size:.86rem;line-height:1.55}
-
-/* ---- packaging grid ---- */
-.pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.pack{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6)}
-.pack-ic{font-size:1.7rem;line-height:1;margin-bottom:10px}
-.pack h3{margin:.1em 0 .4em;font-size:1.12rem;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.pack h3 .pack-spec{font-family:var(--fs);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#2a2008;background:var(--accent);border-radius:999px;padding:2px 9px}
-.pack p{margin:0;color:var(--ink-soft);font-size:.97rem}
-.pack p.flag-note{margin-top:10px;font-size:.8rem;font-style:italic}
-
-/* ---- example packs ---- */
-.ex-title{margin:44px 0 4px;font-size:1.3rem;color:var(--usgs)}
-.ex-sub{max-width:80ch;margin:0 0 24px;color:var(--ink-soft);font-size:.95rem}
-.ex-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.ex-pack{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px -22px rgba(10,35,66,.6);display:flex;flex-direction:column}
-.ex-head{font-family:var(--fd);font-weight:700;letter-spacing:.02em;color:#fff;background:var(--usgs);padding:12px 16px;font-size:1.02rem}
-.ex-head.reg{background:var(--field)}
-.ex-pack.flag{border-color:var(--accent);box-shadow:0 16px 40px -24px rgba(198,160,74,.7)}
-.ex-pack.flag .ex-head{background:linear-gradient(135deg,#8a6d1f,#c6a04a)}
-.ex-pack ul{list-style:none;margin:0;padding:12px 16px;flex:1}
-.ex-pack li{display:grid;grid-template-columns:34px 1fr;column-gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);line-height:1.2}
-.ex-pack li:last-child{border-bottom:0}
-.ex-pack li img{grid-row:1 / span 2;width:34px;aspect-ratio:1000/1400;object-fit:cover;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
-.ex-pack li .nm{font-weight:600;color:var(--ink);font-size:.92rem}
-.ex-pack li span{font-weight:400;font-size:.78rem;color:var(--ink-soft)}
-.ex-pack li .nm{grid-column:2}
-.ex-pack li span:not(.nm){grid-column:2}
-.ex-pack li.horizon{grid-template-columns:1fr}
-.ex-pack li.horizon .nm{grid-column:1;color:#8a6d1f}
-.ex-pack li.horizon span:not(.nm){grid-column:1}
-.ex-note{margin:0;padding:10px 16px 14px;font-size:.82rem;color:var(--ink-soft);font-style:italic}
-.region-note{margin:28px auto 0;max-width:80ch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:22px 24px}
-.region-note h4{font-family:var(--fd);color:var(--usgs);margin:0 0 8px;font-size:1.08rem}
-.region-note p{margin:0 0 10px;color:var(--ink-soft);font-size:.95rem}
-.region-note ul{margin:0 0 10px;padding-left:20px;color:var(--ink-soft);font-size:.95rem}
-.region-note li{margin-bottom:6px}
-.region-note li strong{color:var(--ink)}
-.region-fine{font-size:.85rem;font-style:italic;margin-bottom:0!important}
-
-/* ---- idea demo (one card front+back up top) ---- */
-.idea-demo{display:grid;grid-template-columns:1fr 1.05fr;gap:34px;align-items:center;margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 14px 40px -26px rgba(10,35,66,.6);padding:28px 30px}
-.idea-demo-copy h3{font-size:1.5rem;margin:0 0 .4em}
-.idea-demo-copy p{color:var(--ink-soft);margin:0 0 1.2em}
-.idea-demo-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.idea-demo-cards figure{margin:0;text-align:center}
-.idea-demo-cards img{width:100%;border-radius:10px;box-shadow:var(--shadow);border:2px solid rgba(255,255,255,.9)}
-.idea-demo-cards figcaption{font-family:var(--fd);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--ink-soft);margin-top:8px}
-
-/* ---- use-case chips ---- */
-.uses{display:flex;flex-wrap:wrap;gap:12px}
-.use{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-weight:600;color:var(--usgs);display:flex;align-items:center;gap:9px}
-.use span{font-size:1.15rem}
-
-/* ---- gallery controls ---- */
-.g-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:26px}
-.search{flex:1;min-width:200px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
-.search input{border:0;outline:0;font-size:1rem;width:100%;font-family:var(--fs);background:transparent}
-.toggle{display:flex;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.toggle button{border:0;background:transparent;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;padding:10px 16px;cursor:pointer;color:var(--ink-soft)}
-.toggle button.on{background:var(--usgs);color:#fff}
-
-/* ---- gallery grid ---- */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:30px}
-.grid.wall{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-
-/* ---- the card (flip) ---- */
-.card{perspective:1400px;cursor:pointer}
-.card .inner{position:relative;width:100%;aspect-ratio:1000/1400;transition:transform .7s cubic-bezier(.2,.75,.2,1);transform-style:preserve-3d}
-.card.flipped .inner{transform:rotateY(180deg)}
-.card.flipped .cnum,.card .cnum:empty{display:none}
-.card .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;overflow:hidden;
-  box-shadow:var(--shadow);background:#ddd;border:1px solid rgba(255,255,255,.6)}
-.card .face img{width:100%;height:100%;object-fit:cover}
-.card .back{transform:rotateY(180deg)}
-.card .cnum{position:absolute;top:8px;right:8px;z-index:3;background:rgba(10,35,66,.86);color:#fff;font-family:var(--fd);font-size:.72rem;letter-spacing:.05em;padding:3px 8px;border-radius:999px}
-.card .tools{position:absolute;bottom:8px;right:8px;z-index:3;display:flex;gap:6px;opacity:0;transition:opacity .2s}
-.card:hover .tools,.card:focus-within .tools{opacity:1}
-.card .tools button{border:0;cursor:pointer;width:34px;height:34px;border-radius:8px;background:rgba(10,35,66,.86);color:#fff;font-size:1rem;display:grid;place-items:center}
-.card .tools button:hover{background:var(--usgs-2)}
-.card .label{margin-top:10px;text-align:center}
-.card .label .nm{font-family:var(--fd);font-weight:600;color:var(--usgs);font-size:1.02rem;line-height:1.1}
-.card .label .sc{font-style:italic;color:var(--ink-soft);font-size:.86rem}
-.wall .card .label{display:none}
-.wall .card .tools{display:none}
-
-/* subtle cursor-tilt handled in JS via CSS vars */
-.card .inner{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
-.card.flipped .inner{transform:rotateY(180deg)}
-.card.flipped .cnum,.card .cnum:empty{display:none}
-
-/* ---- lightbox ---- */
-.lb{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;
-  background:rgba(6,14,26,.86);backdrop-filter:blur(4px);padding:28px}
-.lb.open{display:flex}
-.lb-stage{perspective:1800px;max-width:min(92vw,560px);width:100%}
-.lb-inner{position:relative;width:100%;aspect-ratio:1000/1400;transition:transform .7s cubic-bezier(.2,.75,.2,1);transform-style:preserve-3d}
-.lb-inner.flipped{transform:rotateY(180deg)}
-.lb-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg)}
-.lb-face img{width:100%;height:100%;object-fit:contain;background:#0a1626}
-.lb-back{transform:rotateY(180deg)}
-.lb-bar{position:absolute;top:18px;right:22px;display:flex;gap:10px;z-index:3}
-.lb-bar button,.lb-nav button{font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.82rem;
-  border:0;cursor:pointer;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
-  padding:10px 16px;border-radius:9px}
-.lb-bar button:hover,.lb-nav button:hover{background:rgba(255,255,255,.26)}
-.lb-nav{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;z-index:3}
-.lb-nav .cap{color:#dbe6f2;font-family:var(--fd);letter-spacing:.04em;min-width:170px;text-align:center}
-.lb-feedback{position:absolute;bottom:18px;right:22px;z-index:3}
-
-/* ---- feedback / review section ---- */
-.review{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
-.review .note{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
-.review h3{margin-top:0}
-.sci-edit{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-.sci-pick{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font-family:var(--fs);font-size:1rem;margin-bottom:16px}
-.field{margin-bottom:14px}
-.field label{display:block;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.76rem;color:var(--usgs);margin-bottom:5px}
-.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-family:var(--fs);font-size:.98rem;line-height:1.5;resize:vertical;min-height:62px}
-.field .orig{font-size:.82rem;color:var(--ink-soft);margin-top:4px;display:none}
-.field.changed textarea{border-color:var(--accent);background:#fffdf6}
-.field.changed .orig{display:block}
-
-/* ---- footer ---- */
-footer{background:var(--usgs);color:#cdd9e8;padding:40px 0;font-size:.95rem}
-footer a{color:#fff}
-footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-
-.pill-note{display:inline-block;background:#fff6dd;border:1px solid var(--accent);color:#6b531a;padding:4px 12px;border-radius:999px;font-size:.82rem;font-weight:600}
-
-/* ---- sort by state (slicer) ---- */
-.slicer-lead{max-width:82ch;margin:0 0 22px;color:var(--ink-soft);font-size:1.02rem}
-.slicer-lead strong{color:var(--ink)}
-.clarify{margin:0 0 26px;max-width:84ch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 20px;color:var(--ink-soft);font-size:.96rem;line-height:1.55}
-.clarify b{color:var(--ink)}
-.slicer-controls{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6);margin-bottom:26px}
-.sc-row{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:flex-end}
-.sc-field{display:flex;flex-direction:column;gap:6px}
-.sc-field label{font-family:var(--fd);text-transform:uppercase;letter-spacing:.07em;font-size:.72rem;color:var(--usgs);font-weight:600}
-.sc-field select{padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-family:var(--fs);font-size:.98rem;background:#fff;min-width:168px}
-.sc-field.grow{flex:1;min-width:200px}
-.seg{display:inline-flex;background:var(--paper-2);border:1px solid var(--line);border-radius:9px;overflow:hidden}
-.seg button{border:0;background:transparent;font-family:var(--fd);text-transform:uppercase;letter-spacing:.05em;font-size:.74rem;padding:9px 14px;cursor:pointer;color:var(--ink-soft)}
-.seg button.on{background:var(--usgs);color:#fff}
-.sc-help{margin:12px 0 0;font-size:.84rem;color:var(--ink-soft);line-height:1.5}
-.sc-reset{background:transparent;border:1px solid var(--line);color:var(--ink-soft);font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.74rem;padding:9px 14px;border-radius:9px;cursor:pointer}
-.sc-reset:hover{background:var(--paper-2);color:var(--usgs)}
-.slicer-summary{font-family:var(--fd);color:var(--usgs);font-size:1.12rem;margin:0 0 6px}
-.slicer-summary .cnt{color:var(--field)}
-.state-blurb{color:var(--ink-soft);font-size:.95rem;margin:0 0 22px;max-width:84ch}
-.bucket{margin:0 0 30px}
-.bucket-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:7px;margin-bottom:16px}
-.bucket-head h3{margin:0;font-size:1.22rem;display:flex;align-items:center;gap:9px}
-.bucket-head .dot{width:13px;height:13px;border-radius:3px;display:inline-block;flex:none}
-.bucket-head .b-count{font-family:var(--fd);color:#fff;font-size:.74rem;letter-spacing:.04em;padding:2px 9px;border-radius:999px;background:var(--ink-soft)}
-.bucket-head .b-sub{color:var(--ink-soft);font-size:.9rem;font-style:italic}
-.dot-present{background:var(--danger)}
-.dot-native{background:var(--field)}
-.dot-ondeck{background:var(--accent)}
-.bucket.b-present .b-count{background:var(--danger)}
-.bucket.b-native .b-count{background:var(--field)}
-.bucket.b-ondeck .b-count{background:#a07d1e}
-.mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:16px}
-.mini{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 8px 22px -18px rgba(10,35,66,.6);cursor:pointer;display:flex;flex-direction:column;transition:transform .14s ease,box-shadow .2s ease}
-.mini:hover,.mini:focus-visible{transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(10,35,66,.65);outline:none}
-.mini .thumb{position:relative;aspect-ratio:1000/1400;background:#dfe3ea}
-.mini .thumb img{width:100%;height:100%;object-fit:cover}
-.mini .mnum{position:absolute;top:6px;left:6px;background:rgba(10,35,66,.86);color:#fff;font-family:var(--fd);font-size:.66rem;letter-spacing:.04em;padding:2px 7px;border-radius:999px}
-.mini .flag{position:absolute;top:6px;right:6px;font-family:var(--fd);font-size:.6rem;letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:999px;color:#fff}
-.flag-wide{background:rgba(44,82,59,.92)}
-.flag-yr{background:rgba(156,43,43,.92)}
-.mini .mcap{padding:8px 9px 10px}
-.mini .mcap .nm{font-family:var(--fd);font-weight:600;color:var(--usgs);font-size:.9rem;line-height:1.12}
-.mini .mcap .sc{font-style:italic;color:var(--ink-soft);font-size:.76rem;margin-top:1px}
-.bucket-empty{color:var(--ink-soft);font-style:italic;font-size:.95rem;padding:2px 0 4px}
-.wide-note{margin:18px 0 0;background:var(--paper-2);border:1px dashed var(--line);border-radius:10px;padding:12px 16px;color:var(--ink-soft);font-size:.86rem;line-height:1.5}
-.wide-note b{color:var(--ink)}
-.pitch-foot{margin:30px auto 0;max-width:84ch;background:#fff;border:1px solid var(--line);border-left:4px solid var(--field);border-radius:12px;padding:18px 22px;color:var(--ink-soft);font-size:.95rem;line-height:1.55}
-.pitch-foot h4{font-family:var(--fd);color:var(--usgs);margin:0 0 7px;font-size:1.06rem}
-.pitch-foot b{color:var(--ink)}
-.slicer-none{color:var(--ink-soft);font-size:1rem;background:#fff;border:1px dashed var(--line);border-radius:12px;padding:22px}
-
-/* ---- big-number callouts + "more detail" fold-outs (tightening pass) ---- */
-.bignum{font-family:var(--fd);font-weight:700;color:var(--usgs);font-size:clamp(2.6rem,6vw,4.2rem);line-height:1;letter-spacing:.01em}
-.bignum small{display:block;font-family:var(--fs);font-weight:600;font-size:.95rem;letter-spacing:0;color:var(--ink-soft);margin-top:6px}
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:0 0 34px}
-.stat-row>div{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6)}
-.more{margin:26px auto 0;max-width:84ch}
-.more>summary{cursor:pointer;font-family:var(--fd);text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;color:var(--usgs-2);font-weight:600;padding:6px 0}
-.more[open]>summary{margin-bottom:10px}
-.more .region-note{margin-top:8px}
-sup.dag a,a.dag{color:#8a6d1f;text-decoration:none;font-weight:700}
-sup.dag a:hover,a.dag:hover{text-decoration:underline}
-
-/* ---- Horizon Scanning ---- */
-.hz{background:linear-gradient(160deg,#0a2342 0%,#0c2b52 60%,#14304a 100%);color:#e8eef6}
-.hz h2,.hz h3{color:#fff}
-.hz .eyebrow{color:var(--accent)}
-.hz .sec-head p{color:#c9d6e6}
-.hz-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center}
-.hz-card{margin:0;text-align:center}
-.hz-card img{width:100%;max-width:340px;margin:0 auto;border-radius:12px;box-shadow:var(--shadow-lg)}
-.hz-card figcaption{font-family:var(--fd);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:#9fb3cc;margin-top:12px}
-.hz-story{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch;margin:0 0 26px}
-.hz-step{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:16px 18px}
-.hz-step b{display:block;font-family:var(--fd);font-size:1.25rem;color:var(--accent);letter-spacing:.02em;margin-bottom:4px}
-.hz-step span{font-size:.97rem;color:#dbe6f2}
-.hz-arrow{align-self:center;font-size:1.8rem;color:var(--accent)}
-.hz-cost{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-left:4px solid var(--accent);border-radius:12px;padding:18px 20px}
-.hz-cost .tag{display:inline-block;background:#fff6dd;color:#6b531a;border-radius:999px;font-size:.72rem;font-weight:700;padding:2px 10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
-.hz-cost p{margin:0 0 6px;color:#dbe6f2;font-size:.97rem}
-.hz-cost p.fine{font-size:.82rem;color:#9fb3cc;margin:8px 0 0}
-.hz-cost strong{color:#fff}
-
-/* ---- example cards (Horizon Scanning + Special Topics) ---- */
-.ex-host{width:100%;max-width:340px;margin:0 auto}
-.ex-host>img{width:100%;border-radius:12px;box-shadow:var(--shadow-lg)}
-.ex-host .card .label{display:none}
-.hz-card figcaption,.st-card figcaption{margin-top:12px}
-.st{background:#eef3f8}
-.st-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:start}
-.st-card{margin:0;text-align:center}
-.st-card figcaption{font-family:var(--fd);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--ink-soft)}
-.st-lead{font-size:1.1rem;margin:.4em 0 1em}
-.st-topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:12px 0}
-.st-group{background:#fff;border:1px solid #d5dee8;border-radius:12px;padding:12px 16px}
-.st-group h4{margin:0 0 6px;font-family:var(--fd);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;color:var(--usgs)}
-.st-group ul{list-style:none;margin:0;padding:0}
-.st-group li{padding:5px 0;border-top:1px solid #edf1f5;font-size:.92rem}
-.st-group li:first-child{border-top:0}
-.st-group li b{display:block;font-family:var(--fd);color:var(--ink);font-size:.9rem}
-.st-group li span{color:var(--ink-soft)}
-.st .fine{font-size:.82rem;color:var(--ink-soft)}
-/* ---- 2026-11-19 restructure ---- */
-.role3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch;margin:6px 0 26px}
-.r3{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:0 10px 30px -22px rgba(10,35,66,.6)}
-.r3 b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--usgs);color:#fff;font-family:var(--fd);margin-bottom:8px}
-.r3 h3{margin:0 0 4px;font-size:1.08rem}
-.r3 p{margin:0;color:var(--ink-soft);font-size:.95rem}
-.r3-arrow{align-self:center;font-size:1.8rem;color:var(--accent)}
-.backs-demo{display:grid;grid-template-columns:.6fr 1.4fr;gap:36px;align-items:center;margin:0 0 22px}
-.bd-card{margin:0;text-align:center}
-.bd-card img{width:100%;max-width:320px;border-radius:12px;box-shadow:var(--shadow-lg)}
-.bd-card figcaption{font-family:var(--fd);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--ink-soft);margin-top:10px}
-.bd-example{font-size:1.05rem;border-left:4px solid var(--accent);padding:4px 0 4px 14px}
-.bd-boxes{margin:12px 0 0;padding-left:22px}
-.bd-boxes li{margin:6px 0}
-.bd-boxes b{font-family:var(--fd);color:var(--usgs);margin-right:6px}
-.kinds3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.k3{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;color:inherit;text-decoration:none}
-.k3 h3{margin:0 0 4px;font-size:1.1rem;color:var(--usgs)}
-.k3 p{margin:0;color:var(--ink-soft);font-size:.95rem}
-.k3a:hover{box-shadow:0 0 0 2px var(--accent)}
-.hz-more summary{color:#fff}
-.hz-more{background:transparent}
-.st-pack{background:#fff;border:1px solid #d5dee8;border-radius:12px;padding:10px 14px;font-size:.95rem}
-.sites{columns:2;margin:10px 0 0;padding-left:20px}
-.sites li{margin:4px 0;break-inside:avoid}
-.ask3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:14px}
-.a3{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
-.a3 b{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#1a1a1a;font-family:var(--fd);margin-bottom:8px}
-.a3 h3{margin:0 0 4px}
-.a3 p{margin:0;color:var(--ink-soft)}
-@media (max-width:860px){.role3,.kinds3,.ask3{grid-template-columns:1fr}.r3-arrow{display:none}.backs-demo{grid-template-columns:1fr}.sites{columns:1}}
-.role4{grid-template-columns:1fr auto 1fr auto 1fr auto 1fr}
-.more.xp{margin:6px 0 0;max-width:none}
-.hz-more,.st .more,.hz .hz-more{max-width:none;margin-left:0}
-.xp-lead{font-size:1.1rem;max-width:70ch;margin:.4em 0 1em}
-.hz .xp-lead{color:#c9d6e6}
-.hz .xp-lead strong{color:#fff}
-.xp>summary{display:inline-block;font-size:.9rem;padding:10px 18px;border-radius:999px;background:var(--accent);color:#1a1a1a}
-.xp[open]>summary{margin-bottom:22px}
-.hz .xp>summary::marker,.st .xp>summary::marker{color:#1a1a1a}
-.mixes{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:16px 22px;margin:22px 0 6px}
-.mixes h3{margin:0 0 6px;font-size:1.1rem}
-.mixes ul{margin:0;padding-left:20px}
-.mixes li{margin:4px 0}
-@media (max-width:860px){.role4{grid-template-columns:1fr}}
-/* ---- responsive ---- */
-@media (max-width:860px){
-  .stat-row{grid-template-columns:1fr}
-  .hz-grid{grid-template-columns:1fr;gap:26px}
-  .hz-story{grid-template-columns:1fr}
-  .hz-arrow{transform:rotate(90deg);justify-self:center}
-  .hero .wrap{grid-template-columns:1fr;gap:10px}
-  .hero-stage{height:320px;order:-1}
-  .pitch-grid{grid-template-columns:1fr}
-  .idea-demo{grid-template-columns:1fr;gap:22px}
-  .review{grid-template-columns:1fr}
-  .tier-grid{grid-template-columns:1fr}
-  .pack-grid{grid-template-columns:1fr}
-  .ex-grid{grid-template-columns:1fr}
-  .sc-row{flex-direction:column;align-items:stretch}
-  .sc-field select{min-width:0;width:100%}
-}
-@media (max-width:1100px) and (min-width:861px){
-  .pack-grid{grid-template-columns:repeat(2,1fr)}
-  .ex-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media (prefers-reduced-motion:reduce){
-  *{transition:none!important;scroll-behavior:auto!important}
-  .card .inner,.lb-inner{transition:none!important}
-}
-</style>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 
@@ -421,16 +17,11 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
   <div class="wrap">
     <a class="brand" href="#top">USGS <b>Invaders</b> &mdash; Trading Card Series</a>
     <nav class="nav">
-      <a href="#pitch">Idea</a>
       <a href="#gallery">Cards</a>
       <a href="#backs">Backs</a>
+      <a href="#beyond">More card types</a>
       <a href="#uses">Uses</a>
-      <a href="#packaging">Packs</a>
-      <a href="#slicer">By State</a>
-      <a href="#horizon">Horizon Scanning</a>
-      <a href="#special">Special Topics</a>
-      <a href="#buyin">Buy-In</a>
-      <a href="#review">Feedback</a>
+      <a class="nav-cta" href="details.html">Packs &amp; costs &rarr;</a>
     </nav>
   </div>
 </header>
@@ -443,56 +34,34 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
     <div class="hero-copy">
       <div class="eyebrow">A USGS Public-Engagement Concept</div>
       <h1>Meet the invaders.<br><span class="hl">Root for the home team.</span></h1>
-      <p class="lede">Trading cards that cast invasive species as the opposing team and USGS scientists as the home team. Real science, understood at a glance.</p>
+      <p class="lede">USGS develops the science that the Department of the Interior and its partners use to stop invasive species. These cards make that work easy to see. Kids and adults learn the dangers of invasives and get excited that USGS is on the job.</p>
       <div class="cta-row">
         <a class="btn btn-gold" href="#gallery">See the cards &rarr;</a>
-        <a class="btn btn-ghost" href="#pitch">Why it works</a>
+        <a class="btn btn-ghost" href="details.html">Packs &amp; costs</a>
       </div>
     </div>
     <div class="hero-stage"><div class="fan" id="fan"></div></div>
   </div>
 </section>
 
-<!-- ============ THE IDEA / THESIS ============ -->
-<section id="pitch">
+<!-- ============ PROOF STRIP ============ -->
+<div class="proof">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">The Idea</div>
-      <h2>An abstract threat becomes a rival you can see.</h2>
-      <p>Each card is a real invader dressed as a visiting player. Across the diamond: USGS scientists, the people who find, study, and fight it. Anyone gets it in three seconds, and wants the set.</p>
-    </div>
     <div class="stat-row">
       <div><div class="bignum">21<small>cards built, on the way to 50+</small></div></div>
       <div><div class="bignum">3<small>kinds of cards: species, Horizon Scanning, Special Topics</small></div></div>
       <div><div class="bignum">5<small>boxes of real USGS science on the back of every card</small></div></div>
     </div>
-    <div class="pitch-grid">
-      <div class="pc"><div class="ic">1</div><h3>Instantly understood</h3><p>Threat vs. the team that beats it. A 9-year-old and a Deputy Director read it the same way.</p></div>
-      <div class="pc"><div class="ic">2</div><h3>Built to be wanted</h3><p>&ldquo;Gotta collect them all&rdquo; drives repeat visits at events, in classrooms, and online.</p></div>
-      <div class="pc"><div class="ic">3</div><h3>It is us</h3><p>The scientists on the cards reflect the real USGS workforce. The science comes from USGS and partners.</p></div>
-    </div>
-
-    <div class="idea-demo">
-      <div class="idea-demo-copy">
-        <h3>One card. One glance.</h3>
-        <p>Front: the invader as the opposing player. Back: real USGS science. Meet the Sea Lamprey, a Great Lakes invader USGS has fought for decades.</p>
-        <a class="btn btn-gold" href="#gallery">See all 21 cards &rarr;</a>
-      </div>
-      <div class="idea-demo-cards">
-        <figure><img src="assets/cards/11_front.jpg" alt="Sea Lamprey card, front" loading="lazy"><figcaption>Front</figcaption></figure>
-        <figure><img src="assets/cards/11_back.jpg" alt="Sea Lamprey card, back &mdash; USGS science" loading="lazy"><figcaption>Back</figcaption></figure>
-      </div>
-    </div>
   </div>
-</section>
+</div>
 
-<!-- ============ GALLERY ============ -->
+<!-- ============ CARDS ============ -->
 <section id="gallery">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">The Cards</div>
       <h2>The starting lineup: 21 of a planned 50+.</h2>
-      <p>Click a card to flip it and read the science. Use <strong>enlarge</strong> to look closer.</p>
+      <p>Tap or click a card to flip it and read the science. Use <strong>enlarge</strong> to look closer.</p>
     </div>
     <div class="g-controls">
       <label class="search">
@@ -519,15 +88,6 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
       <h2>The invader is the hook. USGS is the hero.</h2>
       <p>Every back shows what USGS scientists actually do, and what it makes possible.</p>
     </div>
-    <div class="role3 role4">
-      <div class="r3"><b>1</b><h3>The problem</h3><p>An invader is doing harm, and partners need to know what to do about it.</p></div>
-      <div class="r3-arrow" aria-hidden="true">&rarr;</div>
-      <div class="r3"><b>2</b><h3>USGS does this</h3><p>Finds it, maps it, tracks it, or tests a way to stop it.</p></div>
-      <div class="r3-arrow" aria-hidden="true">&rarr;</div>
-      <div class="r3"><b>3</b><h3>So the partner can</h3><p>Aim the work: choose where to look, what to treat, and what to try.</p></div>
-      <div class="r3-arrow" aria-hidden="true">&rarr;</div>
-      <div class="r3"><b>4</b><h3>So the result is</h3><p>The invader is stopped sooner, with less money and effort wasted.</p></div>
-    </div>
     <div class="backs-demo">
       <figure class="bd-card"><img src="assets/cards/03_back.jpg" alt="Back of the Burmese Python card, showing five science boxes" loading="lazy"><figcaption>Burmese Python, back</figcaption></figure>
       <div class="bd-copy">
@@ -539,15 +99,54 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
           <li><b>How USGS helps stop it</b> What partners do, and what USGS gives them.</li>
           <li><b>Take action</b> How a reader can report a sighting. The report becomes data.</li>
         </ol>
+        <p class="bd-partners">Partners such as the U.S. Fish and Wildlife Service, USDA, states, Tribes, and universities usually run the control work. Each card credits them by name.</p>
       </div>
     </div>
-    <details class="more"><summary>More on USGS&rsquo;s role</summary>
-      <p style="max-width:80ch">USGS finds invaders, tracks them, predicts where they will go next, and tests ways to stop them. Partners such as the U.S. Fish and Wildlife Service, USDA, states, tribes, and universities usually run the control work. The cards credit each partner by name and say plainly what USGS provides. Where a problem is unsolved, the card says what scientists are doing next.</p>
-    </details>
   </div>
 </section>
 
-<!-- ============ USE CASES ============ -->
+<!-- ============ MORE CARD TYPES: HORIZON SCANNING + SPECIAL TOPICS ============ -->
+<section id="beyond" class="hz">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">More Card Types</div>
+      <h2>The set shows the full range of USGS work.</h2>
+      <p>Besides the invaders already here, two more kinds of cards show the rest of the job: watching for what could arrive, and the tools and stories behind the science.</p>
+    </div>
+    <div class="bey-grid">
+      <div class="bey" id="horizon">
+        <figure class="hz-card" style="margin:0">
+          <div id="hzHost" class="ex-host">
+            <img src="assets/horizon/horizon_template_front.png" alt="Horizon Scanning card template (shown if the example card fails to load)" loading="lazy">
+          </div>
+          <figcaption>Example: Puff Adder &middot; tap to flip</figcaption>
+        </figure>
+        <div class="bey-copy">
+          <h3>Horizon Scanning cards</h3>
+          <p class="tagline">Not here yet. On our radar.</p>
+          <p>These cards show a species that has <strong>not</strong> arrived in the U.S. but that experts rate as a high risk, so we can act before it gets here. The front rates how likely it is to arrive, settle, and do harm. The back shows where it could settle and how USGS watches for it.</p>
+        </div>
+      </div>
+      <div class="bey" id="special">
+        <figure class="st-card" style="margin:0">
+          <div id="stHost" class="ex-host"></div>
+          <figcaption>Example: READI-Net &middot; tap to flip</figcaption>
+        </figure>
+        <div class="bey-copy">
+          <h3>Special Topics cards</h3>
+          <p class="tagline">Not a species. A tool, a rule, or a story.</p>
+          <p>Some of the best invasive species science is not an animal or a plant. This example is READI-Net, the USGS team and water-sampling robot that look for eDNA (tiny bits of DNA that organisms leave behind) so managers know where to look closer, early.</p>
+          <details class="more"><summary>Other topics we are considering</summary>
+            <div id="stTopics" class="st-topics"></div>
+            <p class="fine">Topics are ideas under consideration, not a final list. Only READI-Net is built as an example.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USES ============ -->
 <section id="uses" class="alt">
   <div class="wrap">
     <div class="sec-head">
@@ -567,386 +166,12 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ HOW WE'D PACKAGE THEM ============ -->
-<section id="packaging" class="alt">
+<!-- ============ NEXT STEP ============ -->
+<section class="nextband">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">How We'd Package &amp; Use Them</div>
-      <h2>One card set. Packed for the moment.</h2>
-      <p>The cards are the asset. Packaging is a toolkit: a pocket giveaway for a school visit, a curated set for Capitol Hill.</p>
-    </div>
-
-    <div class="pack-grid">
-      <div class="pack">
-        <div class="pack-ic">&#128230;</div>
-        <h3>Center packs <span class="pack-spec">6&ndash;7 cards</span></h3>
-        <p>The workhorse. <strong>5 species cards + 1 Horizon Scanning card</strong><sup class="dag"><a href="#horizon" title="About the Horizon Scanning card">&dagger;</a></sup> (and a Special Topics card in every pack or every other pack), released in waves that build to the full set (50+). Every pack in a wave is identical, so it is simple to print and ship. New waves bring people back to finish the set.</p>
-      </div>
-      <div class="pack">
-        <div class="pack-ic">&#127970;</div>
-        <h3>Conference packs <span class="pack-spec">13 cards</span></h3>
-        <p><strong>Two Center packs, banded together.</strong> A weightier handout for professional meetings. No new design.</p>
-      </div>
-      <div class="pack">
-        <div class="pack-ic">&#11088;</div>
-        <h3>Flagship packs <span class="pack-spec">curated</span></h3>
-        <p>The best of the best in a plain premium wrapper. Kept at HQ for leadership and Capitol Hill: the strongest cards plus 1 Horizon Scanning card<sup class="dag"><a href="#horizon" title="About the Horizon Scanning card">&dagger;</a></sup>. The program in 30 seconds.<sup class="dag">*</sup></p>
-        <p class="flag-note">* Just an example of one possible suite. Any actual Flagship collection would be decided by Leadership, the Communications team, and the Biological Threats Program.</p>
-      </div>
-      <div class="pack">
-        <div class="pack-ic">&#127482;&#127480;</div>
-        <h3>Regional packs <span class="pack-spec">if Comms likes it</span></h3>
-        <p>An option to explore: &ldquo;the invaders in <em>your</em> backyard, and USGS already working on them.&rdquo; A handful of regions (not state by state), each with a clearly labeled wrapper (&ldquo;Southeast Invaders,&rdquo; &ldquo;Great Lakes Invaders&rdquo;). A strong handout when a region's delegation visits.</p>
-      </div>
-      <div class="pack">
-        <div class="pack-ic">&#128203;</div>
-        <h3>Collector checklist &amp; album</h3>
-        <p>A roster of the full set (50+), plus the Horizon Scanning card slots<sup class="dag"><a href="#horizon" title="About the Horizon Scanning card">&dagger;</a></sup>. It turns a handout into a set people want to finish.</p>
-      </div>
-    </div>
-
-    <p class="costs-fine">
-      Options to mix and match, not one fixed product. Hill distribution would route through USGS Communications / Congressional Liaison.
-    </p>
-
-    <details class="more"><summary>See example packs built from the first 21 cards</summary>
-    <h3 class="ex-title" style="margin-top:14px">What those packs could look like</h3>
-    <p class="ex-sub">Illustrations built from the first 21 cards. The full 50+ gives every region plenty to pull from.</p>
-    <div class="ex-grid">
-      <div class="ex-pack">
-        <div class="ex-head reg">Southeast Invaders</div>
-        <ul>
-          <li><img src="assets/cards/03_front.jpg" alt="" loading="lazy"><span class="nm">Burmese Python</span><span>S. Florida</span></li>
-          <li><img src="assets/cards/14_front.jpg" alt="" loading="lazy"><span class="nm">Lionfish</span><span>SE Atlantic / Gulf / Caribbean</span></li>
-          <li><img src="assets/cards/13_front.jpg" alt="" loading="lazy"><span class="nm">Hydrilla</span><span>Florida &amp; Southeast waters</span></li>
-          <li><img src="assets/cards/18_front.jpg" alt="" loading="lazy"><span class="nm">Blue Catfish</span><span>Chesapeake &amp; Southeast rivers</span></li>
-          <li><img src="assets/cards/06_front.jpg" alt="" loading="lazy"><span class="nm">Feral Hog</span><span>heavy across the South</span></li>
-          <li><img src="assets/cards/10_front.jpg" alt="" loading="lazy"><span class="nm">Red Imported Fire Ant</span><span>Southern U.S.</span></li>
-        </ul>
-      </div>
-      <div class="ex-pack">
-        <div class="ex-head reg">Great Lakes Invaders</div>
-        <ul>
-          <li><img src="assets/cards/11_front.jpg" alt="" loading="lazy"><span class="nm">Sea Lamprey</span><span>all five Great Lakes</span></li>
-          <li><img src="assets/cards/05_front.jpg" alt="" loading="lazy"><span class="nm">Zebra Mussel</span><span>Great Lakes &amp; eastern basins</span></li>
-          <li><img src="assets/cards/07_front.jpg" alt="" loading="lazy"><span class="nm">Silver Carp</span><span>Mississippi/Ohio, nearing the Lakes</span></li>
-          <li><img src="assets/cards/12_front.jpg" alt="" loading="lazy"><span class="nm">Bighead Carp</span><span>Mississippi/Ohio, nearing the Lakes</span></li>
-          <li><img src="assets/cards/01_front.jpg" alt="" loading="lazy"><span class="nm">Black Rat</span><span>cities &amp; ports region-wide</span></li>
-          <li><img src="assets/cards/09_front.jpg" alt="" loading="lazy"><span class="nm">Kudzu</span><span>spreading northward</span></li>
-        </ul>
-      </div>
-      <div class="ex-pack">
-        <div class="ex-head reg">West Coast Invaders</div>
-        <ul>
-          <li><img src="assets/cards/19_front.jpg" alt="" loading="lazy"><span class="nm">Golden Mussel</span><span>CA Delta / SF Bay (new)</span></li>
-          <li><img src="assets/cards/15_front.jpg" alt="" loading="lazy"><span class="nm">Cheatgrass</span><span>Great Basin &amp; West rangelands</span></li>
-          <li><img src="assets/cards/06_front.jpg" alt="" loading="lazy"><span class="nm">Feral Hog</span><span>established across California</span></li>
-          <li><img src="assets/cards/01_front.jpg" alt="" loading="lazy"><span class="nm">Black Rat</span><span>coastal cities &amp; ports</span></li>
-          <li><img src="assets/cards/05_front.jpg" alt="" loading="lazy"><span class="nm">Zebra Mussel</span><span>a looming Western threat</span></li>
-          <li><img src="assets/cards/10_front.jpg" alt="" loading="lazy"><span class="nm">Red Imported Fire Ant</span><span>Southern California</span></li>
-        </ul>
-      </div>
-      <div class="ex-pack flag">
-        <div class="ex-head">Flagship* &mdash; Best of the Best</div>
-        <ul>
-          <li><img src="assets/cards/20_front.jpg" alt="" loading="lazy"><span class="nm">Black Carp</span><span>gold-standard card</span></li>
-          <li><img src="assets/cards/11_front.jpg" alt="" loading="lazy"><span class="nm">Sea Lamprey</span><span>strongest back-of-card</span></li>
-          <li><img src="assets/cards/08_front.jpg" alt="" loading="lazy"><span class="nm">Southern House Mosquito</span><span>flagship USGS story</span></li>
-          <li><img src="assets/cards/03_front.jpg" alt="" loading="lazy"><span class="nm">Burmese Python</span><span>instantly iconic</span></li>
-          <li><img src="assets/cards/14_front.jpg" alt="" loading="lazy"><span class="nm">Lionfish</span><span>striking hero art</span></li>
-          <li class="horizon"><span class="nm">+ 1 Horizon Scanning card<sup class="dag"><a href="#horizon" title="About the Horizon Scanning card">&dagger;</a></sup></span><span>&ldquo;what's coming next&rdquo;</span></li>
-        </ul>
-        <p class="ex-note">* Example only. The real Flagship set would be chosen by Leadership, the Communications team, and the Biological Threats Program.</p>
-      </div>
-    </div>
-    </details>
-
-<details class="more"><summary>How we'd define &ldquo;regions&rdquo; (a leadership &amp; Comms call)</summary>
-    <div class="region-note">
-      <h4>Six ways to cut a region</h4>
-      <p>No need to lock in a scheme now. &ldquo;Region&rdquo; can mean different things for different purposes:</p>
-      <ul>
-        <li><strong>DOI / USGS Unified Regions</strong> &mdash; the 12 regions the Department already uses (e.g., Pacific, Columbia&ndash;Pacific Northwest, Upper Colorado, Mississippi Basin, South Atlantic&ndash;Gulf, Great Lakes, North Atlantic&ndash;Appalachian, Alaska, etc.). The most &ldquo;on-brand&rdquo; cut &mdash; it aligns packs with how USGS itself is organized.</li>
-        <li><strong>Watersheds (large HUCs)</strong> &mdash; group by major basin (HUC-2 regions like the Great Lakes, Ohio, Upper/Lower Mississippi, California). This is literally how the aquatic species are already mapped on the card backs, so it's the most scientifically natural cut for the water invaders.</li>
-        <li><strong>Broad ecological regions</strong> &mdash; plain-language zones (Southeast, Great Lakes, Gulf, Pacific &amp; Islands, Great Basin/West) that a general public audience reads instantly.</li>
-        <li><strong>State delegations</strong> &mdash; a single state's species; the simplest, most defensible cut for a specific member's office.</li>
-        <li><strong>Congressional caucuses &amp; task forces</strong> &mdash; several map neatly to this work (e.g., Great Lakes Task Force, Western Caucus, Chesapeake Bay Watershed and Everglades groups, an Invasive Species Caucus). In some cases an existing caucus effectively defines the region for us &mdash; current rosters would be confirmed with Congressional Liaison.</li>
-        <li><strong>Committee audiences</strong> &mdash; members on Natural Resources or Interior Appropriations, where the budget relevance is highest (less geographic, more strategic).</li>
-      </ul>
-      <p class="region-fine">These aren't mutually exclusive: one card can sit in a DOI-region pack and a caucus pack. USGS leadership and Communications / Congressional Liaison would choose the lens and who receives anything on the Hill.</p>
-    </div></details>
-  </div>
-</section>
-
-<!-- ============ SORT BY STATE (SLICER) ============ -->
-<section id="slicer">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Sort by State &middot; Planning Tool</div>
-      <h2>Know which cards matter where.</h2>
-      <p>Pick a state and see which invaders are <strong>here now</strong>, which species are <strong>native here</strong>, and which are <strong>on deck</strong>. Use it to brief a visit, choose cards for an event, or decide which Regional packs are worth printing.</p>
-    </div>
-
-    <p class="slicer-lead">A working demo on the first 21 cards. It will carry the full 50+, and subject-matter experts are validating the state data.</p>
-
-    <details class="more" style="margin:0 0 24px;max-width:84ch"><summary>How this fits with the packs</summary>
-      <div class="region-note" style="margin-top:8px">
-        <p><strong>Ready-made packs stay simple:</strong> Center, Conference, Flagship, and a handful of Regional packs. These are printed and wrapped by the printer, not state by state.</p>
-        <p><strong>Anything more specific is a pick list.</strong> For a special visit, staff would use this tool to see which cards to pull from loose stock. That works for a few dozen custom sets, not thousands.</p>
-        <p class="region-fine">This is a proposal. How many Regional packs to print, and how custom sets are assembled, would be decided with Communications and the printer.</p>
-      </div>
-    </details>
-
-    <p class="clarify">
-      <b>One species, different roles.</b> A fish can be a prized local in one state and a costly invader two states over. The cards flag where each species is invasive, native, or on deck. (See Sea Lamprey, Blue Catfish.)
-    </p>
-
-    <details class="more"><summary>Try the live tool &mdash; pick a state and watch the series regroup</summary>
-    <p class="slicer-lead" style="margin:10px 0 12px"><strong>Try it:</strong> pick a <strong>state or territory</strong> below to split the series into <strong>Invasive here</strong>, <strong>Native here</strong>, and <strong>On deck</strong>. Or set a region, taxon, or wave to browse a cross-state slice.</p>
-
-    <div class="slicer-controls">
-      <div class="sc-row">
-        <div class="sc-field grow">
-          <label for="slState">State / territory</label>
-          <select id="slState" aria-label="State or territory"></select>
-        </div>
-        <div class="sc-field">
-          <label for="slRegion">Region lens</label>
-          <select id="slRegion" aria-label="Ecoregion"></select>
-        </div>
-        <div class="sc-field">
-          <label for="slTaxon">Taxon</label>
-          <select id="slTaxon" aria-label="Taxon"></select>
-        </div>
-        <div class="sc-field">
-          <label for="slWave">Release wave</label>
-          <select id="slWave" aria-label="Release wave"></select>
-        </div>
-      </div>
-      <div class="sc-row" style="margin-top:16px">
-        <div class="sc-field">
-          <label>Show statuses</label>
-          <div class="seg" id="slStatusSeg" role="group" aria-label="Which statuses to show">
-            <button data-status="present" class="on" aria-pressed="true">Invasive here</button>
-            <button data-status="onDeck" class="on" aria-pressed="true">On deck</button>
-            <button data-status="native" class="on" aria-pressed="true">Native here</button>
-          </div>
-        </div>
-        <div class="sc-field">
-          <label for="slCombine">Combine state + facets by</label>
-          <div class="seg" id="slCombineSeg" role="group" aria-label="Union or intersection">
-            <button data-combine="union" aria-pressed="false">Union (any)</button>
-            <button data-combine="intersection" class="on" aria-pressed="true">Intersection (all)</button>
-          </div>
-        </div>
-        <div class="sc-field">
-          <label>&nbsp;</label>
-          <button class="sc-reset" id="slReset" type="button">Reset filters</button>
-        </div>
-      </div>
-      <p class="sc-help">
-        <b>Union</b> = a card shows if it matches the state <em>or</em> any facet you set. <b>Intersection</b> = it must match the state <em>and</em> every facet. &ldquo;Invasive here&rdquo; and &ldquo;On deck&rdquo; are what a state pack usually leads with; toggle &ldquo;Native here&rdquo; to show the teaching cases too.
-      </p>
-    </div>
-
-    <div id="slResults"></div>
-    </details>
-
-    <div class="pitch-foot">
-      <h4>Why this matters</h4>
-      <p>One dataset, many uses: brief a state visit, pick cards for a classroom, or spot which regions deserve their own pack. No new design, no reprinting.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ THREE KINDS OF CARDS ============ -->
-<section id="kinds">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Three Kinds of Cards</div>
-      <h2>One game. Three ways to learn.</h2>
-    </div>
-    <div class="kinds3">
-      <div class="k3"><h3>Species cards</h3><p>An invader that is already here, dressed as the visiting player. The numbered core of the set.</p></div>
-      <a class="k3 k3a" href="#horizon"><h3>Horizon Scanning cards</h3><p>A species that has not arrived yet, but experts flagged as a high risk. Gold foil.</p></a>
-      <a class="k3 k3a" href="#special"><h3>Special Topics cards</h3><p>Not an animal or plant: a tool, a rule, or a story, such as the eDNA water-sampling robot.</p></a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ HORIZON SCANNING (self-contained; target of the dagger footnotes) ============ -->
-<section id="horizon" class="hz">
-  <div class="wrap">
-    <div class="eyebrow">&dagger; Horizon Scanning cards</div>
-    <h2>Not here yet. On our radar.</h2>
-    <p class="xp-lead">A <strong>Horizon Scanning card</strong> shows a species that has <strong>not</strong> arrived in the U.S. but that experts rate as a high risk, so we can act before it gets here.</p>
-    <details class="more xp" data-autoopen><summary>Show the example card: Puff Adder</summary>
-      <div class="hz-grid">
-        <figure class="hz-card">
-          <div id="hzHost" class="ex-host">
-            <img src="assets/horizon/horizon_template_front.png" alt="Horizon Scanning card template (shown if the example card fails to load)" loading="lazy">
-          </div>
-          <figcaption>Example: Puff Adder &middot; click the card to flip it &middot; gold = foil</figcaption>
-        </figure>
-        <div>
-          <p style="font-size:1.08rem;color:#c9d6e6;margin:0 0 1em">The front rates how likely it is to <strong style="color:#fff">arrive</strong>, to <strong style="color:#fff">settle</strong>, and to do <strong style="color:#fff">harm</strong>, using baseballs. The back shows where in the U.S. it could settle, and how USGS watches for it.</p>
-          <div class="hz-story">
-            <div class="hz-step"><b>Today: a prospect</b><span>Scouted overseas. Gray jersey, no team, number 00. Zero in the U.S. so far.</span></div>
-            <div class="hz-arrow" aria-hidden="true">&rarr;</div>
-            <div class="hz-step"><b>If it establishes: a team</b><span>It earns a numbered jersey and joins the serialized set.</span></div>
-          </div>
-          <details class="more hz-more"><summary>What foil costs</summary>
-            <div class="hz-cost">
-              <span class="tag">Estimate, not a quote</span>
-              <p><strong>One Horizon Scanning card in every pack:</strong> about 10,000 foil cards at Level 1, 50,000 at Level 2, and 100,000 at Level 3.</p>
-              <p><strong>Foil adds roughly $0.03&ndash;$0.12 per foil card</strong> (about $300&ndash;$1.2k / $1.5k&ndash;$6k / $3k&ndash;$12k), plus <strong>$300&ndash;$1.5k</strong> one-time tooling.</p>
-              <p class="fine">Planning assumptions; printers did not publish per-card foil prices at volume. A real quote firms it up. Foil is front only; one die serves every Horizon Scanning card.</p>
-            </div>
-          </details>
-        </div>
-      </div>
-    </details>
-  </div>
-</section>
-
-<!-- ============ SPECIAL TOPICS ============ -->
-<section id="special" class="st">
-  <div class="wrap">
-    <div class="eyebrow">Special Topics cards</div>
-    <h2>Not a species. A tool, a rule, or a story.</h2>
-    <p class="xp-lead">Some of the best science behind invasive species work is not an animal or a plant. It is a robot that samples water, a law that stops a species at the border, or a case that taught us a lesson.</p>
-    <details class="more xp" data-autoopen><summary>Show the example card: READI-Net</summary>
-      <div class="st-grid">
-        <figure class="st-card">
-          <div id="stHost" class="ex-host"></div>
-          <figcaption>Example: READI-Net &middot; click the card to flip it</figcaption>
-        </figure>
-        <div>
-          <p>READI-Net is the USGS team and water-sampling robot that look for tiny bits of DNA (eDNA) so managers can look closer, early. These cards put USGS tools and the people behind them in the same card format.</p>
-          <p class="st-pack"><strong>In the packs:</strong> one Special Topics card could ride along in every pack, or in every other pack, so a two-pack Conference bundle gets one.</p>
-          <details class="more"><summary>Other topics under consideration</summary>
-            <div id="stTopics" class="st-topics"></div>
-            <p class="fine">Topics are ideas under consideration, not a final list. Only READI-Net is built as an example.</p>
-          </details>
-        </div>
-      </div>
-    </details>
-  </div>
-</section>
-
-<!-- ============ LEVELS OF BUY-IN ============ -->
-<section id="buyin">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Levels of Buy-In</div>
-      <h2>Choose how many packs.</h2>
-      <p>The full set is about 10 pack designs. Pack 1 holds cards 1&ndash;5 plus Horizon Scanning card 1. Pack 2 holds cards 6&ndash;10, Horizon Scanning card 2, and Special Topics card 1, and so on. Every USGS science location gets packs for its tables, classrooms, and visitors.</p>
-    </div>
-    <div class="tier-grid">
-      <div class="tier">
-        <div class="tier-tag">Level 1 &middot; Every site</div>
-        <div class="tier-qty">10,000 <span>packs</span></div>
-        <div class="tier-total">1,000 of each pack design &middot; &asymp; 830 per site</div>
-        <div class="tier-cost">~$5,000 &ndash; $10,000</div>
-        <p class="tier-note">Every site has a supply for events, classrooms, and visits.</p>
-      </div>
-      <div class="tier">
-        <div class="tier-tag">Level 2 &middot; A full program year</div>
-        <div class="tier-qty">50,000 <span>packs</span></div>
-        <div class="tier-total">5,000 of each pack design &middot; &asymp; 4,200 per site</div>
-        <div class="tier-cost">~$20,000 &ndash; $36,000</div>
-        <p class="tier-note">A steady supply all year, and packs to trade at events.</p>
-      </div>
-      <div class="tier">
-        <div class="tier-tag">Level 3 &middot; The whole network</div>
-        <div class="tier-qty">100,000 <span>packs</span></div>
-        <div class="tier-total">10,000 of each pack design &middot; &asymp; 8,300 per site</div>
-        <div class="tier-cost">~$33,000 &ndash; $65,000</div>
-        <p class="tier-note">The lowest cost per card, and the level that adds the special mixes below.</p>
-      </div>
-    </div>
-    <div class="mixes">
-      <h3>Level 3 also unlocks special mixes</h3>
-      <ul>
-        <li><strong>Best of the Best:</strong> a curated Flagship pack for HQ and Capitol Hill.</li>
-        <li><strong>Regional mixes:</strong> the invaders in your part of the country, such as Southeast or Great Lakes.</li>
-        <li><strong>State sets:</strong> one state&rsquo;s species, for a visit from that state&rsquo;s delegation.</li>
-        <li><strong>Local Horizon Scanning card:</strong> each regional or state pack gets a Horizon Scanning species rated high risk (4 or 5) for the ecoregions in that area.</li>
-      </ul>
-      <p class="fine" style="margin:6px 0 0">Made from the same 50+ cards. How many of each mix to print would be set with Communications and the printer. Room to add the Cooperative Research Units and Climate Adaptation Centers.</p>
-    </div>
-    <p class="costs-fine" style="margin-bottom:0"><strong>Estimates, not quotes.</strong> A pack is 5 species cards, 1 Horizon Scanning card, and a Special Topics card in about half of the packs (about 6.5 cards per pack). Cost per card runs about $0.05&ndash;$0.15 and falls as quantity rises.</p>
-    <details class="more"><summary>The 12 locations these levels are split across</summary>
-      <ul class="sites">
-        <li>Alaska Science Center</li>
-        <li>Columbia Environmental Research Center</li>
-        <li>Eastern Ecological Science Center (2 locations)</li>
-        <li>Forest and Rangeland Ecosystem Science Center</li>
-        <li>Fort Collins Science Center</li>
-        <li>Great Lakes Science Center</li>
-        <li>Northern Prairie Wildlife Research Center</li>
-        <li>Northern Rocky Mountain Science Center</li>
-        <li>Pacific Island Ecosystems Research Center</li>
-        <li>Southwest Biological Science Center (does invasive species work and is supported by this effort)</li>
-        <li>USGS Headquarters, Reston, Virginia</li>
-      </ul>
-      <p class="fine" style="margin:6px 0 0">Per-site numbers divide the pack total evenly across the 12 locations. Cooperative Research Units and Climate Adaptation Centers are not counted yet.</p>
-    </details>
-    <details class="more"><summary>Sources &amp; fine print</summary>
-    <p class="costs-fine" style="margin-top:0">
-      Planning-level figures for budgeting. Offset-printing setup is spread over more cards at higher volume. Based on published 2026 trade pricing for bulk custom card printing
-      (<a href="https://wjplayingcard.com/game-card-printing-costs/" target="_blank" rel="noopener">wjplayingcard.com</a>,
-      <a href="https://www.mrplayingcard.com/blog/custom-trading-cards-printing-guide" target="_blank" rel="noopener">mrplayingcard.com</a>);
-      figures rephrased and recomputed for this estimate. Actual cost depends on the chosen vendor, finish, foil/specialty cards, packaging, and freight &mdash; a formal quote through USGS procurement / the printer would firm these up. The foil Horizon Scanning cards and specialty packaging add setup minimums and a modest premium; see the <a class="dag" href="#horizon">Horizon Scanning</a> section.
-    </p></details>
-  </div>
-</section>
-
-<!-- ============ THE ASK ============ -->
-<section id="ask" class="alt">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">What We Need From You</div>
-      <h2>Three decisions to move forward.</h2>
-    </div>
-    <div class="ask3">
-      <div class="a3"><b>1</b><h3>A level of buy-in</h3><p>Level 1, 2, or 3: how many packs, and for how many locations.</p></div>
-      <div class="a3"><b>2</b><h3>The pack mix</h3><p>Center, Conference, Flagship, or Regional packs, and whether a Special Topics card rides in every pack or every other pack.</p></div>
-      <div class="a3"><b>3</b><h3>Approval to proceed</h3><p>Communications review of names and partner credits, then a printer quote.</p></div>
-    </div>
-    <p class="costs-fine">The design is done. 21 species cards are built, with a Horizon Scanning example and a Special Topics example.</p>
-  </div>
-</section>
-
-<!-- ============ REVIEW / FEEDBACK ============ -->
-<section id="review" class="alt">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Give Feedback</div>
-      <h2>Tell me what to change.</h2>
-      <p>Big-picture notes on the left. Exact science edits to one card on the right. Both come straight to me.</p>
-    </div>
-    <div class="review">
-      <!-- general / high-level -->
-      <div class="note">
-        <h3>General notes &amp; direction</h3>
-        <p style="color:var(--ink-soft);margin-top:0">Reactions to the concept, the pitch, audiences, anything.</p>
-        <div class="field">
-          <label for="gn">Your notes</label>
-          <textarea id="gn" rows="6" placeholder="What works? What doesn't? What would make this a yes?"></textarea>
-        </div>
-        <button class="btn btn-gold" id="sendGeneral">Email my notes &rarr;</button>
-        <p id="formNote" style="font-size:.85rem;color:var(--ink-soft);margin-top:14px"></p>
-      </div>
-      <!-- per-card science edit -->
-      <div class="sci-edit">
-        <h3>Suggest a science edit</h3>
-        <p style="color:var(--ink-soft);margin-top:0">Pick a card, edit its science text, and send it. Changes are highlighted.</p>
-        <select class="sci-pick" id="sciPick" aria-label="Choose a card to edit"></select>
-        <div id="sciFields"></div>
-        <button class="btn btn-gold" id="sendSci">Email my edits &rarr;</button>
-      </div>
-    </div>
+    <h2>The design is done. What is left is packing and printing.</h2>
+    <p>21 species cards are built, with a Horizon Scanning example and a Special Topics example. See how the cards could be packed and what they might cost.</p>
+    <a class="btn btn-gold" href="details.html">Packs &amp; costs &rarr;</a>
   </div>
 </section>
 
@@ -979,7 +204,8 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
     </div>
     <div>
       Questions or feedback?<br>
-      <a id="footMail" href="#">jjenglish@usgs.gov</a>
+      <a id="footMail" href="#">jjenglish@usgs.gov</a><br>
+      <a href="details.html#review">Leave feedback</a>
     </div>
   </div>
 </footer>
@@ -991,11 +217,11 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
   var map = links.map(function(a){ var id=a.getAttribute('href').slice(1); return {a:a, el:document.getElementById(id)}; }).filter(function(m){return m.el;});
   if(!map.length) return;
   function spy(){
-    var y = window.scrollY + 90; // offset for sticky bar
-    var cur = map[0];
+    var y = window.scrollY + 110;
+    var cur = null;
     map.forEach(function(m){ if(m.el.offsetTop <= y) cur = m; });
     links.forEach(function(a){ a.classList.remove('on'); });
-    cur.a.classList.add('on');
+    if(cur) cur.a.classList.add('on');
   }
   window.addEventListener('scroll', spy, {passive:true});
   window.addEventListener('resize', spy);
@@ -1004,8 +230,6 @@ sup.dag a:hover,a.dag:hover{text-decoration:underline}
 </script>
 <script src="data/cards.js"></script>
 <script src="data/examples.js"></script>
-<script src="data/card_states.js"></script>
-<script src="data/card_facets.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

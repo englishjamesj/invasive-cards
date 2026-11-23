@@ -130,6 +130,7 @@
 
   function renderGrid(list) {
     currentList = list;
+    if (!gridEl) return;   // page 2 has no gallery
     gridEl.innerHTML = '';
     if (!list.length) {
       gridEl.innerHTML = '<p style="color:#667">No species match that search.</p>';
@@ -143,6 +144,7 @@
   // ---- SEARCH + VIEW TOGGLE -----------------------------------------
   function wireControls() {
     var q = document.getElementById('q');
+    if (!q || !gridEl) return;   // page 2 has no gallery
     q.addEventListener('input', function () {
       var t = q.value.trim().toLowerCase();
       if (!t) { renderGrid(CARDS); return; }
@@ -216,7 +218,7 @@
   }
   function wireGeneral() {
     var btn = document.getElementById('sendGeneral');
-    btn.addEventListener('click', function () {
+    if (btn) btn.addEventListener('click', function () {
       var notes = document.getElementById('gn').value.trim();
       var body = 'General feedback on the Invasive Species Trading Card portfolio:\n\n' +
         (notes || '(write your notes here)') + '\n\n---\nSent from the portfolio page.';
@@ -227,6 +229,7 @@
     var fm = document.getElementById('footMail');
     if (fm) fm.href = mailto('Trading Cards - feedback', '');
     var note = document.getElementById('formNote');
+    if (!note) return;
     if (CONFIG.formUrl) {
       note.innerHTML = 'Prefer a form? <a href="' + esc(CONFIG.formUrl) + '" target="_blank" rel="noopener">Open the feedback form &rarr;</a>';
     } else {
@@ -238,6 +241,7 @@
   function wireSci() {
     var pick = document.getElementById('sciPick');
     var fieldsEl = document.getElementById('sciFields');
+    if (!pick || !fieldsEl) return;   // feedback form is on page 2 only
 
     CARDS.forEach(function (c) {
       var o = el('option');
@@ -653,7 +657,16 @@
     var t = document.querySelector(a.getAttribute('href'));
     var d = t && t.querySelector('details[data-autoopen]');
     if (d) d.open = true;
+    if (t && t.matches && t.matches('details.fold')) t.open = true;   // page 2 sections
   });
+  // Opening page 2 with #section in the address (for example details.html#review) opens that section.
+  function openHashFold() {
+    if (location.hash.length < 2) return;
+    var t = null;
+    try { t = document.querySelector(location.hash); } catch (err) { return; }
+    if (t && t.matches && t.matches('details.fold')) { t.open = true; t.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', openHashFold);
 
   // ---- INIT ----------------------------------------------------------
   renderExamples();
@@ -663,4 +676,5 @@
   wireGeneral();
   wireSci();
   wireSlicer();
+  openHashFold();
 })();
